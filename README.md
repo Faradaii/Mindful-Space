@@ -12,12 +12,12 @@ Sebuah platform yang menyediakan pelayanan problem solving untuk berbagai masala
 ## FEATURES ADMIN:
 - HOME
 - DASHBOARD:- Manage Berita (CRUD)
-            - Manage Dokter (CRUD)
+            - Manage Dokter (CRUD) //data dokter dijadikan satu di user
             - Manage User   (CRUD)
 
 ## FEATURES DOKTER:
 - HOME
-- DASHBOARD:- Chat          (local Chat)
+- DASHBOARD:- Chat          (Chat secara 2 arah dalam satu jaringan lokal)
             - Schedule      (CRUD Diatur oleh dokter itu sendiri)
             - Profile User yang sedang konseling    (menampikan data User)
 
