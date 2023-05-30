@@ -13,7 +13,7 @@
 <body>
     <?php
         if (isset($_GET['pesan'])) {
-            if ($_GET['pesan'] == 'login berhasil') {
+            if ($_GET['pesan'] == 'loginberhasil') {
                 header("location:dashboard.php");
             } else {
                 ?>
