@@ -6,6 +6,10 @@
     padding: 0;
 }
 
+body {
+    position: relative;
+}
+
 h1 {
     color: rgba(5, 6, 15, 1);
     font-family: 'HeeBo', sans-serif;
@@ -19,6 +23,7 @@ h1 {
     background-color: #4C564D;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
@@ -170,4 +175,8 @@ input[type=submit] {
 
 form p {
     font-family: 'ABeeZee', sans-serif;
+}
+
+form p span a {
+    text-decoration: none;
 }

@@ -8,6 +8,7 @@
 
     <!-- styling -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="nav-style.css">
 
 </head>
 <body>
@@ -25,12 +26,15 @@
                 <?php
             }
         }
-        ?>
+    ?>
+
+
+<div class="form">
 
         <nav>
         
             <div class="logo">
-                <h1>MINDFUL SPACE</h1>
+                <h1>MINDFUL <span>SPACE</span></h1>
             </div>
         
             <div class="navigation">
@@ -50,9 +54,6 @@
             </div>
         
         </nav>
-
-    <div class="form">
-
         
         <img src="https://img.freepik.com/free-photo/beautiful-architecture-office-business-building-with-glass-window-shape_74190-6438.jpg?size=626&ext=jpg&ga=GA1.1.629320682.1661959596&semt=sph" alt="">
         
