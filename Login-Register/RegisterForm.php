@@ -14,7 +14,7 @@
 
     <div class="form">
         
-        <form action="CekLogin.php" method="post">
+        <form action="registerAction.php" method="post">
 
             <h1>Sign Up</h1>
 
@@ -35,7 +35,7 @@
             <br>
 
             <div class="input-box">
-                <input type="password" name="password" id="" required>
+                <input type="password" name="confirmPassword" id="" required>
                 <label for="password">Confirm Password</label>
             </div>
     

@@ -11,7 +11,9 @@
 
 </head>
 <body>
+    
     <?php
+    session_start();
         if (isset($_GET['pesan'])) {
             if ($_GET['pesan'] == 'loginberhasil') {
                 header("location:dashboard.php");
@@ -23,34 +25,60 @@
                 <?php
             }
         }
-    ?>
+        ?>
+
+        <nav>
+        
+            <div class="logo">
+                <h1>MINDFUL SPACE</h1>
+            </div>
+        
+            <div class="navigation">
+                <ul>
+                    <a href="">
+                        <li>Home</li>
+                    </a>
+                    
+                    <a href="">
+                        <li>Fasilitas</li>
+                    </a>
+                    
+                    <a href="">
+                        <li>Layanan</li>
+                    </a>
+                </ul>
+            </div>
+        
+        </nav>
 
     <div class="form">
+
         
-        <form action="CekLogin.php" method="post">
+        <img src="https://img.freepik.com/free-photo/beautiful-architecture-office-business-building-with-glass-window-shape_74190-6438.jpg?size=626&ext=jpg&ga=GA1.1.629320682.1661959596&semt=sph" alt="">
+        
+        <form action="cekLogin.php" method="post">
 
-            <h1>Sign In</h1>
+            <h1>SIGN IN</h1>
 
             <br>
 
-            <div class="input-box">
-                <input type="text" name="username" id="" required>
-                <label for="username">Username</label>
-            </div>
-    
-            <br>
-    
-            <div class="input-box">
-                <input type="password" name="password" id="" required>
-                <label for="password">Password</label>
+            <div class="form__group field">
+                <input type="text" name="username" id="" class="form__field" placeholder="Username" required>
+                <label for="username" class="form__label">Username</label>
             </div>
     
             <br>
             <br>
+    
+            <div class="form__group field">
+                <input type="password" name="password" id="" class="form__field" placeholder="Password" required>
+                <label for="password" class="form__label">Password</label>
+            </div>
+    
+            <br><br><br><br>
     
             <input type="submit" value="Log In">
             
-            <br>
             <br>
             <br>
 

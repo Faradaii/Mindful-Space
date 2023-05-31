@@ -11,17 +11,22 @@
     session_start();
     include 'connection.php';
 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    try {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
 
-    $data = mysqli_query($koneksi, "SELECT * FROM user WHERE `username` = $username AND `password` = $password");
-    $role = mysqli_fetch_array($data);
+        $data = mysqli_query($koneksi, "SELECT * FROM users WHERE username = '$username' AND password = '$password'");
+        $result = mysqli_fetch_array($data);
+        $cek = mysqli_num_rows($data);
 
-    if (isset($role)){
-        $_SESSION['username'] = $username;
-        header("location:LoginForm.php?pesan=loginberhasil&role={$role['role']}");
-    } else {
-        header ("location:LoginForm.php?pesan=gagal");
+        if ($cek > 0){
+            $_SESSION['username'] = $username;
+            header("location:LoginForm.php?pesan=loginberhasil&role={$result['role']}");
+        } else {
+            header ("location:LoginForm.php?pesan=gagal");
+        }
+    } catch (mysqli_sql_exception $e) {
+        var_dump($e);
     }
 ?>
 </body>
