@@ -1,1 +1,3 @@
-//todo landing page for guest user
+<?php
+    header('location:Login-Register/LoginForm.php');
+?>

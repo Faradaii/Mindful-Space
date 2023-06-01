@@ -7,8 +7,8 @@
     <title>Sign In</title>
 
     <!-- styling -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="nav-style.css">
+    <link rel="stylesheet" href="styling/style.css">
+    <link rel="stylesheet" href="styling/nav-style.css">
 
 </head>
 <body>
@@ -76,11 +76,10 @@
                 <label for="password" class="form__label">Password</label>
             </div>
     
-            <br><br><br><br>
+            <br><br><br>
     
             <input type="submit" value="Log In">
             
-            <br>
             <br>
 
             <p>Tidak memiliki akun? <span><a href="RegisterForm.php">Daftar disini.</a></span></p>
