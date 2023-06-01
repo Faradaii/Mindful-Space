@@ -26,3 +26,14 @@ Sebuah platform yang menyediakan pelayanan problem solving untuk berbagai masala
 ## FEATURES USER:
 - HOME
 - DASHBOARD: -
+
+
+# LAPORAN PEMBUATAN:
+
+### 30 Mei
+- Setup github dan figma untuk pembuatan project
+
+### 31 Mei dan 1 Juni
+- Pembuatan fitur Login dan Register
+- Pembuatan Design untuk fitur Login dan Register
+
