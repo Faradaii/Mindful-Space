@@ -1,19 +1,15 @@
 <?php 
-
+session_start();
 include 'connection.php';
 
 try{
     $username = $_POST['username'];
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirmPassword'];
-    if($confirmPassword!=$password){
-        echo 
-        "<script> 
-            alert('Kata sandi tidak sama'); 
-        </script>";
-        header("location:RegisterForm.php");
+    if($confirmPassword!=$password) {
+        header("location:RegisterForm.php?pesan=registergagal");
     } else {
-        mysqli_query($koneksi, "INSERT INTO users VALUES ('','$username','$password','user')");
+        mysqli_query($koneksi, "INSERT INTO users VALUES (DEFAULT,'$username','$password','user')");
         header("location:LoginForm.php");
     }
 
