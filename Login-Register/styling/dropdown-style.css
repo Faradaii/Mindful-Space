@@ -1,0 +1,84 @@
+label[for=layanan], label[for=fasilitas] {
+    transition: .5s ease; 
+    color: rgba(255, 255, 255, .6);
+    font-family: 'ABeeZee', sans-serif;
+    letter-spacing: .08rem;
+}
+
+#fasilitas, #layanan {
+    display: none;
+}
+
+.fasilitas-check:hover, .layanan-check:hover {
+    cursor: pointer;
+    color: white;
+}
+
+ul.fasilitas-dropdown, ul.layanan-dropdown {
+    background-color: rgba(255, 255, 255, .4);
+    border-radius: .5rem;
+    backdrop-filter: blur(.5rem);
+    margin-top: 1rem;
+    padding: 1rem 0;
+    top: -20%;
+    z-index: -1;
+    width: 8rem;
+    height: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    row-gap: 1rem;
+    position: fixed;
+}
+
+ul.layanan-dropdown {
+    margin-top: -1rem;
+    width: 9rem;
+    height: 8rem;
+    padding-bottom: 1.3rem;
+}
+
+ul.fasilitas-dropdown {
+    right: 14.5rem;
+}
+
+ul.layanan-dropdown {
+    right: 4rem;
+}
+
+ul.fasilitas-dropdown li, 
+ul.layanan-dropdown li {
+    text-align: center;
+}
+
+
+/* Drop-Down */
+#fasilitas:checked ~ ul.fasilitas-dropdown,
+#layanan:checked ~ ul.layanan-dropdown {
+    transition: .5s ease-in-out;
+    top: 8%;
+}
+
+#fasilitas:not(:checked) ~ ul.fasilitas-dropdown,
+#layanan:not(:checked) ~ ul.layanan-dropdown {
+    transition: .3s ease-in-out;
+    top: -20%;
+}
+
+#layanan:checked ~ ul.layanan-dropdown {
+    transition: .5s ease-in-out;
+    top: 12.5%;
+}
+
+/* Arrow-Down */
+#fasilitas:checked + label.fasilitas-check > i,
+#layanan:checked + label.layanan-check > i {
+    transition: .5s;
+    transform: rotate(180deg);
+}
+
+#fasilitas:not(:checked) + label.fasilitas-check > i
+#layanan:not(checked) + label.layanan-check > i {
+    transition: .5s;
+    transform: rotate(0deg);
+}
