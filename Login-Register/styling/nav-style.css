@@ -1,0 +1,53 @@
+nav {
+    width: 90%;
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    height: 6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+}
+
+.navigation {
+    height: 100%;
+}
+
+ul {
+    height: 100%;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    column-gap: 3rem;
+}
+
+ul a {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.navigation a {
+    font-family: 'ABeeZee', sans-serif;
+    text-decoration: none;
+    color: rgba(255, 255, 255, .6);
+    letter-spacing: .08rem;
+    transition: .3s ease; 
+}
+
+.navigation a:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
+.logo h1 {
+    font-family: 'Carrois Gothic SC', sans-serif;
+    color: white;
+    font-size: 1.85rem;
+    letter-spacing: .1rem;
+}
+
+h1 span {
+    color: #88CFF9;
+}

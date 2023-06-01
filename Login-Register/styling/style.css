@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee&family=Heebo:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap');
+
+* {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    position: relative;
+}
+
+h1 {
+    color: rgba(5, 6, 15, 1);
+    font-family: 'HeeBo', sans-serif;
+    letter-spacing: .1rem;
+    font-size: 2.25rem;
+    margin-top: -1rem;
+}
+
+.form {
+    position: relative;
+    background-color: #4C564D;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.form img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+    opacity: .2;
+}
+
+form {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 5rem;
+    height: 60%;
+    width: 20%;
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 1);
+    border-radius: 2rem;
+    backdrop-filter: blur(.5rem);
+}
+
+/*
+.input-box {
+    font-family: 'ABeeZee', sans-serif;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+label {
+    display: block;
+    margin-bottom: .3rem;
+    font-weight: bold;
+    color: #05060f99;
+    transition: color .3s ease;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #05060f0a;
+    border-radius: .5rem;
+    height: 5vh;
+    padding: 0 1rem;
+    border: 2px solid rgba(5, 6, 15, 0);
+    transition: .3s;
+}
+
+input[type=text]:hover, 
+input[type=password]:hover {
+    border: 2px solid rgba(5, 6, 15, 1);
+}
+
+input[type=text]:hover + label,
+input[type=password]:hover + label,
+input[type=text]:focus + label,
+input[type=password]:focus + label {
+    color: rgba(5, 6, 15, 1);
+} */
+
+.form__group {
+    position: relative;
+    padding: 15px 0 0;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.form__field {
+    font-family: 'ABeeZee', sans-serif;
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid #000000;
+    outline: 0;
+    font-size: 1.3rem;
+    color: white;
+    padding: .5rem 0;
+    background: none;
+    transition: border-color 0.2s;
+}
+
+.form__field::placeholder {
+    color: transparent;
+}
+
+.form__field:placeholder-shown ~ .form__label {
+    font-size: 1rem;
+    cursor: text;
+    top: 20px;
+}
+
+
+.form__label {
+    font-family: 'ABeeZee', sans-serif;
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: .8rem;
+    color: #000000;
+}
+
+.form__field:focus ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    font-size: .8rem;
+    color: #000000;
+    transition: 0.2s;
+    font-weight: 200;    
+}
+
+.form__field:focus {
+    border-image-slice: 1;
+}
+
+/* reset input */
+.form__field:required, .form__field:invalid { 
+    box-shadow:none; 
+} 
+
+
+/* don't touch */
+input[type=submit] {
+    font-family: 'HeeBo', sans-serif;
+    color: white;
+    width: 100%;
+    border-radius: 1rem;
+    height: 7vh;
+    font-weight: bold;
+    font-size: 1.15rem;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .2s;
+    background-color: rgba(5, 6, 15, 1);
+    border: 2px solid rgba(5, 6, 15, 1);
+}
+
+.input-box {
+    width: 100%;
+}
+
+form p {
+    font-family: 'ABeeZee', sans-serif;
+}
+
+form p span a {
+    text-decoration: none;
+    font-weight: 600;
+}
