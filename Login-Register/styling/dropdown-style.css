@@ -1,5 +1,5 @@
 label[for=layanan], label[for=fasilitas] {
-    transition: .5s ease; 
+    transition: .3s ease; 
     color: rgba(255, 255, 255, .6);
     font-family: 'ABeeZee', sans-serif;
     letter-spacing: .08rem;
@@ -61,11 +61,11 @@ ul.layanan-dropdown li {
 /* CHECKED */
 #fasilitas:checked ~ ul.fasilitas-dropdown {
     top: 3.8rem;
-    animation: dropdown-fasilitas .3s ease-in-out forwards;
+    animation: dropdown .3s ease-in-out forwards;
 }
 #layanan:checked ~ ul.layanan-dropdown {
     top: 5.8rem;
-    animation: dropdown-layanan .3s ease-in-out forwards;
+    animation: dropdown .3s ease-in-out forwards;
 }
 
 /* UNCHECKED */
@@ -80,17 +80,17 @@ ul.layanan-dropdown li {
 #fasilitas:checked + label.fasilitas-check > i,
 #layanan:checked + label.layanan-check > i {
     transition: .5s;
-    transform: rotate(180deg);
+    transform: rotateZ(180deg);
 }
-#fasilitas:not(:checked) + label.fasilitas-check > i
+#fasilitas:not(:checked) + label.fasilitas-check > i,
 #layanan:not(checked) + label.layanan-check > i {
     transition: .5s;
-    transform: rotateZ(-180deg);
+    transform: rotateZ(0deg);
 }
 
 
 /* ANIMASI */
-@keyframes dropdown-layanan {
+@keyframes dropdown {
     0% {
         transform: translateY(-10rem);
         opacity: 0;
@@ -102,22 +102,6 @@ ul.layanan-dropdown li {
 
     100% {
         transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes dropdown-fasilitas {
-    0% {
-        transform: translateY(-10rem);
-        opacity: 0;
-    }
-
-    60% {
-        opacity: .01;
-    }
-
-    100% {
-        transform: translateY(0); 
         opacity: 1;
     }
 }
