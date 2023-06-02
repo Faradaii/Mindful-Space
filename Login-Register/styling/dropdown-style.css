@@ -39,11 +39,11 @@ ul.layanan-dropdown {
 }
 
 ul.fasilitas-dropdown {
-    right: 14.5rem;
+    right: 13.2rem;
 }
 
 ul.layanan-dropdown {
-    right: 4rem;
+    right: 3.5rem;
 }
 
 ul.fasilitas-dropdown li, 
@@ -52,22 +52,28 @@ ul.layanan-dropdown li {
 }
 
 
-/* Drop-Down */
-#fasilitas:checked ~ ul.fasilitas-dropdown,
+/* Drop-Down . TOLONG JANGAN DIAPA-APAIN*/
+/* #fasilitas:checked ~ ul.fasilitas-dropdown,
 #layanan:checked ~ ul.layanan-dropdown {
-    transition: .5s ease-in-out;
-    top: 8%;
+    top: -10%;
+} */
+
+/* CHECKED */
+#fasilitas:checked ~ ul.fasilitas-dropdown {
+    top: 3.8rem;
+    animation: dropdown-fasilitas .3s ease-in-out forwards;
+}
+#layanan:checked ~ ul.layanan-dropdown {
+    top: 5.8rem;
+    animation: dropdown-layanan .3s ease-in-out forwards;
 }
 
-#fasilitas:not(:checked) ~ ul.fasilitas-dropdown,
-#layanan:not(:checked) ~ ul.layanan-dropdown {
+/* UNCHECKED */
+#layanan:not(:checked) ~ ul.layanan-dropdown,
+#fasilitas:not(:checked) ~ ul.fasilitas-dropdown {
+    opacity: 0.4;
     transition: .3s ease-in-out;
     top: -20%;
-}
-
-#layanan:checked ~ ul.layanan-dropdown {
-    transition: .5s ease-in-out;
-    top: 12.5%;
 }
 
 /* Arrow-Down */
@@ -76,9 +82,42 @@ ul.layanan-dropdown li {
     transition: .5s;
     transform: rotate(180deg);
 }
-
 #fasilitas:not(:checked) + label.fasilitas-check > i
 #layanan:not(checked) + label.layanan-check > i {
     transition: .5s;
-    transform: rotate(0deg);
+    transform: rotateZ(-180deg);
+}
+
+
+/* ANIMASI */
+@keyframes dropdown-layanan {
+    0% {
+        transform: translateY(-10rem);
+        opacity: 0;
+    }
+
+    60% {
+        opacity: .01;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes dropdown-fasilitas {
+    0% {
+        transform: translateY(-10rem);
+        opacity: 0;
+    }
+
+    60% {
+        opacity: .01;
+    }
+
+    100% {
+        transform: translateY(0); 
+        opacity: 1;
+    }
 }
