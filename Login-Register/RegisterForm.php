@@ -45,7 +45,7 @@
             <ul>
 
                 <a href="">
-                    <li class="home">Home</li>
+                    <li class="beranda">Beranda</li>
                 </a>
 
                 <li>
@@ -98,7 +98,7 @@
             <h1>SIGN UP</h1>
 
             <div class="form__group field">
-                <input class="form__field" type="text" name="username" id="" required placeholder="Username">
+                <input class="form__field" type="text" name="username" id="" required placeholder="Username" autocomplete="off">
                 <label class="form__label" for="username">Username</label>
             </div>
     

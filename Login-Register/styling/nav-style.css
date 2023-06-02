@@ -34,7 +34,7 @@ ul a {
     text-decoration: none;
     color: rgba(255, 255, 255, .6);
     letter-spacing: .08rem;
-    transition: .3s ease; 
+    transition: .1s ease; 
 }
 
 .navigation a:hover {
@@ -52,6 +52,6 @@ h1 span {
     color: #88CFF9;
 }
 
-.home {
+.beranda {
     font-family: 'ABeeZee', sans-serif;
 }

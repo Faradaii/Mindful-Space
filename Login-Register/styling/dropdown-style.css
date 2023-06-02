@@ -52,7 +52,8 @@ ul.layanan-dropdown li {
 }
 
 
-/* Drop-Down . TOLONG JANGAN DIAPA-APAIN*/
+/* ====== Drop-Down . TOLONG JANGAN DIAPA-APAIN ====== */
+
 /* #fasilitas:checked ~ ul.fasilitas-dropdown,
 #layanan:checked ~ ul.layanan-dropdown {
     top: -10%;
