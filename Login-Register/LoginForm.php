@@ -19,17 +19,24 @@
     
     <?php
     session_start();
-        if (isset($_GET['pesan'])) {
-            if ($_GET['pesan'] == 'loginberhasil') {
-                header("location:dashboard.php");
-            } else {
-                ?>
-                <script>
-                    
-                </script>
-                <?php
-            }
+
+    if (isset($_SESSION['username'])) {
+        // todo ubah ini inget
+        header("location:dashboard.php");
+    }
+
+    if (isset($_GET['pesan'])) {
+        if ($_GET['pesan'] == 'success') {
+            // todo ubah ini inget
+            header("location:dashboard.php");
+        } else {
+            ?>
+            <script>
+
+            </script>
+            <?php
         }
+    }
     ?>
 
 
@@ -93,7 +100,7 @@
         
         <img src="https://img.freepik.com/free-photo/beautiful-architecture-office-business-building-with-glass-window-shape_74190-6438.jpg?size=626&ext=jpg&ga=GA1.1.629320682.1661959596&semt=sph" alt="">
         
-        <form action="cekLogin.php" method="post">
+        <form action="../Action/LoginAction.php" method="post">
 
             <h1>SIGN IN</h1>
 
@@ -114,7 +121,7 @@
     
             <br><br><br>
     
-            <input type="submit" value="Log In">
+            <input type="submit" name="login-button" value="Log In">
             
             <br>
 
