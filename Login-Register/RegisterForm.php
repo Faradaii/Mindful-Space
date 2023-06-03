@@ -51,9 +51,9 @@
                 <li>
 
                     <input type="checkbox" id="fasilitas">
-                    <label for="fasilitas" class="fasilitas-check">Fasilitas <i class="fa fa-chevron-down"></i></label>
+                    <label for="fasilitas" class="fasilitas__check">Fasilitas <i class="fa fa-chevron-down"></i></label>
 
-                    <ul class="fasilitas-dropdown">
+                    <ul class="fasilitas__dropdown">
                         <a href="">
                             <li>Ruang Konseling</li>
                         </a>
@@ -67,9 +67,9 @@
                 <li>
 
                     <input type="checkbox" id="layanan">
-                    <label for="layanan" class="layanan-check">Layanan <i class="fa fa-chevron-down"></i></label>
+                    <label for="layanan" class="layanan__check">Layanan <i class="fa fa-chevron-down"></i></label>
 
-                    <ul class="layanan-dropdown">
+                    <ul class="layanan__dropdown">
                         <a href="">
                             <li>Konseling</li>
                         </a>
