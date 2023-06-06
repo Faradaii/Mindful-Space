@@ -32,11 +32,11 @@
                     <li>Beranda</li>
                 </a>
             
-                <a href="">
+                <a href="#administrasi">
                     <li>Administrasi</li>
                 </a>
 
-                <a href="">
+                <a href="#manajemen">
                     <li>Manajemen Artikel</li>
                 </a>
 
@@ -54,234 +54,241 @@
     
     </nav>
 
+    <br><br><br><br>
+    <br><br><br><br>
+
     <!-- Main -->
-    <main>
+    <div class="body">
 
-        <div class="left__col">
-
-            <h2>ADMINISTRASI</h2>
-        
-            <label for="total__user" id="label__user" class="radio__label">
-                
-                <h4>Total User</h4>
-                <h3>01</h3>
-                
-            </label>    
+        <main>
+    
+            <div class="left__col">
+    
+                <h2 id="administrasi">ADMINISTRASI</h2>
             
-            <label for="total__dokter" id="label__dokter" class="radio__label">
+                <label for="total__user" id="label__user" class="radio__label">
+                    
+                    <h4>Total User</h4>
+                    <h3>01</h3>
+                    
+                </label>    
                 
-                <h4>Total Dokter</h4>
-                <h3>02</h3>
+                <label for="total__dokter" id="label__dokter" class="radio__label">
+                    
+                    <h4>Total Dokter</h4>
+                    <h3>02</h3>
+                    
+                </label>    
                 
-            </label>    
-            
-            <a href="" class="box">
-                
-                <div class="tambah__dokter">
-                    <p>TAMBAH<br>DOKTER</p>
-                </div>
-
-                <div class="plus">
-
-                    <div>
-                        <p>+</p>
+                <a href="" class="box">
+                    
+                    <div class="tambah__dokter">
+                        <p>TAMBAH<br>DOKTER</p>
                     </div>
-
-                </div>
+    
+                    <div class="plus">
+    
+                        <div>
+                            <p>+</p>
+                        </div>
+    
+                    </div>
+                    
+                </a>
                 
-            </a>
+            </div>
             
-        </div>
-        
-        <div class="right__col">
-            
-            <form action="dashboard.php" method="get">
+            <div class="right__col">
                 
-                <input type="text" name="search" placeholder="Cari Username">
-                <input type="submit" value="" hidden>
+                <form action="dashboard.php" method="get">
+                    
+                    <input type="text" name="search" placeholder="Cari Username">
+                    <input type="submit" value="" hidden>
+                    
+                </form>
                 
-            </form>
-            
-            <div class="table">
-
-                <!-- TABEL DOKTER -->
-
-                <input type="radio" name="total" id="total__user" checked>
-                <table class="table__dokter">
-
-                    <thead>
-
+                <div class="table">
+    
+                    <!-- TABEL DOKTER -->
+    
+                    <input type="radio" name="total" id="total__user" checked>
+                    <table class="table__dokter">
+    
+                        <thead>
+    
+                            <tr>
+                                <th>No</th>
+                                <th>Username</th>
+                                <th>Aksi</th>
+                            </tr>
+    
+                        </thead>
+    
+                        <tbody>
+                            
+                        <?php 
+                        // DISINI PHP 
+                        ?>
+    
+                            <tr>
+                                <!-- NOMOR -->
+                                <td  class="number">1</td>
+                                <!-- USERNAME -->
+                                <td>Prof. Dr. Budhi Jago, S.T., M.T.</td>
+                                <!-- AKSI -->
+                                <td class="action">
+                                
+                                    <a href="">Update</a>
+                                    <a href="">Delete</a>
+    
+                                </td>
+                            </tr>
+    
+                       <?php 
+                        // DISINI PHP
+                       ?>
+    
+                        </tbody>
+    
+                    </table>
+    
+                    <!-- TABEL USER -->
+    
+                    <input type="radio" name="total" id="total__dokter">
+                    <table class="table__user">
+                        
                         <tr>
-                            <th>No</th>
+                            <th class="number">No</th>
                             <th>Username</th>
                             <th>Aksi</th>
                         </tr>
-
-                    </thead>
-
-                    <tbody>
-                        
-                    <?php 
-                    // DISINI PHP 
-                    ?>
-
-                        <tr>
-                            <!-- NOMOR -->
-                            <td  class="number">1</td>
-                            <!-- USERNAME -->
-                            <td>Prof. Dr. Budhi Jago, S.T., M.T.</td>
-                            <!-- AKSI -->
-                            <td class="action">
-                            
-                                <a href="">Update</a>
-                                <a href="">Delete</a>
-
-                            </td>
-                        </tr>
-
-                   <?php 
-                    // DISINI PHP
-                   ?>
-
-                    </tbody>
-
-                </table>
-
-                <!-- TABEL USER -->
-
-                <input type="radio" name="total" id="total__dokter">
-                <table class="table__user">
-                    
-                    <tr>
-                        <th class="number">No</th>
-                        <th>Username</th>
-                        <th>Aksi</th>
-                    </tr>
+        
+                        <?php 
+                            // DISINI PHP 
+                        ?>
     
-                    <?php 
-                        // DISINI PHP 
-                    ?>
-
-                        <tr>
-                            <!-- NOMOR -->
-                            <td  class="number">1</td>
-                            <!-- USERNAME -->
-                            <td>Budhi Jago</td>
-                            <!-- AKSI -->
-                            <td class="action">
-                            
-                                <a href="">Update</a>
-                                <a href="">Delete</a>
-
-                            </td>
-                        </tr>
-
-                   <?php 
-                    // DISINI PHP
-                   ?>
+                            <tr>
+                                <!-- NOMOR -->
+                                <td  class="number">1</td>
+                                <!-- USERNAME -->
+                                <td>Budhi Jago</td>
+                                <!-- AKSI -->
+                                <td class="action">
+                                
+                                    <a href="">Update</a>
+                                    <a href="">Delete</a>
     
-                </table>
-
-                <div class="pagination">
-                    <a href=""><- previous page</a>
-                    <a href="">next page -></a>
+                                </td>
+                            </tr>
+    
+                       <?php 
+                        // DISINI PHP
+                       ?>
+        
+                    </table>
+    
+                    <div class="pagination">
+                        <a href=""><- previous page</a>
+                        <a href="">next page -></a>
+                    </div>
+    
                 </div>
-
+    
             </div>
-
-        </div>
-        
-    </main>
-     
-    <section class="manajemen">
-
-        <br>
-        <br>
-        <br>
-
-        <div class="top">
-        
-                <h2>MANAJEMEN ARTIKEL</h2>
+            
+        </main>
+         
+        <section class="manajemen">
     
-                <a href="" class="artikel">
-
-                    <div>
-                        Tambah Artikel
-                    </div>
+            <br>
+            <br>
+            <br>
+    
+            <div class="top">
+            
+                    <h2 id="manajemen">MANAJEMEN ARTIKEL</h2>
+        
+                    <a href="" class="artikel">
+    
+                        <div>
+                            Tambah Artikel
+                        </div>
+                        
+                        <div>
+                            +
+                        </div>
+    
+                    </a>
+                
+            </div>
+    
+            <br>
+    
+            <table class="berita">
+    
+            <thead>
+                
+                <tr>
+        
+                    <th>
+                        Gambar
+                    </th>
                     
-                    <div>
-                        +
-                    </div>
-
-                </a>
-            
-        </div>
-
-        <br>
-
-        <table class="berita">
-
-        <thead>
-            
-            <tr>
+                    <th>
+                        Judul
+                    </th>
+        
+                    <th>
+                        Deskripsi
+                    </th>
+        
+                    <th>
+                        Link
+                    </th>
+        
+                    <th>
+                        Action
+                    </th>
+        
+                </tr>
     
-                <th>
-                    Gambar
-                </th>
-                
-                <th>
-                    Judul
-                </th>
+            </thead>
     
-                <th>
-                    Deskripsi
-                </th>
+            <tbody>
     
-                <th>
-                    Link
-                </th>
+                <tr>
     
-                <th>
-                    Action
-                </th>
+                    <td>
+                        <!--gambar -->
+                    </td>
     
-            </tr>
+                    <td>
+                        <!-- judul -->
+                    </td>
+    
+                    <td>
+                        <!-- deskripsi -->
+                    </td>
+    
+                    <td>
+                        <!-- link -->
+                    </td>
+                    
+                    <td class="action">
+                        <!-- action -->
+                        <a href="">Update</a>
+                        <a href="">Delete</a>
+                    </td>
+    
+                </tr>
+    
+            </tbody>
+    
+            </table>
+    
+        </section>
 
-        </thead>
-
-        <tbody>
-
-            <tr>
-
-                <td>
-                    <!--gambar -->
-                </td>
-
-                <td>
-                    <!-- judul -->
-                </td>
-
-                <td>
-                    <!-- deskripsi -->
-                </td>
-
-                <td>
-                    <!-- link -->
-                </td>
-                
-                <td class="action">
-                    <!-- action -->
-                    <a href="">Update</a>
-                    <a href="">Delete</a>
-                </td>
-
-            </tr>
-
-        </tbody>
-
-        </table>
-
-    </section>
+    </div>
 
     <script src="styling/script.js"></script>
 
