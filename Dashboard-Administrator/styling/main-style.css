@@ -11,7 +11,7 @@ div.left__col {
     row-gap: 1.5rem;
 }
 
-label {
+label.radio__label {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,12 +22,12 @@ label {
     height: 8rem;
 }
 
-label:hover {
+label.radio__label:hover {
     box-shadow: 0 0 20px 2px var(--main-grey);
     cursor: pointer;
 }
 
-a.box {
+label[for=tambah__dokter] {
     padding: 0 1.7rem;
     color: black;
     border-radius: 1rem;
@@ -41,12 +41,14 @@ a.box {
     align-items: center;
     justify-content: space-between;
     column-gap: 0;
-}
-
-.tambah__dokter {
     text-align: center;
     font-size: 1.5rem;
     line-height: 2.5rem;
+}
+
+label[for=tambah__dokter]:hover, label[for=tambah__artikel]:hover {
+    cursor: pointer;
+    box-shadow: 0 0 20px 2px var(--main-grey);
 }
 
 .plus div {
@@ -69,9 +71,6 @@ a.box {
     color: white;
 }
 
-a.box:hover {
-    box-shadow: 0 0 20px 2px var(--main-grey);
-}
 
 /* LEFT COLUMN STYLING END */
 
@@ -108,7 +107,7 @@ input[type=text]::placeholder {
     color: var(--black-not-hover);
 }
 
-input[type=text] {
+input[type=text], input[type=password] {
     font-family: 'Poppins', sans-serif;
     width: 100%;
     height: 2.5rem;
