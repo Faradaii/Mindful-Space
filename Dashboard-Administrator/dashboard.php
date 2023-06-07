@@ -13,9 +13,84 @@
     <link rel="stylesheet" href="styling/nav-style.css">
     <link rel="stylesheet" href="styling/main-style.css">
     <link rel="stylesheet" href="styling/manajemen-style.css">
+    <link rel="stylesheet" href="styling/modal-style.css">
 
 </head> 
 <body>
+   
+<!-- MODAL -->
+
+    <!-- Tambah Dokter -->
+    <input type="checkbox" name="tambah__dokter" id="tambah__dokter">
+    <div class="box__tambah__dokter">
+        
+        <form action="" method="">
+    
+            <h1>Tambah Dokter</h1>
+    
+            <br><br>
+
+            <label for="username">Username</label>
+            <input type="text" name="username" id="">
+    
+            <br><br><br>
+    
+            <label for="password">Password</label>
+            <input type="password" name="password" id="">
+    
+            <br><br><br><br>
+    
+            <div>
+
+                <label for="tambah__dokter">Batal</label>
+                <input type="submit" value="Tambah Akun">
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- Tambah Artikel -->
+    <input type="checkbox" name="tambah__artikel" id="tambah__artikel">
+    <div class="box__tambah__artikel">
+
+    <form action="" method="">
+    
+        <h1>Tambah Artikel</h1>
+
+        <br><br>
+
+        <label for="gambar">Unggah Gambar</label>
+        <input type="file" name="gambar" id="gambar">
+
+        <br><br>
+
+        <label for="judul">Judul</label>
+        <input type="text" name="judul" id="">
+
+        <br><br>
+
+        <label for="deskripsi">Deskripsi</label>
+        <input type="text" name="deskripsi" id="">
+
+        <br><br>
+
+        <label for="link">Tautan</label>
+        <input type="text" name="link">
+
+        <br><br><br>
+
+        <div>
+
+            <label for="tambah__artikel">Batal</label>
+            <input type="submit" value="Tambah Artikel">
+            
+        </div>
+
+</form>
+
+    </div>
 
     <!-- Navigasi -->
     <nav>
@@ -80,7 +155,7 @@
                     
                 </label>    
                 
-                <a href="" class="box">
+                <label for="tambah__dokter" class="box">
                     
                     <div class="tambah__dokter">
                         <p>TAMBAH<br>DOKTER</p>
@@ -94,7 +169,7 @@
     
                     </div>
                     
-                </a>
+                </label>
                 
             </div>
             
@@ -208,7 +283,7 @@
             
                     <h2 id="manajemen">MANAJEMEN ARTIKEL</h2>
         
-                    <a href="" class="artikel">
+                    <label for="tambah__artikel" class="artikel">
     
                         <div>
                             Tambah Artikel
@@ -218,7 +293,7 @@
                             +
                         </div>
     
-                    </a>
+                    </label>
                 
             </div>
     
