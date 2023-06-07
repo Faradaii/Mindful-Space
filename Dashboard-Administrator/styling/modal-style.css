@@ -1,0 +1,107 @@
+input[name=tambah__dokter], input[name=tambah__artikel] {
+    display: none;
+}
+
+div.box__tambah__dokter, div.box__tambah__artikel {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: none;
+    z-index: 2;
+    background-color: var(--main-grey);
+    backdrop-filter: blur(.4rem);
+}
+
+div.box__tambah__dokter form,
+div.box__tambah__artikel form {
+    font-family: 'Poppins', sans-serif;
+    background-color: rgba(255, 255, 255, .8);
+    border-radius: 1rem;
+    width: 30vw;
+    height: 60vh;
+    box-shadow: 0 0 30px 10px var(--main-grey);
+    backdrop-filter: blur(.9rem);
+    padding: 2rem;
+    animation: form .5s;
+} div.box__tambah__artikel form {
+    height: 70vh;
+}
+
+input[name=tambah__dokter]:checked ~ div.box__tambah__dokter,
+input[name=tambah__artikel]:checked ~ div.box__tambah__artikel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--black-not-hover);
+    animation: modal .3s;
+}
+
+div.box__tambah__dokter > form h1,
+div.box__tambah__artikel > form h1 {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+div.box__tambah__dokter > form div,
+div.box__tambah__artikel > form div {
+    display: flex;
+    justify-content: space-between;
+    height: 3rem;
+}
+
+form div > label[for=tambah__dokter], form div > label[for=tambah__artikel],
+input[type=submit] {
+    font-weight: 700;
+    font-size: 1.15rem;
+    border-radius: .5rem;
+    color: white;
+    letter-spacing: .02rem;
+    cursor: pointer;
+}
+
+form div > label[for=tambah__artikel] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 7rem;
+}
+
+input[type=submit] {
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--main-blue);
+    width: 10rem;
+}
+input[type=submit]:hover {
+    cursor: pointer;
+}
+
+form div > label[for=tambah__dokter],
+form div > label[for=tambah__artikel] {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--main-red);
+    height: 3rem;
+}
+
+@keyframes modal {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 100%;
+    }
+}
+
+@keyframes form {
+    from {
+        transform: translateY(-4rem);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
