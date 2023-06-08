@@ -3,7 +3,7 @@ namespace Helper {
 
     use mysqli;
 
-    ConnectionUtil::initialize("localhost", "root", "pwduas123", "mindfulspace");
+    ConnectionUtil::initialize("localhost", "root", "", "mindfulspace");
 
     class ConnectionUtil {
 

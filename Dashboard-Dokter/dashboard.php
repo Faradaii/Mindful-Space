@@ -16,6 +16,12 @@
 
 </head>
 <body>
+<?php
+    session_start();
+    if ($_SESSION['role'] != 'dokter') {
+        header('location:../Login-Register/LoginForm.php');
+    }
+   ?>
     
     <nav>
 
@@ -26,6 +32,9 @@
         <div>
             Dokter Budhi
         </div>
+        <a href="../Login-Register/Logout.php" class="logout">
+                    <li>Log Out</li>
+                </a>
 
     </nav>
 

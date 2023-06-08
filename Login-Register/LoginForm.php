@@ -19,24 +19,34 @@
     
     <?php
     session_start();
-
-    if (isset($_SESSION['username'])) {
-        // todo ubah ini inget
-        header("location:dashboard.php");
+    if (isset($_SESSION['role'])) {
+        header("location:LoginForm.php?pesan=loginberhasil&role=".$_SESSION['role']);
     }
-
-    if (isset($_GET['pesan'])) {
-        if ($_GET['pesan'] == 'success') {
-            // todo ubah ini inget
-            header("location:dashboard.php");
-        } else {
-            ?>
-            <script>
-
-            </script>
-            <?php
+        if (isset($_GET['pesan'])) {
+            if ($_GET['pesan'] == 'loginberhasil') {
+                switch ($_SESSION['role']) {
+                    case 'user':
+                        header("location:../Dashboard-User/dashboard.php");
+                        break;
+                    case 'admin':
+                        header("location:../Dashboard-Administrator/dashboard.php");
+                        break;
+                    case 'dokter':
+                        header("location:../Dashboard-Dokter/dashboard.php");
+                        break;
+                }
+            } else {
+                ?>
+                <script>
+                    alert("login tidak berhasil");
+                </script>
+                <?php
+            }
         }
-    }
+
+        if (isset($_SESSION['role'])) {
+            
+        }
     ?>
 
 
@@ -100,7 +110,7 @@
         
         <img src="https://img.freepik.com/free-photo/beautiful-architecture-office-business-building-with-glass-window-shape_74190-6438.jpg?size=626&ext=jpg&ga=GA1.1.629320682.1661959596&semt=sph" alt="">
         
-        <form action="../Action/LoginAction.php" method="post">
+        <form action="cekLogin.php" method="post">
 
             <h1>SIGN IN</h1>
 
@@ -121,7 +131,7 @@
     
             <br><br><br>
     
-            <input type="submit" name="login-button" value="Log In">
+            <input type="submit" value="Log In">
             
             <br>
 

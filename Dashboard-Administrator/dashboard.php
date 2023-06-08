@@ -17,7 +17,12 @@
 
 </head> 
 <body>
-   
+   <?php
+    session_start();
+    if ($_SESSION['role'] != 'admin') {
+        header('location:../Login-Register/LoginForm.php');
+    }
+   ?>
 <!-- MODAL -->
 
     <!-- Tambah Dokter -->
@@ -119,7 +124,7 @@
                     <hr>
                 </li>
 
-                <a href="../Login-Register/LoginForm.php" class="logout">
+                <a href="../Login-Register/Logout.php" class="logout">
                     <li>Log Out</li>
                 </a>
                 
