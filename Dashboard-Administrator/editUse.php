@@ -8,7 +8,8 @@
 </head>
 <body>
 <?php 
-    include 'konek.php';
+    require_once '../Helper/ConnectionUtil.php';
+    use Helper\ConnectionUtil;
 
     
     $id = $_POST['id'];
@@ -17,7 +18,7 @@
     $role = $_POST['role'];
 
     
-    mysqli_query($konek, "UPDATE dashboard SET username='$username', password='$password', role='$role' WHERE id='$id'");
+    mysqli_query(ConnectionUtil::connect(), "UPDATE dashboard SET username='$username', password='$password', role='$role' WHERE id='$id'");
     header("location:dashboard.php")
     ?>
 </body>

@@ -8,11 +8,12 @@
 </head>
 <body>
 <?php 
-    include 'konek.php';
+    require_once '../Helper/ConnectionUtil.php';
+    use Helper\ConnectionUtil;
 
     $id = $_GET['id'];
 
-    mysqli_query($konek, "DELETE FROM newspaper WHERE `newspaper`.`id_news` = $id");
+    mysqli_query(ConnectionUtil::connect(), "DELETE FROM newspaper WHERE `newspaper`.`id_news` = $id");
     header("location:dashboard.php");
     ?>
 </body>

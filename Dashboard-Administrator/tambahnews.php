@@ -10,8 +10,8 @@
 <form action = "addNews.php" method = "post">
     <table>
         <tr>
-            <td>url image</td>
-            <td><input type ="text" name = "url_image"></td>
+            <td>url</td>
+            <td><input type ="text" name = "url"></td>
         </tr>
         <tr>
             <td>judul</td>

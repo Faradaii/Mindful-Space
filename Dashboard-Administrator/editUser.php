@@ -8,11 +8,12 @@
 </head>
 <body>
 <?php
-    include "konek.php";
+    include '../Helper/ConnectionUtil.php';
+    use Helper\ConnectionUtil;
 
     $id = $_GET['id'];
 
-    $data = mysqli_query($konek, "SELECT*FROM dashboard WHERE id = '$id'");
+    $data = mysqli_query(ConnectionUtil::connect(), "SELECT*FROM dashboard WHERE id = '$id'");
     
     $result = mysqli_fetch_array($data);
 ?>

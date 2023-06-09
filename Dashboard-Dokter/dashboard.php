@@ -16,6 +16,12 @@
 
 </head>
 <body>
+
+<?php
+if (!isset($_SESSION['role'])) {
+    header("location: ../Login-Register/LoginForm.php");
+}
+?>
     
     <nav>
 

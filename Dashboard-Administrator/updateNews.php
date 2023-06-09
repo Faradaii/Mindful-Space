@@ -7,9 +7,11 @@
 </head>
 <body>
 <?php
-require_once "konek.php";
+require_once "Helper/ConnectionUtil.php";
+use Helper\ConnectionUtil;
+
 $id = $_GET['id'] ?? null;
-$data = mysqli_query($konek, "SELECT*FROM newspaper WHERE id_news='$id'");
+$data = mysqli_query(ConnectionUtil::connect(), "SELECT*FROM newspaper WHERE id_news='$id'");
 $result = mysqli_fetch_array($data);
 ?>
 <form action = "editNews.php" method = "post">

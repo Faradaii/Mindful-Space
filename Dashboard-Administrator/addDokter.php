@@ -8,14 +8,15 @@
 </head>
 <body>
 <?php 
-    include "konek.php";
+    require_once '../Helper/ConnectionUtil.php';
+    use Helper\ConnectionUtil;
     
     $nama = $_POST["username"];
-    $spesialis = $_POST["password"];
-    $role = $_POST["role"];
+    $password = $_POST["password"];
+    $role = 'dokter';
     
     
-    mysqli_query($konek, "INSERT INTO dashboard VALUES(DEFAULT, '$nama','$spesialis', '$role')");
+    mysqli_query(ConnectionUtil::connect(), "INSERT INTO users VALUES(DEFAULT, '$nama','$password', '$role')");
     header("location:dashboard.php")
     ?>
 </body>
