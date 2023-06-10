@@ -21,6 +21,14 @@
     if ($_SESSION['role'] != 'dokter') {
         header('location:../Login-Register/LoginForm.php');
     }
+    unset($_SESSION['fromWho']);
+    unset($_SESSION['id_from']);
+    echo $_SESSION['username'];
+    echo $_SESSION['id'];
+    ?>
+    <a href="chat.php">Chat Section</a>
+    <a href="statusSetting.php">Status Setting</a>
+    <a href="infoakun.php">info akun</a>
    ?>
     
     <nav>

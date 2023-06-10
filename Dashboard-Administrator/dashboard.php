@@ -17,19 +17,14 @@
 
 </head> 
 <body>
-   <?php
-    session_start();
-    if ($_SESSION['role'] != 'admin') {
-        header('location:../Login-Register/LoginForm.php');
-    }
-   ?>
+   
 <!-- MODAL -->
 
     <!-- Tambah Dokter -->
     <input type="checkbox" name="tambah__dokter" id="tambah__dokter">
     <div class="box__tambah__dokter">
         
-        <form action="" method="">
+        <form action="addDokter.php" method="post">
     
             <h1>Tambah Dokter</h1>
     
@@ -46,9 +41,9 @@
             <br><br><br><br>
     
             <div>
-
+                
                 <label for="tambah__dokter">Batal</label>
-                <input type="submit" value="Tambah Akun">
+                <input type="submit" value="Tambah Dokter">
 
             </div>
 
@@ -60,7 +55,7 @@
     <input type="checkbox" name="tambah__artikel" id="tambah__artikel">
     <div class="box__tambah__artikel">
 
-    <form action="" method="">
+    <form action="addNews.php" method="post" enctype="multipart/form-data">
     
         <h1>Tambah Artikel</h1>
 
@@ -89,7 +84,7 @@
         <div>
 
             <label for="tambah__artikel">Batal</label>
-            <input type="submit" value="Tambah Artikel">
+            <input type="submit" name="submit" value="Tambah Artikel">
             
         </div>
 
@@ -149,14 +144,36 @@
                 <label for="total__user" id="label__user" class="radio__label">
                     
                     <h4>Total User</h4>
-                    <h3>01</h3>
+                    <h3>
+                        <?php
+                        require_once "../Helper/ConnectionUtil.php";
+                        use Helper\ConnectionUtil;
+                        $data = mysqli_query(ConnectionUtil::connect(), "SELECT id FROM users WHERE role = 'user'");
+                        $totalUser = mysqli_fetch_all($data);
+                        if (sizeof($totalUser) < 10) {
+                            echo "0".sizeof($totalUser);
+                        } else {
+                            echo sizeof($totalUser);
+                        }
+                        ?>
+                    </h3>
                     
                 </label>    
                 
                 <label for="total__dokter" id="label__dokter" class="radio__label">
                     
                     <h4>Total Dokter</h4>
-                    <h3>02</h3>
+                    <h3>
+                        <?php
+                        $data = mysqli_query(ConnectionUtil::connect(), "SELECT id FROM users WHERE role = 'dokter'");
+                        $totalDokter = mysqli_fetch_all($data);
+                        if (sizeof($totalDokter) < 10) {
+                            echo "0".sizeof($totalDokter);
+                        } else {
+                            echo sizeof($totalDokter);
+                        }
+                        ?>
+                    </h3>
                     
                 </label>    
                 
@@ -208,24 +225,33 @@
                             
                         <?php 
                         // DISINI PHP 
+                        
+                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'dokter'");
+                                if (isset($_GET['search'])) {
+                                    $search = $_GET['search'];
+                                    $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'dokter' AND LIKE '%'.$search.'%'");
+                                }
+                                while ($result = mysqli_fetch_array($data)){
                         ?>
     
                             <tr>
                                 <!-- NOMOR -->
                                 <td  class="number">1</td>
                                 <!-- USERNAME -->
-                                <td>Prof. Dr. Budhi Jago, S.T., M.T.</td>
+                                <td><?php echo $result['username']?></td>
                                 <!-- AKSI -->
                                 <td class="action">
                                 
-                                    <a href="">Update</a>
-                                    <a href="">Delete</a>
+                                    <a href="editUser.php?id=<?php echo $result['id']?>">Update</a>
+                                    <a href="delUserAction.php?id=<?php echo $result['id']?>">Delete</a>
     
                                 </td>
                             </tr>
     
                        <?php 
                         // DISINI PHP
+                                }
+                            
                        ?>
     
                         </tbody>
@@ -245,24 +271,31 @@
         
                         <?php 
                             // DISINI PHP 
+                            
+                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'user'");
+                                // search query
+                                while ($result = mysqli_fetch_array($data)){
                         ?>
     
                             <tr>
                                 <!-- NOMOR -->
                                 <td  class="number">1</td>
                                 <!-- USERNAME -->
-                                <td>Budhi Jago</td>
+                                <td><?php echo $result['username']?></td>
                                 <!-- AKSI -->
                                 <td class="action">
                                 
-                                    <a href="">Update</a>
-                                    <a href="">Delete</a>
+                                    <a href="editUser.php?id=<?php echo $result['id']?>">Update</a>
+                                    <a href="delUserAction.php?id=<?php echo $result['id']?>
+                                    " >Delete</a>
     
                                 </td>
                             </tr>
     
                        <?php 
                         // DISINI PHP
+                                }
+                            
                        ?>
         
                     </table>
@@ -336,31 +369,42 @@
     
             <tbody>
     
+            <?php 
+                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM newspaper ORDER BY id DESC LIMIT 3");
+                while($news = mysqli_fetch_array($data)){
+            ?>
                 <tr>
     
                     <td>
                         <!--gambar -->
+                        <img src="<?php echo $news['url_image'] ?>" width="200px">
                     </td>
     
                     <td>
                         <!-- judul -->
+                        <h5 style="text-align:center;"><?php echo $news['judul']?></h5>
                     </td>
     
                     <td>
                         <!-- deskripsi -->
+                        <p style="text-align:center;"> <?php echo $news['deskripsi']?> </p>
                     </td>
     
                     <td>
                         <!-- link -->
+                        <p style="text-align:center;"> <?php echo $news['link']?> </p>
                     </td>
                     
                     <td class="action">
                         <!-- action -->
-                        <a href="">Update</a>
-                        <a href="">Delete</a>
+                        <a href="../Dashboard-Administrator/updateNews.php?id=<?php echo $news['id']?>">Update</a>
+                        <a href="../Dashboard-Administrator/delNews.php?id=<?php echo $news['id']?>&url_image=<?php echo $news['url_image']?>">Delete</a>
                     </td>
     
                 </tr>
+            <?php 
+                }
+            ?>
     
             </tbody>
     
