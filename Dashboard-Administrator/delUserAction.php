@@ -13,7 +13,7 @@
 
     $id = $_GET['id'];
 
-    mysqli_query(ConnectionUtil::connect(), "DELETE FROM dashboard WHERE `dashboard`.`id` = $id");
+    mysqli_query(ConnectionUtil::connect(), "DELETE FROM users WHERE id = $id");
     header("location:dashboard.php")
     ?>
 </body>

@@ -13,11 +13,11 @@
 
     $id = $_GET['id'];
 
-    $data = mysqli_query(ConnectionUtil::connect(), "SELECT*FROM dashboard WHERE id = '$id'");
+    $data = mysqli_query(ConnectionUtil::connect(), "SELECT*FROM users WHERE id = '$id'");
     
     $result = mysqli_fetch_array($data);
 ?>
-<form action = "editUse.php" method = "post">
+<form action = "editUserAction.php" method = "post">
     <table>
         <tr>
             <td><input type="hidden" name="id" value="<?php echo $result['id']; ?>"></td>
@@ -25,6 +25,28 @@
         <tr>
             <td>Username</td>
             <td><input type ="text" name = "username" value="<?php echo $result['username']; ?>"></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type ="text" name = "password" value="<?php echo $result['password']; ?>"></td>
+        </tr>
+        <tr>
+            <td>Role</td>
+            <td>
+                <select type ="text" name = "role" value="<?php echo $result['role']; ?>">
+                    <?php 
+                        if ($result['role'] == 'dokter') {?>
+                        <option value="dokter" selected>Dokter</option>
+                        <option value="user" >User</option>
+                        <?php 
+                        } else {?>
+                        <option value="user" selected>User</option>
+                        <option value="dokter" >Dokter</option>
+                        <?php 
+                        }?>
+                    ?>
+                </select>
+            </td>
         </tr>
         <tr>
         <td>

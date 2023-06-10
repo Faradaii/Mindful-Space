@@ -225,24 +225,33 @@
                             
                         <?php 
                         // DISINI PHP 
+                        
+                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'dokter'");
+                                if (isset($_GET['search'])) {
+                                    $search = $_GET['search'];
+                                    $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'dokter' AND LIKE '%'.$search.'%'");
+                                }
+                                while ($result = mysqli_fetch_array($data)){
                         ?>
     
                             <tr>
                                 <!-- NOMOR -->
                                 <td  class="number">1</td>
                                 <!-- USERNAME -->
-                                <td>Prof. Dr. Budhi Jago, S.T., M.T.</td>
+                                <td><?php echo $result['username']?></td>
                                 <!-- AKSI -->
                                 <td class="action">
                                 
-                                    <a href="">Update</a>
-                                    <a href="">Delete</a>
+                                    <a href="editUser.php?id=<?php echo $result['id']?>">Update</a>
+                                    <a href="delUserAction.php?id=<?php echo $result['id']?>">Delete</a>
     
                                 </td>
                             </tr>
     
                        <?php 
                         // DISINI PHP
+                                }
+                            
                        ?>
     
                         </tbody>
@@ -262,24 +271,31 @@
         
                         <?php 
                             // DISINI PHP 
+                            
+                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'user'");
+                                // search query
+                                while ($result = mysqli_fetch_array($data)){
                         ?>
     
                             <tr>
                                 <!-- NOMOR -->
                                 <td  class="number">1</td>
                                 <!-- USERNAME -->
-                                <td>Budhi Jago</td>
+                                <td><?php echo $result['username']?></td>
                                 <!-- AKSI -->
                                 <td class="action">
                                 
-                                    <a href="">Update</a>
-                                    <a href="">Delete</a>
+                                    <a href="editUser.php?id=<?php echo $result['id']?>">Update</a>
+                                    <a href="delUserAction.php?id=<?php echo $result['id']?>
+                                    " >Delete</a>
     
                                 </td>
                             </tr>
     
                        <?php 
                         // DISINI PHP
+                                }
+                            
                        ?>
         
                     </table>
@@ -354,7 +370,7 @@
             <tbody>
     
             <?php 
-                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM newspaper ORDER BY id DESC");
+                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM newspaper ORDER BY id DESC LIMIT 3");
                 while($news = mysqli_fetch_array($data)){
             ?>
                 <tr>
@@ -381,8 +397,8 @@
                     
                     <td class="action">
                         <!-- action -->
-                        <a href="">Update</a>
-                        <a href="">Delete</a>
+                        <a href="../Dashboard-Administrator/updateNews.php?id=<?php echo $news['id']?>">Update</a>
+                        <a href="../Dashboard-Administrator/delNews.php?id=<?php echo $news['id']?>&url_image=<?php echo $news['url_image']?>">Delete</a>
                     </td>
     
                 </tr>

@@ -11,12 +11,20 @@
     require_once '../Helper/ConnectionUtil.php';
     use Helper\ConnectionUtil;
 
-    $id = $_POST['id_news'];
+    $id = $_POST['id'];
     $judul = $_POST['judul'];
     $desc = $_POST['deskripsi'];
+    $link = $_POST['link'];
     $url_image = $_POST['url_image'];
 
-    mysqli_query(ConnectionUtil::connect(), "UPDATE newspaper SET judul='$judul', deskripsi='$desc', url_image='$url_image' WHERE id_news='$id'");
+    mysqli_query(ConnectionUtil::connect(), "UPDATE newspaper SET judul='$judul', deskripsi='$desc', link='$link' WHERE id='$id'");
+    
+    if ($_FILES["gambar"]["tmp_name"]) {
+        chmod($url_image,0755); 
+        unlink($url_image);
+        move_uploaded_file($_FILES["gambar"]["tmp_name"], $url_image);
+    }
+
     header("location:dashboard.php");
     ?>
 </body>

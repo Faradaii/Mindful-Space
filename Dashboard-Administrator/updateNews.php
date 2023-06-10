@@ -7,21 +7,24 @@
 </head>
 <body>
 <?php
-require_once "Helper/ConnectionUtil.php";
+require_once "../Helper/ConnectionUtil.php";
 use Helper\ConnectionUtil;
 
 $id = $_GET['id'] ?? null;
-$data = mysqli_query(ConnectionUtil::connect(), "SELECT*FROM newspaper WHERE id_news='$id'");
+$data = mysqli_query(ConnectionUtil::connect(), "SELECT*FROM newspaper WHERE id='$id'");
 $result = mysqli_fetch_array($data);
 ?>
-<form action = "editNews.php" method = "post">
+<form action = "editNews.php" method = "post" enctype="multipart/form-data">
     <table>
         <tr>
-            <td><input type="hidden" name="id_news" value="<?php echo $result['id_news']; ?>"></td>
+            <td><input type="hidden" name="id" value="<?php echo $result['id']?>"></td>
         </tr>
         <tr>
             <td>image</td>
-            <td><input type ="text" name = "url_image" value="<?php echo $result['url_image']; ?>"></td>
+            <td>
+                <input type="text" hidden name="url_image" value="<?php echo $result['url_image']?>">
+                <input type="file" name="gambar" id="gambar">
+            </td>
         </tr>
         <tr>
             <td>judul</td>
@@ -30,6 +33,10 @@ $result = mysqli_fetch_array($data);
         <tr>
             <td>deskripsi</td>
             <td><input type ="text" name = "deskripsi" value="<?php echo $result['deskripsi']; ?>"></td>
+        </tr>
+        <tr>
+            <td>Link</td>
+            <td><input type ="text" name = "link" value="<?php echo $result['link']; ?>"></td>
         </tr>
         <tr>
         <td>

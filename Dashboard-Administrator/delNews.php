@@ -12,8 +12,11 @@
     use Helper\ConnectionUtil;
 
     $id = $_GET['id'];
-
-    mysqli_query(ConnectionUtil::connect(), "DELETE FROM newspaper WHERE `newspaper`.`id_news` = $id");
+    $url_image = $_GET['url_image'];
+    
+    chmod($url_image,0755); 
+    unlink($url_image);
+    mysqli_query(ConnectionUtil::connect(), "DELETE FROM newspaper WHERE id = $id");
     header("location:dashboard.php");
     ?>
 </body>

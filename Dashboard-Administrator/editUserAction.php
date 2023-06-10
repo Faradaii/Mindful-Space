@@ -11,9 +11,14 @@
     require_once '../Helper/ConnectionUtil.php';
     use Helper\ConnectionUtil;
 
-    $id = $_GET['id'];
+    
+    $id = $_POST['id'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $role = $_POST['role'];
 
-    mysqli_query(ConnectionUtil::connect(), "DELETE FROM dashboard WHERE `dashboard`.`id` = $id");
+    
+    mysqli_query(ConnectionUtil::connect(), "UPDATE users SET username='$username', password='$password', role='$role' WHERE id='$id'");
     header("location:dashboard.php")
     ?>
 </body>
