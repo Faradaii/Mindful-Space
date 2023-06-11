@@ -1,6 +1,6 @@
 label[for=layanan], label[for=fasilitas] {
     transition: .3s ease; 
-    color: rgba(255, 255, 255, .6);
+    color: var(--black-not-hover);
     font-family: 'ABeeZee', sans-serif;
     letter-spacing: .08rem;
 }
@@ -11,7 +11,7 @@ label[for=layanan], label[for=fasilitas] {
 
 .fasilitas__check:hover, .layanan__check:hover {
     cursor: pointer;
-    color: white;
+    color: black;
 }
 
 ul.fasilitas__dropdown, ul.layanan__dropdown {
@@ -39,11 +39,11 @@ ul.layanan__dropdown {
 }
 
 ul.fasilitas__dropdown {
-    right: 13.2rem;
+    right: 27.5rem;
 }
 
 ul.layanan__dropdown {
-    right: 3.5rem;
+    right: 17.5rem;
 }
 
 ul.fasilitas__dropdown li, 

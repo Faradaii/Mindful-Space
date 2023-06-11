@@ -4,9 +4,9 @@ nav {
     justify-content: space-between;
     align-items: center;
     position: fixed !important;
-    width: 100%;
+    inset: 0 0 0 0;
     padding: 0 5%;
-    z-index: 1;
+    z-index: 2;
     background-color: white;
 }
 
@@ -16,8 +16,6 @@ nav {
 
 ul {
     height: 100%;
-    margin: 0;
-    padding: 0;
     list-style-type: none;
     display: flex;
     justify-content: space-evenly;
@@ -31,21 +29,22 @@ ul a {
     align-items: center;
 }
 
-ul a li {
-    letter-spacing: 0.03rem;
-    font-weight: 500;
-}
-
 .navigation a {
     font-family: 'ABeeZee', sans-serif;
     text-decoration: none;
     color: var(--black-not-hover);
     letter-spacing: .08rem;
-    transition: .3s ease; 
+    transition: .2s ease; 
 }
 
 .navigation a:hover {
-    color: black;
+    color: rgba(0, 0, 0, 1);
+}
+
+hr {
+    border: 1.5px solid var(--black-not-hover);
+    opacity: .6;
+    height: 35px;
 }
 
 .logo h1 {
@@ -60,37 +59,50 @@ h1 span {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-span.admin {
-    font-family: 'Carrois Gothic SC', sans-serif;
-    color: var(--black-not-hover);
-    font-size: 1.25rem;
-    letter-spacing: 0;
-    font-weight: 500;
+.beranda {
+    font-family: 'ABeeZee', sans-serif;
+    color: black;
 }
 
-.line hr {
-    border: 1.5px solid var(--black-not-hover);
-    opacity: .6;
-    height: 35px;
-}
-
-.logout li {
+.login li {
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 1rem;
     height: 2.8rem;
-    background-color: var(--main-red);
+    background-color: var(--main-blue);
     color: white;
     font-weight: 700;
     width: 8rem;  
     font-size: 1.15rem;
     font-family: 'Inter', sans-serif;
     letter-spacing: .01rem;
-    box-shadow: 0 0 5px 1px var(--main-red-transparent);
+    box-shadow: 0 0 5px 1px var(--main-blue-transparent);
     transition: .3s;
 }
 
-.logout li:hover {
-    box-shadow: 0 0 15px 1px var(--main-red-transparent);
+.login li:hover {
+    box-shadow: 0 0 15px 2px var(--main-blue-transparent);
+}
+
+/* UNDERLINE ANIMATION */
+
+div.underline {
+    position: absolute;
+    background-color: var(--main-blue);
+    height: 5px;
+    width: 1.3rem;
+    right: 38.5rem;
+    top: 75%;
+    border-radius: 1.3rem;
+    transition: .3s;
+    z-index: 2;
+}
+
+.fasilitas__hover:hover ~ div.underline {
+    right: 32.1%;
+}
+
+.layanan__hover:hover ~ div.underline {
+    right: 22.4%;
 }

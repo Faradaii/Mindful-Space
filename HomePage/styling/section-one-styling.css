@@ -1,0 +1,147 @@
+/* WELCOME SECTION STYLING */
+
+    /* TEXT */
+section.welcome h1, section.welcome span {
+    margin-top: 1rem;
+    font-family: 'montserrat', sans-serif !important;
+    font-weight: 700;
+    font-size: 3.5rem;
+}
+
+section.welcome h2 {
+    font-family: 'montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--black-not-hover);
+    font-size: 1.4rem;
+    letter-spacing: .03rem;
+}
+
+section.welcome p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 1.25rem;
+    text-align: justify;
+    width: 42ch;
+}
+
+section.welcome {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.welcome__text {
+    margin-top: 2rem;
+}
+
+    /* IMAGE */
+div.welcome__image {
+    height: 31rem;
+    width: 34%;
+    position: absolute;
+    right: 5rem;
+    border-radius: 5rem;
+    margin-right: 3rem;
+    background-color: var(--secondary-blue);
+    z-index: -2;
+}
+
+div.welcome__image img {
+    width: 27rem;
+}
+
+div.welcome__image img.main__img {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    right: -1.5rem;
+}
+
+div.welcome__image img.blur {
+    position: absolute;
+    right: 3.5rem;
+    bottom: -.7rem;
+    z-index: -1;
+    filter: blur(1.9rem);
+}
+
+/* ARTICLE SECTION STYLING */
+
+section.artikel {
+    margin-top: 12rem;
+}
+
+section.artikel h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+section.artikel div.list__artikel {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+section.artikel div.list__artikel div {
+    position: relative;
+}
+
+section.artikel div.list__artikel img {
+    width: 100%;
+    max-height: 40%;
+    display: flex;
+    justify-content: center;
+    border-radius: 1rem 1rem 0 0;
+}
+
+section.artikel div.list__artikel h1 {
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+section.artikel div.list__artikel p {
+    font-family: 'Poppins', sans-serif;
+    line-height: 2rem;
+    color: var(--black-not-hover);
+    font-size: 1.2rem;
+    max-height: 30%;
+    text-align: justify;
+    width: 85%;
+    margin: 1.5rem auto;
+}
+
+section.artikel div.list__artikel a {
+    color: var(--black-not-hover);
+    transition: .3s;
+    text-decoration: none;
+    position: absolute;
+    bottom: 3.5%;
+    right: 7.5%;
+    display: block;
+    text-align: right;
+} 
+
+section.artikel div.list__artikel a:hover {
+    color: black;
+}
+
+div.list__artikel div {
+    background-color: var(--secondary-blue);
+    height: 35rem;
+    width: 27rem;
+    border-radius: 1rem;
+}
+
+/* ANIMATION */
+
+@keyframes scroll {
+    from {
+        transform: translateY(-10rem);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}

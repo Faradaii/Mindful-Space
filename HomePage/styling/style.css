@@ -6,8 +6,8 @@
 
 :root {
     --main-blue: #88CFF9;
-    --main-red: #F06363;
-    --main-red-transparent: rgba(240, 99, 99, .4);
+    --main-blue-transparent: rgba(136, 207, 249, .4);
+    --secondary-blue: #D4F8F9;
     --main-grey: rgba(0, 0, 0, .05);
     --black-not-hover: rgba(0, 0, 0, .4);
 }
@@ -18,7 +18,11 @@
     box-sizing: border-box;
 }
 
-.body {
+html {
+    scroll-behavior: smooth;
+}
+
+body {
     width: 90%;
     margin: 0 auto;
 }
