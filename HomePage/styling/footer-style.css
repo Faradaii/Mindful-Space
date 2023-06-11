@@ -1,0 +1,49 @@
+footer {
+    position: absolute;
+    right: 0;
+    left: 0;
+    padding: 0 5%;
+    padding-top: 2rem;
+    background-color: var(--main-blue);
+}
+
+div.footer {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: .7rem;
+    height: 4rem;
+    padding: 0 1rem;
+}
+
+div.top {
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer div.kontak a i {
+    color: var(--black-not-hover);
+    font-size: 4rem;
+    transition: .3s;
+}
+footer div.kontak a i:hover {
+    color: black;
+}
+
+div.kontak h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    color: var(--black-not-hover);
+}
+
+div.kontak div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.copyright p {
+    text-align: center;
+}
