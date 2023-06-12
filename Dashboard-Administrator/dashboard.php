@@ -12,24 +12,41 @@
     <link rel="stylesheet" href="styling/style.css">
     <link rel="stylesheet" href="styling/nav-style.css">
     <link rel="stylesheet" href="styling/main-style.css">
-    <link rel="stylesheet" href="styling/manajemen-style.css">
     <link rel="stylesheet" href="styling/modal-style.css">
+    <link rel="stylesheet" href="styling/manajemen-style.css">
+
+    <script>
+        document.addEventListener('DOMContentLoaded' function() {
+            // Check if there's a stored value for the radio inputs
+            if (localStorage.getItem('checkedInput')) {
+                // Get the stored value
+                var checkedInput = localStorage.getItem('checkedInput');
+                
+                // Set the checked property based on the stored value
+                document.getElementById(checkedInput).checked = true;
+            }
+            
+            // Add an event listener to the radio inputs
+            var radioInputs = document.querySelectorAll('input[type="radio"]');
+            for (var i = 0; i < radioInputs.length; i++) {
+                radioInputs[i].addEventListener('change', function() {
+                    // Store the checked input's id in localStorage
+                    localStorage.setItem('checkedInput', this.id);
+                });
+            }
+        });
+    </script>
 
 </head> 
 <body>
-   <?php
-    session_start();
-    if ($_SESSION['role'] != 'admin') {
-        header('location:../Login-Register/LoginForm.php');
-    }
-   ?>
+   
 <!-- MODAL -->
 
     <!-- Tambah Dokter -->
     <input type="checkbox" name="tambah__dokter" id="tambah__dokter">
     <div class="box__tambah__dokter">
         
-        <form action="" method="">
+        <form action="addDokter.php" method="post">
     
             <h1>Tambah Dokter</h1>
     
@@ -46,9 +63,9 @@
             <br><br><br><br>
     
             <div>
-
+                
                 <label for="tambah__dokter">Batal</label>
-                <input type="submit" value="Tambah Akun">
+                <input type="submit" value="Tambah Dokter">
 
             </div>
 
@@ -60,7 +77,7 @@
     <input type="checkbox" name="tambah__artikel" id="tambah__artikel">
     <div class="box__tambah__artikel">
 
-    <form action="" method="">
+    <form action="addNews.php" method="post" enctype="multipart/form-data">
     
         <h1>Tambah Artikel</h1>
 
@@ -89,7 +106,7 @@
         <div>
 
             <label for="tambah__artikel">Batal</label>
-            <input type="submit" value="Tambah Artikel">
+            <input type="submit" name="submit" value="Tambah Artikel">
             
         </div>
 
@@ -149,14 +166,36 @@
                 <label for="total__user" id="label__user" class="radio__label">
                     
                     <h4>Total User</h4>
-                    <h3>01</h3>
+                    <h3>
+                        <?php
+                        require_once "../Helper/ConnectionUtil.php";
+                        use Helper\ConnectionUtil;
+                        $data = mysqli_query(ConnectionUtil::connect(), "SELECT id FROM users WHERE role = 'user'");
+                        $totalUser = mysqli_fetch_all($data);
+                        if (sizeof($totalUser) < 10) {
+                            echo "0".sizeof($totalUser);
+                        } else {
+                            echo sizeof($totalUser);
+                        }
+                        ?>
+                    </h3>
                     
                 </label>    
                 
                 <label for="total__dokter" id="label__dokter" class="radio__label">
                     
                     <h4>Total Dokter</h4>
-                    <h3>02</h3>
+                    <h3>
+                        <?php
+                        $data = mysqli_query(ConnectionUtil::connect(), "SELECT id FROM users WHERE role = 'dokter'");
+                        $totalDokter = mysqli_fetch_all($data);
+                        if (sizeof($totalDokter) < 10) {
+                            echo "0".sizeof($totalDokter);
+                        } else {
+                            echo sizeof($totalDokter);
+                        }
+                        ?>
+                    </h3>
                     
                 </label>    
                 
@@ -191,7 +230,7 @@
     
                     <!-- TABEL DOKTER -->
     
-                    <input type="radio" name="total" id="total__user" checked>
+                    <input type="radio" name="total" id="total__user">
                     <table class="table__dokter">
     
                         <thead>
@@ -207,25 +246,49 @@
                         <tbody>
                             
                         <?php 
-                        // DISINI PHP 
+                        $no = 1;
+                        $batas = 7; // <-- Magic number
+                        $halaman= @$_GET['halaman'];
+                        if (empty($halaman)){
+                            $posisi= 0;
+                            $halaman= 1;
+                        } else {
+                            $posisi = ($halaman-1)* $batas;
+                            $no = $posisi + 1;
+                        }
+
+                        $data = mysqli_query(ConnectionUtil::connect(), "SELECT*FROM users WHERE role = 'dokter'");
+                        $jmldata= mysqli_num_rows($data);
+                        $jmlhal = ceil($jmldata/$batas);
+
+                            // search query
+                            
+                            if (isset($_GET['search'])) {
+                                $search = $_GET['search'];
+                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'dokter' LIKE '%$search%' LIMIT $posisi,$batas");
+                            } else {
+                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT*FROM users WHERE role = 'dokter' LIMIT $posisi,$batas");
+                            }
+
+                        while ($result = mysqli_fetch_array($data)){
                         ?>
     
                             <tr>
                                 <!-- NOMOR -->
-                                <td  class="number">1</td>
+                                <td  class="number"><?php echo $no++; ?></td>
                                 <!-- USERNAME -->
-                                <td>Prof. Dr. Budhi Jago, S.T., M.T.</td>
+                                <td><?php echo $result['username']?></td>
                                 <!-- AKSI -->
                                 <td class="action">
                                 
-                                    <a href="">Update</a>
-                                    <a href="">Delete</a>
+                                    <a href="editUser.php?id=<?php echo $result['id']?>">Update</a>
+                                    <a href="delUserAction.php?id=<?php echo $result['id']?>">Delete</a>
     
                                 </td>
                             </tr>
     
                        <?php 
-                        // DISINI PHP
+                       }
                        ?>
     
                         </tbody>
@@ -233,8 +296,7 @@
                     </table>
     
                     <!-- TABEL USER -->
-    
-                    <input type="radio" name="total" id="total__dokter">
+                    <input type="radio" name="total" id="total__dokter" checked>
                     <table class="table__user">
                         
                         <tr>
@@ -243,33 +305,69 @@
                             <th>Aksi</th>
                         </tr>
         
-                        <?php 
-                            // DISINI PHP 
+                        <?php
+                        // DISINI PHP 
+                        $no = 1;
+                        $batas = 7; // <-- Magic number
+                        $halaman= @$_GET['halaman'];
+                        if (empty($halaman)){
+                            $posisi= 0;
+                            $halaman= 1;
+                        } else {
+                            $posisi = ($halaman-1)* $batas;
+                            $no = $posisi + 1;
+                        }
+
+                        $data = mysqli_query(ConnectionUtil::connect(), "SELECT*FROM users WHERE role = 'user'");
+                        $jmldata= mysqli_num_rows($data);
+                        $jmlhal = ceil($jmldata/$batas);
+
+                            // search query
+                            
+                            if (isset($_GET['search'])) {
+                                $search = $_GET['search'];
+                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'user' LIKE '%$search%' LIMIT $posisi,$batas");
+                            } else {
+                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT*FROM users WHERE role = 'user' LIMIT $posisi,$batas");
+                            }
+                            while ($result = mysqli_fetch_array($data)){
                         ?>
     
                             <tr>
                                 <!-- NOMOR -->
-                                <td  class="number">1</td>
+                                <td  class="number"><?php echo $no++; ?></td>
                                 <!-- USERNAME -->
-                                <td>Budhi Jago</td>
+                                <td><?php echo $result['username']?></td>
                                 <!-- AKSI -->
                                 <td class="action">
                                 
-                                    <a href="">Update</a>
-                                    <a href="">Delete</a>
+                                    <a href="editUser.php?id=<?php echo $result['id']?>">Update</a>
+                                    <a href="delUserAction.php?id=<?php echo $result['id']?>
+                                    " >Delete</a>
     
                                 </td>
                             </tr>
     
                        <?php 
-                        // DISINI PHP
+                       }
                        ?>
         
                     </table>
     
                     <div class="pagination">
-                        <a href=""><- previous page</a>
-                        <a href="">next page -></a>
+                        <?php
+                        if ($halaman > 1) {
+                        ?>
+                            <a href="dashboard.php?halaman=<?php echo $halaman - 1; ?>"><- previous page</a>
+                        <?php
+                        } 
+
+                        if ($halaman < $jmlhal) {
+                        ?>
+                            <a href="dashboard.php?halaman=<?php echo $halaman + 1; ?>">next page -></a>
+                        <?php
+                        }
+                        ?>
                     </div>
     
                 </div>
@@ -336,31 +434,42 @@
     
             <tbody>
     
+            <?php 
+                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM newspaper ORDER BY id DESC LIMIT 3");
+                while($news = mysqli_fetch_array($data)){
+            ?>
                 <tr>
     
                     <td>
                         <!--gambar -->
+                        <img src="<?php echo $news['url_image'] ?>" width="200px">
                     </td>
     
                     <td>
                         <!-- judul -->
+                        <h5 style="text-align:center;"><?php echo $news['judul']?></h5>
                     </td>
     
                     <td>
                         <!-- deskripsi -->
+                        <p style="text-align:center;"> <?php echo $news['deskripsi']?> </p>
                     </td>
     
                     <td>
                         <!-- link -->
+                        <p style="text-align:center;"> <?php echo $news['link']?> </p>
                     </td>
                     
-                    <td class="action">
+                    <td class="action__berita">
                         <!-- action -->
-                        <a href="">Update</a>
-                        <a href="">Delete</a>
+                        <a href="../Dashboard-Administrator/updateNews.php?id=<?php echo $news['id']?>">Update</a>
+                        <a href="../Dashboard-Administrator/delNews.php?id=<?php echo $news['id']?>&url_image=<?php echo $news['url_image']?>">Delete</a>
                     </td>
     
                 </tr>
+            <?php 
+                }
+            ?>
     
             </tbody>
     
