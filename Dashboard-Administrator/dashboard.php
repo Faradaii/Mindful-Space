@@ -288,9 +288,7 @@
                             </tr>
     
                        <?php 
-                        // DISINI PHP
-                                }
-                            
+                       }
                        ?>
     
                         </tbody>
@@ -307,7 +305,7 @@
                             <th>Aksi</th>
                         </tr>
         
-                        <?php 
+                        <?php
                         // DISINI PHP 
                         $no = 1;
                         $batas = 7; // <-- Magic number
@@ -351,9 +349,7 @@
                             </tr>
     
                        <?php 
-                        // DISINI PHP
-                                }
-                            
+                       }
                        ?>
         
                     </table>

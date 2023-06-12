@@ -1,0 +1,108 @@
+label[for=layanan], label[for=fasilitas] {
+    transition: .3s ease; 
+    color: var(--black-not-hover);
+    font-family: 'ABeeZee', sans-serif;
+    letter-spacing: .08rem;
+}
+
+#fasilitas, #layanan {
+    display: none;
+}
+
+.fasilitas__check:hover, .layanan__check:hover {
+    cursor: pointer;
+    color: black;
+}
+
+ul.fasilitas__dropdown, ul.layanan__dropdown {
+    background-color: rgba(255, 255, 255, .4);
+    border-radius: .5rem;
+    backdrop-filter: blur(.5rem);
+    margin-top: 1rem;
+    padding: 1rem 0;
+    top: -20%;
+    z-index: -1;
+    width: 8rem;
+    height: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    row-gap: 1rem;
+    position: fixed;
+}
+
+ul.layanan__dropdown {
+    margin-top: -1rem;
+    width: 9rem;
+    height: 8rem;
+    padding-bottom: 1.3rem;
+}
+
+ul.fasilitas__dropdown {
+    right: 27.5rem;
+}
+
+ul.layanan__dropdown {
+    right: 17.5rem;
+}
+
+ul.fasilitas__dropdown li, 
+ul.layanan__dropdown li {
+    text-align: center;
+}
+
+
+/* ====== Drop-Down . TOLONG JANGAN DIAPA-APAIN ====== */
+
+/* #fasilitas:checked ~ ul.fasilitas__dropdown,
+#layanan:checked ~ ul.layanan__dropdown {
+    top: -10%;
+} */
+
+/* CHECKED */
+#fasilitas:checked ~ ul.fasilitas__dropdown {
+    top: 3.8rem;
+    animation: dropdown .3s ease-in-out forwards;
+}
+#layanan:checked ~ ul.layanan__dropdown {
+    top: 5.8rem;
+    animation: dropdown .3s ease-in-out forwards;
+}
+
+/* UNCHECKED */
+#layanan:not(:checked) ~ ul.layanan__dropdown,
+#fasilitas:not(:checked) ~ ul.fasilitas__dropdown {
+    opacity: 0.4;
+    transition: .3s ease-in-out;
+    top: -20%;
+}
+
+/* Arrow-Down */
+#fasilitas:checked + label.fasilitas__check > i,
+#layanan:checked + label.layanan__check > i {
+    transition: .5s;
+    transform: rotateZ(180deg);
+}
+#fasilitas:not(:checked) + label.fasilitas__check > i,
+#layanan:not(checked) + label.layanan__check > i {
+    transition: .5s;
+    transform: rotateZ(0deg);
+}
+
+
+/* ANIMASI */
+@keyframes dropdown {
+    0% {
+        transform: translateY(-10rem);
+        opacity: 0;
+    }
+
+    60% {
+        opacity: .01;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
