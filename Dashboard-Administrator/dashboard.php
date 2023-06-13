@@ -265,9 +265,9 @@
                             
                             if (isset($_GET['search'])) {
                                 $search = $_GET['search'];
-                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'dokter' LIKE '%$search%' LIMIT $posisi,$batas");
+                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'dokter' AND username LIKE '%$search%' LIMIT $posisi,$batas");
                             } else {
-                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT*FROM users WHERE role = 'dokter' LIMIT $posisi,$batas");
+                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'dokter' LIMIT $posisi,$batas");
                             }
 
                         while ($result = mysqli_fetch_array($data)){
@@ -318,7 +318,7 @@
                             $no = $posisi + 1;
                         }
 
-                        $data = mysqli_query(ConnectionUtil::connect(), "SELECT*FROM users WHERE role = 'user'");
+                        $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'user'");
                         $jmldata= mysqli_num_rows($data);
                         $jmlhal = ceil($jmldata/$batas);
 
@@ -326,9 +326,9 @@
                             
                             if (isset($_GET['search'])) {
                                 $search = $_GET['search'];
-                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'user' LIKE '%$search%' LIMIT $posisi,$batas");
+                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'user' AND username LIKE '%$search%' LIMIT $posisi,$batas");
                             } else {
-                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT*FROM users WHERE role = 'user' LIMIT $posisi,$batas");
+                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'user' LIMIT $posisi,$batas");
                             }
                             while ($result = mysqli_fetch_array($data)){
                         ?>
