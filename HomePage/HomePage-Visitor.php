@@ -118,17 +118,25 @@
             <h1>Baca artikel terbaru.</h1>
 
             <div class="list__artikel">
+                <?php 
+                    require_once "../Helper/ConnectionUtil.php";
+                    use Helper\ConnectionUtil;
+
+                    $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM newspaper ORDER BY id DESC LIMIT 3");
+                    $result = mysqli_fetch_all($data);
+                ?>
 
                 <div class="artikel__satu">
 
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSN77EgizQUrUvCjQOJ9nVSaEgEDDuShjxUSA&usqp=CAU" alt="">
+                    <!-- <?php print_r($result) ?> -->
+                    <img src="<?php echo $result[0][1] ?>" alt="">
                     
-                    <h1>Judul</h1>
+                    <h1><?php echo $result[0][2] ?></h1>
 
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, soluta veritatis. Non quo itaque dolorem? Quas, aspernatur. . .</p>
+                    <p><?php echo $result[0][3] ?></p>
                     
                     <p>
-                        <a href="">
+                        <a href="<?php echo $result[0][4] ?>">
                             See artikel ->
                         </a>
                     </p>
@@ -137,14 +145,14 @@
 
                 <div class="artikel__dua">
 
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWCSoAcwVcztL6bDnd9BCVb6xaov4RFH7aDw&usqp=CAU" alt="">
+                    <img src="<?php echo $result[1][1] ?>" alt="">
+                    
+                    <h1><?php echo $result[1][2] ?></h1>
 
-                    <h1>Judul</h1>
-
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, soluta veritatis. Non quo itaque dolorem? Quas, aspernatur...</p>
+                    <p><?php echo $result[1][3] ?></p>
                     
                     <p>
-                        <a href="">
+                        <a href="<?php echo $result[1][4] ?>">
                             See artikel ->
                         </a>
                     </p>
@@ -153,14 +161,14 @@
 
                 <div class="artikel__tiga">
 
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh9gnLSqB5AmA1HiERC5AepxnflNL2hLVziQ&usqp=CAU" alt="">    
-                
-                    <h1>Judul</h1>
+                    <img src="<?php echo $result[2][1] ?>" alt="">
                     
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, soluta veritatis. Non quo itaque dolorem? Quas, aspernatur...</p>
+                    <h1><?php echo $result[2][2] ?></h1>
+
+                    <p><?php echo $result[2][3] ?></p>
                     
                     <p>
-                        <a href="">
+                        <a href="<?php echo $result[2][4] ?>">
                             See artikel ->
                         </a>
                     </p>
