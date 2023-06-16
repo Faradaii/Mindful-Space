@@ -38,3 +38,7 @@ Sebuah platform yang menyediakan pelayanan problem solving untuk berbagai masala
 - Pembuatan Design untuk fitur Login dan Register
 
 - DASHBOARD: -
+
+### 3 Juni - 5 Juni
+- Pembuatan Design Dashboard Administrator
+- 
