@@ -1,0 +1,49 @@
+main {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 3rem;
+}
+
+.left__col, .right__col {
+    outline: 2px solid black ;
+}
+
+.left__col {
+    width: 65%;
+} 
+.right__col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 35%;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.right__col h1 {
+    font-weight: 800;
+    letter-spacing: .05rem;
+}
+
+.keluhan, .back {
+    height: 7rem;
+    outline: 2px solid black;
+    letter-spacing: 0.05rem;
+}
+
+.keluhan h2 {
+    font-weight: 650;
+}
+
+.keluhan h4 {
+    font-weight: 400;
+}
+
+.back {
+    border-radius: 20px;
+    background-color: var(--main-grey);
+    color: var(--black-not-hover);
+    font-weight: 600;
+    font-size: 40px;
+    width: 100%;
+}

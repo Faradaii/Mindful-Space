@@ -35,28 +35,48 @@
         $ChatData = mysqli_query(Connect::connect(), $query); 
 
         while($chat = mysqli_fetch_array($ChatData)){
-            if ($chat['id_from'] == $myid){?>
-                <div style='float:right;'>
-                <?php echo $chat['isi_chat']?>
+
+            if ($chat['id_from'] == $myid) {?>
+
                 <br>
-                <small><?php echo $chat['time'] ?></small>
+
+                <div style='float:right;' class="right__chat">
+
+                    <p><?php echo $chat['isi_chat'] ?></p>
+
+                    <br>
+
+                    <small><?php echo $chat['time'] ?></small>
+
                 </div>
-                <br/>
+
+                <br>
 
             <?php
+
             }
-            else{?>
-                <div style='float:left;'>
-                <?php echo $chat['isi_chat']?>
+            else {?>
+
                 <br>
-                <small><?php echo $chat['time'] ?></small>
+
+                <div style='float:left;' class="left__chat">
+
+                    <p><?php echo $chat['isi_chat']?></p>
+
+                    <br>
+
+                    <small><?php echo $chat['time'] ?></small>
+
                 </div>
-                <br/>
+
+                <br>
+
             <?php
             }
         }
     } else {?>
         <h1>Silahkan Mulai Chat dengan menekan chat list di kiri!</h1>
+        
     <?php 
     }?>
     
