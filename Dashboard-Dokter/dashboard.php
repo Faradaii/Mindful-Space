@@ -17,14 +17,23 @@
 </head>
 <body>
 <?php
-    // session_start();
-    // if ($_SESSION['role'] != 'dokter') {
-    //     header('location:../Login-Register/LoginForm.php');
-    // }
+    session_start();
+    include '../Helper/ConnectionUtil.php';
+    use Helper\ConnectionUtil;
+    if ($_SESSION['role'] != 'dokter') {
+        header('location:../Login-Register/LoginForm.php');
+    }
 
+    unset($_SESSION['fromWho']);
+    unset($_SESSION['id_from']);
+    $myId = $_SESSION['id'];
+
+    $data = mysqli_query(ConnectionUtil::connect(), "SELECT * 
+    FROM dokters WHERE id_dokter = $myId ");
+    $result = mysqli_fetch_array($data);
     // 1 = checked
     // 0 == not checked
-    $status = 1;
+    $status = $result['status'];
 
 ?>
 
@@ -39,11 +48,16 @@
 
             <p class="available__status"><!-- Javascript --></p>
             
+            <form action="setStatus.php" method="POST" id="setStatus">
             <label for="available__status">
                 <!-- PHP selected dibawah -->
-                <input type="checkbox" name="available__status" id="available__status" <?php echo $status == 1 ? 'checked' : ''  ?>>
+                <input type="checkbox" name="available__status" onchange="document.getElementById('setStatus').submit()" id="available__status" <?php echo $status == 1 ? 'checked' : ''  ?>>
+                <input type="text" name="status" value="<?php echo $status == 1? 0 : 1 ?>" hidden>
                 <div class="toggle"></div>
             </label>
+            </form>
+                
+            </form>
 
         </div>
 
@@ -52,9 +66,16 @@
 
     <nav>
 
-        <div class="logo">
-            <h1>MINDFUL <span>SPACE</span></h1>
-        </div>
+        <?php
+        $iniHTMLDiDalemPHP = <<<HTML
+            <div class="logo">
+                <h1>MINDFUL <span>SPACE</span></h1>
+            </div>
+        HTML;
+
+        echo $iniHTMLDiDalemPHP;
+        ?>
+        
 
         <div class="profile">
 
@@ -86,7 +107,15 @@
 
         <div class="top">
             
+        <?php
+
+        $iniHTMLDiDalemPHP = <<<HTML
             <h2>DASHBOARD</h2>
+        HTML;
+
+        echo $iniHTMLDiDalemPHP;
+        ?>
+            <!-- <h2>DASHBOARD</h2> -->
 
             <form action="dashboard.php?tes=1">
 
@@ -103,27 +132,39 @@
         <br>
 
         <section class="data__shown">
-
+            
             <div class="left__col">
     
+    <?php 
+        // <!-- fetch data dari table antrian where id_dokter = $_SESSION['id'] -->
+        $data = mysqli_query(ConnectionUtil::connect(), "SELECT users.username, antrian.* 
+                                                    FROM antrian JOIN users 
+                                ON antrian.id_pasien = users.id
+                                WHERE id_dokter = $myId ");
+?>
                 <div>
 
                     <div class="card">
                         
                         <h4>Total Pasien</h4>
-                        <h3>14</h3>
+                        <h3><?php echo sizeof(mysqli_fetch_all($data))?></h3>
         
                     </div>
                     
                     <div class="card">
-        
+        <?php 
+        $data = mysqli_query(ConnectionUtil::connect(), "SELECT users.username, antrian.* 
+        FROM antrian JOIN users 
+        ON antrian.id_pasien = users.id
+        WHERE id_dokter = $myId AND status != 'selesai' ");
+        ?>
                         <h4>Antrian saat ini</h4>
-                        <h3>14</h3>
+                        <h3><?php echo sizeof(mysqli_fetch_all($data))?></h3>
         
                     </div>
 
                 </div>
-    
+               
                 <table>
     
                     <thead>
@@ -138,88 +179,50 @@
                     </thead>
                     
                     <tbody>
-    
+                    <?php
+                    $data = mysqli_query(ConnectionUtil::connect(), "SELECT users.username, antrian.* 
+                    FROM antrian JOIN users 
+        ON antrian.id_pasien = users.id
+        WHERE id_dokter = $myId ORDER BY waktu ASC");
+                        while ($row = mysqli_fetch_array($data)){
+                    ?>
                         <tr>
                             <td class="center">1</td>
-                            <td><a href="">Budhi</a></td>
-                            <td class="center">08.00-09.00</td>
-                            <td class="center">tes</td>
+                            <td><a href="../Dashboard-Dokter/dashboard.php?id=<?php echo $row['id_pasien']?>"><?php echo $row['username']?></a></td>
+                            <td class="center"><?php echo $row['waktu']?>.00 - <?php echo $row['waktu']+1?>.00</td>
+                            <td class="center"><?php echo $row['status']?></td>
                         </tr>
-                        <tr>
-                            <td class="center">2</td>
-                            <td><a href="">Budhi</a></td>
-                            <td class="center">08.00-09.00</td>
-                            <td class="center">tes</td>
-                        </tr>
-                        <tr>
-                            <td class="center">3</td>
-                            <td><a href="">Budhi</a></td>
-                            <td class="center">08.00-09.00</td>
-                            <td class="center">tes</td>
-                        </tr>
-                        <tr>
-                            <td class="center">4</td>
-                            <td><a href="">Budhi</a></td>
-                            <td class="center">08.00-09.00</td>
-                            <td class="center">tes</td>
-                        </tr>
-                        <tr>
-                            <td class="center">5</td>
-                            <td><a href="">Budhi</a></td>
-                            <td class="center">08.00-09.00</td>
-                            <td class="center">tes</td>
-                        </tr>
-                        <tr>
-                            <td class="center">6</td>
-                            <td><a href="">Budhi</a></td>
-                            <td class="center">08.00-09.00</td>
-                            <td class="center">tes</td>
-                        </tr>
-                        <tr>
-                            <td class="center">7</td>
-                            <td><a href="">Budhi</a></td>
-                            <td class="center">08.00-09.00</td>
-                            <td class="center">tes</td>
-                        </tr>
-                        <tr>
-                            <td class="center">8</td>
-                            <td><a href="">Budhi</a></td>
-                            <td class="center">08.00-09.00</td>
-                            <td class="center">tes</td>
-                        </tr>
-                        <tr>
-                            <td class="center">9</td>
-                            <td><a href="">Budhi</a></td>
-                            <td class="center">08.00-09.00</td>
-                            <td class="center">tes</td>
-                        </tr>
-                        <tr>
-                            <td class="center">10</td>
-                            <td><a href="">Budhi</a></td>
-                            <td class="center">08.00-09.00</td>
-                            <td class="center">tes</td>
-                        </tr>
-                       
-
+                    <?php 
+                    }
+                    ?>
                     </tbody>
     
                 </table>
 
-                <div class="pagination">
+                <!-- <div class="pagination">
 
                         <a href=""><- previous page</a>
                         <a href="">next page -></a>
 
-                </div>
+                </div> -->
     
             </div>
-    
+
             <div class="right__col">
     
                 <div class="card hijau">
-
+                <?php
+                $statusQueueQuery = <<<SQL
+                    SELECT users.username, antrian.* 
+                    FROM antrian JOIN users 
+                    ON antrian.id_pasien = users.id
+                    WHERE id_dokter = $myId AND status = 'selesai';
+                SQL;
+                
+        $data = mysqli_query(ConnectionUtil::connect(), $statusQueueQuery);
+        ?>
                         <h4>Pasien selesai</h4>
-                        <h3>14</h3>
+                        <h3><?php echo sizeof(mysqli_fetch_all($data))?></h3>
     
                 </div>
                 
@@ -237,23 +240,47 @@
                     <!-- PROFIL YANG KELUAR DISAAT DOKTER KLIK
                     DATA USER YANG TERTERA PADA TABEL. -->
                     <div class="profile__user">
-    
+                    <?php 
+                        $checkCurrentProfileQuery = <<<SQL
+                            SELECT users.username, identitas.* 
+                            FROM identitas JOIN users 
+                            ON identitas.id_user = users.id;
+                        SQL;
+
+                        $data = mysqli_query(ConnectionUtil::connect(), $checkCurrentProfileQuery);
+                        if (isset($_GET['id'])) {
+                            $otherId = $_GET['id'];
+
+                            $checkOtherProfileQuery = <<<SQL
+                                SELECT users.username, identitas.* 
+                                FROM identitas JOIN users 
+                                ON identitas.id_user = users.id WHERE id_user = $otherId
+                            SQL;
+                            
+                            $data = mysqli_query(ConnectionUtil::connect(), $checkOtherProfileQuery);
+                        }
+        while($row = mysqli_fetch_array($data)){
+        ?>
                         <div class="profile__picture">
-                            <img src="../image/BudhiSwag-removebg-preview.png" alt="">
+                            <img src="<?php echo $row['url_image']?$row['url_image']: '' ?>" alt="">
                         </div>
     
                         <div class="identity">
-                            <h1>BudhiPro</h1>
-                            <p>I Made Bagus Mahatma Budhi</p>
-                            <p>Laki - Laki | 19 Tahun</p>
+                            <h1><?php echo $row['username']? $row['username']:''  ?></h1>
+                            <p><?php echo $row['namalengkap']?$row['namalengkap']:'' ?></p>
+                            <p><?php echo $row['jeniskelamin']?$row['jeniskelamin']:'p' ?> | <?php echo $row['umur'] ?> Tahun</p>
                         </div>
     
                     </div>
+                    <?php }?>
     
-                    <a href="" class="message">
-                        Message
-                        <i class="fa-solid fa-paper-plane"></i>
-                    </a>
+                    <form action="chat.php" method="post">
+                        <input type="text" value="<?php echo isset($_GET['id'])? $_GET['id']:'' ?>" hidden>
+                        <button class="message" type="submit">
+                            Message
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </form>
     
                 </div>
     
