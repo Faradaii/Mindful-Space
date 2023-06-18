@@ -55,15 +55,19 @@
                 <input type="text" name="status" value="<?php echo $status == 1? 0 : 1 ?>" hidden>
                 <div class="toggle"></div>
             </label>
+            
             </form>
                 
             </form>
+            
 
         </div>
 
-
+        <a href="../Login-Register/Logout.php" class="logout">
+            <li>Log Out</li>
+        </a>
     </div>
-
+    
     <nav>
 
         <?php
