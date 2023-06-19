@@ -70,10 +70,52 @@
 
     </nav>
     
+    <?php
+
+        // //history chat
+        session_start();
+        include '../Helper/ConnectionUtil.php';
+            use Helper\ConnectionUtil;
+
+        echo $_SESSION['id'];
+        $myid = $_SESSION['id'];
+        $otherid = $_SESSION['id_from'];
+        if ($myid < $otherid) {
+            $ref = $myid.$otherid;
+        }
+        else {
+            $ref = $otherid.$myid;
+        }
+
+
+        $listchat = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM historychat WHERE id_to = '$myid' ORDER BY id DESC LIMIT 5");
+        // $historychat = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM chats WHERE id_from = '$myid'");
+
+        while ($fromWho = mysqli_fetch_array($listchat)) {
+
+            $from = $fromWho['id_from'];
+            $userdatas =  mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE id = '$from'");
+
+            while ($userdata = mysqli_fetch_array($userdatas)){
+
+                $user_id = $userdata['id'];
+                echo
+                "<form style='z-index: 6;' method='post' action='scriptChat.php?'>
+                    <input type='text' name='id_from' hidden value='$user_id'>
+                    <input type='text' name='help' value='true' hidden>
+                    <button type='submit'>$userdata[$from]</button>
+                </form>";
+
+            }
+
+        }
+
+    ?>
+
     <hr>
     
     <br><br><br><br><br>
-    <br><br><br><br>
+    <br><br>
 
 
     <main>
@@ -84,14 +126,21 @@
                 <!-- ISI CHAT -->
             </div>  
             
-            <br>
+            <br><br><br>
 
             <form method='post' action='addChat.php'>
-                <input type='text' name='isiChat'>
-                <button type='submit'>Send</button>
+
+                <div class="text__bar">
+
+                    <input type='text' name='isiChat' autocomplete="off" placeholder="Ketik disini...">
+                    <button type='submit'><i class="fa-solid fa-paper-plane"></i></button>
+
+                </div>
+
                 <input type='text' name='idFrom' hidden value='<?php echo $myid?>'>
                 <input type='text' name='idTo' hidden value='<?php echo $otherid?>'>
                 <input type='text' name='ref' hidden value='<?php echo $ref?>'>
+
             </form>
     
         </div>
@@ -113,21 +162,21 @@
 
             <div class="user__profile">
 
+                <div class="image">
+                    <img src="../image/BudhiSwag-removebg-preview.png" alt="">
+                </div>
+
                 <?php
-        
-                    session_start();
-            
-                    include '../Helper/ConnectionUtil.php';
-                    use Helper\ConnectionUtil;
             
                     if (isset($_SESSION['fromWho'])) {
                         $otherid = $_SESSION['fromWho'];
             
                         $userData = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE id = '$otherid'");
                         while ($userAbout = mysqli_fetch_array($userData)){
-                            echo '<p>' . $userAbout['username'] . '</p>';
-                            echo '<p>' . $userAbout['password'].'</p>';
-                            echo '<p>' . $userAbout['role'].'</p>';
+                            echo '<p class="data">' . $userAbout['username'] . '</p>';
+                            echo '<p class="nama__asli">' . 'I Made Bagus Mahatma Budhi' . '</p>';
+                            echo '<p class="sub__data">' . $userAbout['password'].' | ';
+                            echo '<span>' . $userAbout['role'].'</span></p>';
             
                         }
                         
@@ -137,9 +186,14 @@
 
             </div>
 
-            <button class="back">
-                Back <i class="fa-sharp fa-solid fa-circle-arrow-left" style="color: #000000;"></i>
-            </button>
+            <form action="Dashboard.php">
+
+                <button class="back">
+                    Back
+                </button>
+                <i class="fa-solid fa-arrow-left"></i>
+
+            </form>
             
         </div>
     

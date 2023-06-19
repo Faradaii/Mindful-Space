@@ -4,20 +4,50 @@ main {
     column-gap: 3rem;
 }
 
-.left__col, .right__col {
+/* .left__col, .right__col {
     outline: 2px solid black ;
-}
+} */
 
 .left__col {
-    width: 65%;
-} 
+    position: relative;
+    width: 90%;
+    background-color: var(--main-grey);
+    height: 75vh;
+    max-height: 75vh;
+}
+
+#chatAutoRefresh {
+    height: 100%;
+    max-height: calc(100% - 4.5rem);
+    overflow-y: auto;
+}
+
+/* RIGHT COLUMN START */
+
 .right__col {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 35%;
     text-align: center;
+    row-gap: .5rem;
     font-family: 'Montserrat', sans-serif;
+}
+
+.time, .keluhan, .user__profile, .back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.time {
+    width: 100%;
+    height: 10%;
+    background-color: white;
+    border: 3px solid black;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-radius: 5rem;
 }
 
 .right__col h1 {
@@ -25,25 +55,141 @@ main {
     letter-spacing: .05rem;
 }
 
-.keluhan, .back {
+/* .keluhan, .back {
     height: 7rem;
     outline: 2px solid black;
     letter-spacing: 0.05rem;
+} */
+
+.keluhan {
+    background-color: var(--main-grey);
+    height: 6rem;
+    flex-direction: column;
+    border-radius: 1rem;
 }
 
 .keluhan h2 {
-    font-weight: 650;
+    font-weight: 700;
+    letter-spacing: .1rem;
 }
 
 .keluhan h4 {
     font-weight: 400;
 }
 
-.back {
-    border-radius: 20px;
+.user__profile {
+    flex-direction: column;
     background-color: var(--main-grey);
+    border-radius: 1rem;
+    height: 70%;
+}
+.user__profile .data {
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+.user__profile .sub__data, .nama__asli {
+    font-size: .9rem;
     color: var(--black-not-hover);
-    font-weight: 600;
-    font-size: 40px;
+}
+
+div.image {
+    background-color: var(--main-blue);
+    width: 9rem;
+    height: 9rem;
+    border-radius: 9rem;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+div.image img {
+    width: 9rem;
+    overflow: hidden;
+}
+
+.right__col form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 1rem;
+    border-radius: 1rem;
+    background-color: var(--main-grey);
     width: 100%;
+    height: 6rem;
+}
+
+.right__col form i {
+    color: var(--black-not-hover);
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.back {
+    font-family: 'Montserrat';
+    color: var(--black-not-hover);
+    font-weight: 700;
+    font-size: 2rem;
+    border: none;
+}
+
+
+/* RIGHT COLUMN END */
+
+/* CHAT STYLING START */
+
+div.text__bar {
+    display: flex;
+    column-gap: 1rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 2.5%;
+    margin: 0 auto;
+    width: 97.5%;
+}
+
+div.text__bar button {
+    height: 3rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+div.text__bar button:hover i {
+    color: black;
+}
+
+div.text__bar button i {
+    transition: .2s;
+    font-size: 2.5rem;
+    color: var(--black-not-hover);
+}
+
+div.text__bar input[name=isiChat] {
+    background-color: var(--main-grey);
+    border: none;
+    border-radius: 1rem;
+    width: 100%;
+    height: 3rem;
+    padding: 0 1rem;
+    font-size: 1rem;
+}
+div.text__bar input[name=isiChat]:focus {
+    border: rgba(0, 0, 0, 0);
+}
+
+/* CHAT STYLING END */
+
+/* SCROLLBAR STYLE */
+
+/* width */
+::-webkit-scrollbar {
+width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+background: rgb(243, 243, 243); 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+background: #ddd; 
 }
