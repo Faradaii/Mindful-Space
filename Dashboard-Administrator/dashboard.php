@@ -12,8 +12,30 @@
     <link rel="stylesheet" href="styling/style.css">
     <link rel="stylesheet" href="styling/nav-style.css">
     <link rel="stylesheet" href="styling/main-style.css">
-    <link rel="stylesheet" href="styling/manajemen-style.css">
     <link rel="stylesheet" href="styling/modal-style.css">
+    <link rel="stylesheet" href="styling/manajemen-style.css">
+
+    <script>
+        document.addEventListener('DOMContentLoaded' function() {
+            // Check if there's a stored value for the radio inputs
+            if (localStorage.getItem('checkedInput')) {
+                // Get the stored value
+                var checkedInput = localStorage.getItem('checkedInput');
+                
+                // Set the checked property based on the stored value
+                document.getElementById(checkedInput).checked = true;
+            }
+            
+            // Add an event listener to the radio inputs
+            var radioInputs = document.querySelectorAll('input[type="radio"]');
+            for (var i = 0; i < radioInputs.length; i++) {
+                radioInputs[i].addEventListener('change', function() {
+                    // Store the checked input's id in localStorage
+                    localStorage.setItem('checkedInput', this.id);
+                });
+            }
+        });
+    </script>
 
 </head> 
 <body>
@@ -208,7 +230,7 @@
     
                     <!-- TABEL DOKTER -->
     
-                    <input type="radio" name="total" id="total__user" checked>
+                    <input type="radio" name="total" id="total__user">
                     <table class="table__dokter">
     
                         <thead>
@@ -224,19 +246,38 @@
                         <tbody>
                             
                         <?php 
-                        // DISINI PHP 
-                        
-                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'dokter'");
-                                if (isset($_GET['search'])) {
-                                    $search = $_GET['search'];
-                                    $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'dokter' AND LIKE '%'.$search.'%'");
-                                }
-                                while ($result = mysqli_fetch_array($data)){
+
+                        $no = 1;
+                        $batas = 7; // <-- Magic number
+                        $halaman= @$_GET['halaman'];
+                        if (empty($halaman)){
+                            $posisi= 0;
+                            $halaman= 1;
+                        } else {
+                            $posisi = ($halaman-1)* $batas;
+                            $no = $posisi + 1;
+                        }
+
+                        $data = mysqli_query(ConnectionUtil::connect(), "SELECT*FROM users WHERE role = 'dokter'");
+                        $jmldata= mysqli_num_rows($data);
+                        $jmlhal = ceil($jmldata/$batas);
+
+                            // search query
+                            
+                            if (isset($_GET['search'])) {
+                                $search = $_GET['search'];
+                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'dokter' AND username LIKE '%$search%' LIMIT $posisi,$batas");
+                            } else {
+                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'dokter' LIMIT $posisi,$batas");
+                            }
+
+                        while ($result = mysqli_fetch_array($data)){
+
                         ?>
     
                             <tr>
                                 <!-- NOMOR -->
-                                <td  class="number">1</td>
+                                <td  class="number"><?php echo $no++; ?></td>
                                 <!-- USERNAME -->
                                 <td><?php echo $result['username']?></td>
                                 <!-- AKSI -->
@@ -249,9 +290,9 @@
                             </tr>
     
                        <?php 
-                        // DISINI PHP
-                                }
-                            
+
+                       }
+
                        ?>
     
                         </tbody>
@@ -259,8 +300,7 @@
                     </table>
     
                     <!-- TABEL USER -->
-    
-                    <input type="radio" name="total" id="total__dokter">
+                    <input type="radio" name="total" id="total__dokter" checked>
                     <table class="table__user">
                         
                         <tr>
@@ -269,17 +309,38 @@
                             <th>Aksi</th>
                         </tr>
         
-                        <?php 
-                            // DISINI PHP 
+
+                        <?php
+                        // DISINI PHP 
+                        $no = 1;
+                        $batas = 7; // <-- Magic number
+                        $halaman= @$_GET['halaman'];
+                        if (empty($halaman)){
+                            $posisi= 0;
+                            $halaman= 1;
+                        } else {
+                            $posisi = ($halaman-1)* $batas;
+                            $no = $posisi + 1;
+                        }
+
+                        $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'user'");
+                        $jmldata= mysqli_num_rows($data);
+                        $jmlhal = ceil($jmldata/$batas);
+
+                            // search query
                             
-                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'user'");
-                                // search query
-                                while ($result = mysqli_fetch_array($data)){
+                            if (isset($_GET['search'])) {
+                                $search = $_GET['search'];
+                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'user' AND username LIKE '%$search%' LIMIT $posisi,$batas");
+                            } else {
+                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'user' LIMIT $posisi,$batas");
+                            }
+                            while ($result = mysqli_fetch_array($data)){
                         ?>
     
                             <tr>
                                 <!-- NOMOR -->
-                                <td  class="number">1</td>
+                                <td  class="number"><?php echo $no++; ?></td>
                                 <!-- USERNAME -->
                                 <td><?php echo $result['username']?></td>
                                 <!-- AKSI -->
@@ -293,16 +354,29 @@
                             </tr>
     
                        <?php 
+
                         // DISINI PHP
                                 }
                             
+
                        ?>
         
                     </table>
     
                     <div class="pagination">
-                        <a href=""><- previous page</a>
-                        <a href="">next page -></a>
+                        <?php
+                        if ($halaman > 1) {
+                        ?>
+                            <a href="dashboard.php?halaman=<?php echo $halaman - 1; ?>"><- previous page</a>
+                        <?php
+                        } 
+
+                        if ($halaman < $jmlhal) {
+                        ?>
+                            <a href="dashboard.php?halaman=<?php echo $halaman + 1; ?>">next page -></a>
+                        <?php
+                        }
+                        ?>
                     </div>
     
                 </div>
@@ -395,7 +469,7 @@
                         <p style="text-align:center;"> <?php echo $news['link']?> </p>
                     </td>
                     
-                    <td class="action">
+                    <td class="action__berita">
                         <!-- action -->
                         <a href="../Dashboard-Administrator/updateNews.php?id=<?php echo $news['id']?>">Update</a>
                         <a href="../Dashboard-Administrator/delNews.php?id=<?php echo $news['id']?>&url_image=<?php echo $news['url_image']?>">Delete</a>

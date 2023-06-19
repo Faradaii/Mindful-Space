@@ -2,9 +2,10 @@
  * TOLONG JANGAN DIUBAH - UBAH
  */
 
+const currentChecked = localStorage.getItem('checkedInput')
 const radio = document.querySelectorAll('input[name=total]')
 const label = document.querySelectorAll('.radio__label')
-const defaultCheckedLabel = document.getElementById('label__user')
+const defaultCheckedLabel = document.querySelector('label[for='+ currentChecked +']')
 
 defaultCheckedLabel.style.backgroundColor = 'var(--main-blue)'
 defaultCheckedLabel.style.color = 'white'
@@ -37,4 +38,3 @@ for (let i = 0; i < radio.length; i++) {
     })
 
 }
-

@@ -11,6 +11,9 @@
     --main-grey: rgba(0, 0, 0, .05);
     --black-not-hover: rgba(0, 0, 0, .4);
     --main-red: #F06363;
+    --main-red: #F06363;
+    --main-red-transparent: rgba(240, 99, 99, .4);
+
 }
 
 * {
