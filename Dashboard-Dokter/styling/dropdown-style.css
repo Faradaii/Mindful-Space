@@ -1,0 +1,118 @@
+div.setting {
+    font-family: 'Montserrat';
+    position: fixed;
+    width: 13.5rem;
+    right: 5%;
+    top: -20%;
+    z-index: 2;
+    border: 2px solid var(--main-grey);
+    border-radius: .5rem;
+    background-color: rgba(255, 255, 255, .8);
+    backdrop-filter: blur(1rem);
+    padding: 2rem;
+}
+
+div.setting > p {
+    text-align: center;
+}
+
+#availability__box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+label[for=available__status] {
+    transition: .3s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: 2.5rem;
+    height: 1.5rem;
+    border-radius: 2.5rem;
+    position: relative;
+}
+
+.toggle {
+    position: absolute;
+    background-color: white;
+    width: 1.2rem;
+    border-radius: 1.2rem;
+    height: 1.2rem;
+}
+
+.logout{
+    display: block;
+    margin-top: 1.5rem;
+}
+
+.logout li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    height: 2.8rem;
+    background-color: var(--main-red);
+    color: white;
+    font-weight: 700;
+    width: 100%;  
+    font-size: 1.15rem;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: .01rem;
+    box-shadow: 0 0 5px 1px var(--main-red-transparent);
+    transition: .3s;
+    list-style: none;
+}
+
+.logout li:hover {
+    box-shadow: 0 0 15px 1px var(--main-red-transparent);
+}
+
+
+input[name=available__status]:not(:checked) + .toggle {
+    transition: .3s;
+    left: 2px;
+}
+input[name=available__status]:checked + .toggle {
+    transition: .3s;
+    right: 2px;
+}
+
+p.available__status {
+    font-weight: 600;
+}
+
+input[type=checkbox] {
+    display: none;
+}
+
+i.dropdown__setting {
+    transition: .5s;
+} i.dropdown__setting:hover {
+    cursor: pointer;
+}
+
+input[name=dropdown__setting]:checked + div {
+    animation: dropdown .3s;
+    top: 9rem;
+}
+input[name=dropdown__setting]:not(:checked) + div {
+    transition: .3s;
+    top: -20%;
+}
+
+@keyframes dropdown {
+    0% {
+        transform: translateY(-10rem);
+        opacity: 0;
+    }
+
+    60% {
+        opacity: .1;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
