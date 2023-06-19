@@ -246,6 +246,7 @@
                         <tbody>
                             
                         <?php 
+
                         $no = 1;
                         $batas = 7; // <-- Magic number
                         $halaman= @$_GET['halaman'];
@@ -271,6 +272,7 @@
                             }
 
                         while ($result = mysqli_fetch_array($data)){
+
                         ?>
     
                             <tr>
@@ -288,7 +290,9 @@
                             </tr>
     
                        <?php 
+
                        }
+
                        ?>
     
                         </tbody>
@@ -305,6 +309,7 @@
                             <th>Aksi</th>
                         </tr>
         
+
                         <?php
                         // DISINI PHP 
                         $no = 1;
@@ -349,7 +354,11 @@
                             </tr>
     
                        <?php 
-                       }
+
+                        // DISINI PHP
+                                }
+                            
+
                        ?>
         
                     </table>

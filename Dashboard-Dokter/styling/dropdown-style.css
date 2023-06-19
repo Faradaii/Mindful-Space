@@ -41,6 +41,7 @@ label[for=available__status] {
     height: 1.2rem;
 }
 
+
 .logout{
     display: block;
     margin-top: 1.5rem;
@@ -67,7 +68,6 @@ label[for=available__status] {
 .logout li:hover {
     box-shadow: 0 0 15px 1px var(--main-red-transparent);
 }
-
 
 input[name=available__status]:not(:checked) + .toggle {
     transition: .3s;

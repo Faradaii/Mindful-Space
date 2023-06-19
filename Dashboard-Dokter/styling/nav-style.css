@@ -43,11 +43,13 @@ div.profile > div.image {
 div.profile h2, div.profile p {
     font-family: 'Poppins', sans-serif;
 }
+
 div.profile h2 {
     font-weight: 800;
     letter-spacing: .05rem;
     color: var(--main-blue);
 }
+
 label i {
     font-size: 1.3rem;
     color: var(--black-not-hover);

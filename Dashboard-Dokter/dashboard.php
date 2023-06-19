@@ -9,10 +9,12 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <!-- Styling -->
+
         <link rel="stylesheet" href="styling/style.css">
         <link rel="stylesheet" href="styling/nav-style.css">
         <link rel="stylesheet" href="styling/main-style.css">
         <link rel="stylesheet" href="styling/dropdown-style.css">
+
 
 </head>
 <body>
@@ -25,6 +27,7 @@
     if ($_SESSION['role'] != 'dokter') {
         header('location:../Login-Register/LoginForm.php');
     }
+
 
     unset($_SESSION['fromWho']);
     unset($_SESSION['id_from']);
@@ -100,6 +103,9 @@
                     <i class="fa fa-chevron-down dropdown__setting"></i>
                 </label>
             </div>
+
+        <div>
+            <?php echo $_SESSION['username']; ?>
 
         </div>
 
@@ -297,7 +303,9 @@
 
     </main>
 
+
     <script src="styling/script.js"></script>
+
 
 </body>
 </html>
