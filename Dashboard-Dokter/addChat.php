@@ -15,6 +15,4 @@ mysqli_query(ConnectionUtil::connect(), "INSERT INTO chats VALUES (DEFAULT, '$is
 
     header('location:chat.php');
 
-
-
 ?>
