@@ -37,10 +37,6 @@
                 text-align: justify;
             }
 
-            .right__chat small {
-                /* text-align: left; */
-            }
-
             .right {
                 width: 100%;
                 display: flex;
