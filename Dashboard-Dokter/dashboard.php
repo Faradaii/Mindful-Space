@@ -16,7 +16,9 @@
 
 </head>
 <body>
+
 <?php
+
     session_start();
     include '../Helper/ConnectionUtil.php';
     use Helper\ConnectionUtil;
@@ -67,6 +69,7 @@
             <li>Log Out</li>
         </a>
     </div>
+
     
     <nav>
 
