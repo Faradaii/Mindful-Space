@@ -33,12 +33,10 @@
     unset($_SESSION['id_from']);
     $myId = $_SESSION['id'];
 
-    $data = mysqli_query(ConnectionUtil::connect(), "SELECT * 
+    $datay = mysqli_query(ConnectionUtil::connect(), "SELECT * 
     FROM dokters WHERE id_dokter = $myId ");
-    $result = mysqli_fetch_array($data);
-    // 1 = checked
-    // 0 == not checked
-    $status = $result['status'];
+    $resulty = mysqli_fetch_array($datay);
+    $status = $resulty['status'];
 
 ?>
 
@@ -67,6 +65,9 @@
             
 
         </div>
+        <a href="updateProfile.php" class="profile__set">
+            <li>Profile</li>
+        </a>
 
         <a href="../Login-Register/Logout.php" class="logout">
             <li>Log Out</li>
@@ -85,17 +86,21 @@
 
         echo $iniHTMLDiDalemPHP;
         ?>
+        <?php 
         
+                       $datax = mysqli_query(ConnectionUtil::connect(), "SELECT users.role, identitas.* FROM identitas JOIN users ON users.id = identitas.id_user WHERE id_user = '$myId'");
+                       $result = mysqli_fetch_array($datax);
+                        ?>
 
         <div class="profile">
 
             <div class="image">
-                <img src="../image/BudhiSwag-removebg-preview.png" alt="">
+                <img src="<?php echo $result['url_image']?>" alt="">
             </div>
 
             <div>
-                <h2>BUDHI</h2>
-                <p>The Rapist</p>
+                <h2><?php echo $result['namalengkap']?></h2>
+                <p><?php echo $result['role']?></p>
             </div>
 
             <div>
@@ -103,11 +108,6 @@
                     <i class="fa fa-chevron-down dropdown__setting"></i>
                 </label>
             </div>
-
-        <div>
-            <?php echo $_SESSION['username']; ?>
-
-        </div>
 
     </nav>
     
@@ -196,11 +196,12 @@
                     $data = mysqli_query(ConnectionUtil::connect(), "SELECT users.username, antrian.* 
                     FROM antrian JOIN users 
         ON antrian.id_pasien = users.id
-        WHERE id_dokter = $myId ORDER BY waktu ASC");
+        WHERE id_dokter = $myId and status != 'selesai' ORDER BY waktu ASC");
+        $no = 1;
                         while ($row = mysqli_fetch_array($data)){
                     ?>
                         <tr>
-                            <td class="center">1</td>
+                            <td class="center"><?php echo $no++?></td>
                             <td><a href="../Dashboard-Dokter/dashboard.php?id=<?php echo $row['id_pasien']?>"><?php echo $row['username']?></a></td>
                             <td class="center"><?php echo $row['waktu']?>.00 - <?php echo $row['waktu']+1?>.00</td>
                             <td class="center"><?php echo $row['status']?></td>
@@ -260,8 +261,8 @@
                             ON identitas.id_user = users.id;
                         SQL;
 
-                        $data = mysqli_query(ConnectionUtil::connect(), $checkCurrentProfileQuery);
                         if (isset($_GET['id'])) {
+                            $data = mysqli_query(ConnectionUtil::connect(), $checkCurrentProfileQuery);
                             $otherId = $_GET['id'];
 
                             $checkOtherProfileQuery = <<<SQL
@@ -272,8 +273,8 @@
                             
                             $data = mysqli_query(ConnectionUtil::connect(), $checkOtherProfileQuery);
                         }
-        while($row = mysqli_fetch_array($data)){
-        ?>
+                        while($row = mysqli_fetch_array($data)){
+                        ?>
                         <div class="profile__picture">
                             <img src="<?php echo $row['url_image']?$row['url_image']: '' ?>" alt="">
                         </div>
@@ -281,14 +282,14 @@
                         <div class="identity">
                             <h1><?php echo $row['username']? $row['username']:''  ?></h1>
                             <p><?php echo $row['namalengkap']?$row['namalengkap']:'' ?></p>
-                            <p><?php echo $row['jeniskelamin']?$row['jeniskelamin']:'p' ?> | <?php echo $row['umur'] ?> Tahun</p>
+                            <p><?php echo $row['jeniskelamin']?$row['jeniskelamin']:'' ?> | <?php echo $row['umur'] ?> Tahun</p>
                         </div>
     
                     </div>
                     <?php }?>
     
                     <form action="chat.php" method="post">
-                        <input type="text" value="<?php echo isset($_GET['id'])? $_GET['id']:'' ?>" hidden>
+                        <input type="text" value="<?php echo isset($_GET['id'])? $_GET['id']:'' ?>" name="id_from" hidden>
                         <button class="message" type="submit">
                             Message
                             <i class="fa-solid fa-paper-plane"></i>

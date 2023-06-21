@@ -7,18 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-<?php
-
-include '../Helper/ConnectionUtil.php';
+<?php 
+    require_once '../Helper/ConnectionUtil.php';
     use Helper\ConnectionUtil;
 
-session_start();
-$myid = $_SESSION['id'];
+    $id = $_POST['id_user'];
 
-$data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM dokters WHERE id_dokter = '$myid'");
-$result = mysqli_fetch_array($data);
-header('location: dashboard.php');
-?>
-
+    mysqli_query(ConnectionUtil::connect(), "UPDATE antrian SET status='selesai' WHERE id_pasien='$id'");
+    
+    header("location:dashboard.php");
+    ?>
 </body>
 </html>

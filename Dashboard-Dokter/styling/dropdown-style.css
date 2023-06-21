@@ -69,6 +69,35 @@ label[for=available__status] {
     box-shadow: 0 0 15px 1px var(--main-red-transparent);
 }
 
+
+.profile__set{
+    display: block;
+    margin-top: 1rem;
+}
+
+.profile__set li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    height: 2.8rem;
+    background-color: var(--main-blue);
+    color: white;
+    font-weight: 700;
+    width: 100%;  
+    font-size: 1.15rem;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: .01rem;
+    box-shadow: 0 0 5px 1px var(--main-blue-transparent);
+    transition: .3s;
+    list-style: none;
+}
+
+.profile__set li:hover {
+    box-shadow: 0 0 15px 1px var(--main-blue-transparent);
+}
+
+
 input[name=available__status]:not(:checked) + .toggle {
     transition: .3s;
     left: 2px;

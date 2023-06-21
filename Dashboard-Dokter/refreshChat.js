@@ -7,7 +7,6 @@ function updateChat() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
         elem.innerHTML = this.responseText;
-        console.log(this.responseText);
         }
     };
 

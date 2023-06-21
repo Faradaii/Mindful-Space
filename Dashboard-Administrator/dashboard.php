@@ -125,7 +125,7 @@
 
             <ul>
 
-                <a href="">
+                <a href="../Homepage/HomePage-Visitor.php">
                     <li>Beranda</li>
                 </a>
             

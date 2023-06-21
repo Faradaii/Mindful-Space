@@ -19,8 +19,32 @@
 </head>
 <body>
 
-   <?php $status = 0 ?>
+<?php 
+session_start();
+include '../Helper/ConnectionUtil.php';
+    use Helper\ConnectionUtil;
 
+$myid = $_SESSION['id'];
+
+if (isset($_POST['id_from'])) {
+    $_SESSION['id_from'] = $_POST['id_from'];
+    $_SESSION['fromWho'] = $_POST['id_from'];
+}
+$otherid = $_SESSION['id_from'];
+if ($myid < $otherid) {
+    $ref = $myid.$otherid;
+}
+else {
+    $ref = $otherid.$myid;
+} ?>
+
+
+<?php
+$data = mysqli_query(ConnectionUtil::connect(), "SELECT * 
+FROM dokters WHERE id_dokter = $myid ");
+$result = mysqli_fetch_array($data);
+$status = $result['status'];
+?>
     <input type="checkbox" name="dropdown__setting" id="dropdown__setting">
     <div class="setting">
 
@@ -32,90 +56,64 @@
 
             <p class="available__status"><!-- Javascript --></p>
             
+            <form action="setStatus.php" method="POST" id="setStatus">
             <label for="available__status">
                 <!-- PHP selected dibawah -->
-                <input type="checkbox" name="available__status" id="available__status" <?php echo $status == 1 ? 'checked' : ''  ?>>
+                <input type="checkbox" name="available__status" onchange="document.getElementById('setStatus').submit()" id="available__status" <?php echo $status == 1 ? 'checked' : ''  ?>>
+                <input type="text" name="status" value="<?php echo $status == 1? 0 : 1 ?>" hidden>
                 <div class="toggle"></div>
             </label>
+            
+            </form>
+                
+            
 
         </div>
+        <a href="" class="profile__set">
+            <li>Profile</li>
+        </a>
 
-
+        <a href="../Login-Register/Logout.php" class="logout">
+            <li>Log Out</li>
+        </a>
     </div>
         
     <nav>
+    <?php 
+
+    $datax = mysqli_query(ConnectionUtil::connect(), "SELECT users.role, identitas.* FROM identitas JOIN users ON users.id = identitas.id_user WHERE id_user = '$myid'");
+    $result = mysqli_fetch_array($datax);
+    ?>
 
         <div class="logo">
             <h1>MINDFUL <span>SPACE</span></h1>
         </div>
 
         <div class="profile">
-
             <div class="image">
-                <img src="../image/BudhiSwag-removebg-preview.png" alt="">
+                <img src="<?php echo $result['url_image']?>" alt="">
             </div>
 
             <div>
-                <h2>BUDHI</h2>
-                <p>The Rapist</p>
+                <h2><?php echo $result['namalengkap']?></h2>
+                <p><?php echo $result['role']?></p>
             </div>
 
-            <div>
+            <div hidden>
                 <label for="dropdown__setting">
                     <i class="fa fa-chevron-down dropdown__setting"></i>
                 </label>
             </div>
-
         </div>
 
     </nav>
-    
-    <?php
-
-        // //history chat
-        session_start();
-        include '../Helper/ConnectionUtil.php';
-            use Helper\ConnectionUtil;
-
-        echo $_SESSION['id'];
-        $myid = $_SESSION['id'];
-        $otherid = $_SESSION['id_from'];
-        if ($myid < $otherid) {
-            $ref = $myid.$otherid;
-        }
-        else {
-            $ref = $otherid.$myid;
-        }
-
-
-        $listchat = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM historychat WHERE id_to = '$myid' ORDER BY id DESC LIMIT 5");
-        // $historychat = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM chats WHERE id_from = '$myid'");
-
-        while ($fromWho = mysqli_fetch_array($listchat)) {
-
-            $from = $fromWho['id_from'];
-            $userdatas =  mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE id = '$from'");
-
-            while ($userdata = mysqli_fetch_array($userdatas)){
-
-                $user_id = $userdata['id'];
-                echo
-                "<form style='z-index: 6;' method='post' action='scriptChat.php?'>
-                    <input type='text' name='id_from' hidden value='$user_id'>
-                    <input type='text' name='help' value='true' hidden>
-                    <button type='submit'>$userdata[$from]</button>
-                </form>";
-
-            }
-
-        }
-
-    ?>
 
     <hr>
     
     <br><br><br><br><br>
     <br><br>
+    <br><br>
+    
 
 
     <main>
@@ -138,7 +136,7 @@
                 </div>
 
                 <input type='text' name='idFrom' hidden value='<?php echo $myid?>'>
-                <input type='text' name='idTo' hidden value='<?php echo $otherid?>'>
+                <input type='text' name='idTo' hidden value="<?php echo $otherid?>">
                 <input type='text' name='ref' hidden value='<?php echo $ref?>'>
 
             </form>
@@ -152,43 +150,45 @@
             <h1>PROFILE USER</h1>
     
             <div class="time">
-                <p>00:00:69</p>
+                <p id="time"></p>
             </div>
 
             <div class="keluhan">
                 <h2>KELUHAN</h2>
-                <h4>MASALAH HIDUP</h4>
+                <?php 
+                $getKeluhan = mysqli_query(ConnectionUtil::connect(), "SELECT antrian.keluhan FROM antrian WHERE id_pasien = '$otherid'");
+                $datakeluhan = mysqli_fetch_array($getKeluhan);
+                ?>
+                <h4><?php echo $datakeluhan['keluhan'] ?></h4>
             </div>
 
             <div class="user__profile">
+                <?php 
+                          $otherId = $_SESSION['fromWho'];
+            
+                          $userData = mysqli_query(ConnectionUtil::connect(), "SELECT users.username, identitas.* 
+                          FROM identitas JOIN users 
+                          ON identitas.id_user = users.id WHERE id_user = $otherId");
+                          $userAbout = mysqli_fetch_array($userData)
+                ?>
 
                 <div class="image">
-                    <img src="../image/BudhiSwag-removebg-preview.png" alt="">
+                    <img src="<?php echo $userAbout['url_image']?>" alt="">
                 </div>
 
                 <?php
-            
-                    if (isset($_SESSION['fromWho'])) {
-                        $otherid = $_SESSION['fromWho'];
-            
-                        $userData = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE id = '$otherid'");
-                        while ($userAbout = mysqli_fetch_array($userData)){
                             echo '<p class="data">' . $userAbout['username'] . '</p>';
-                            echo '<p class="nama__asli">' . 'I Made Bagus Mahatma Budhi' . '</p>';
-                            echo '<p class="sub__data">' . $userAbout['password'].' | ';
-                            echo '<span>' . $userAbout['role'].'</span></p>';
-            
-                        }
-                        
-                    }
+                            echo '<p class="nama__asli">' . $userAbout['namalengkap'] . '</p>';
+                            echo '<p class="sub__data">' . $userAbout['jeniskelamin'].' | ';
+                            echo '<span>' . $userAbout['umur'].'</span></p>';   
         
                 ?>
 
             </div>
 
-            <form action="Dashboard.php">
-
-                <button class="back">
+            <form action="clearQueue.php" method="post" id="backbutton">
+                <input type="text" name="id_user" value="<?php echo $otherid?>" hidden>
+                <button class="back" type="submit">
                     Back
                 </button>
                 <i class="fa-solid fa-arrow-left"></i>
@@ -200,6 +200,8 @@
     </main>
 
     <script src="styling/script.js"></script>
+    <script src="timer.js"></script>
+
 
 </body>
 </html>
