@@ -21,9 +21,17 @@
         $cek = mysqli_num_rows($data);
 
         if ($cek > 0){
+            $id_user = $result['id'];
             $_SESSION['username'] = $username;
             $_SESSION['id'] = $result['id'];
             $_SESSION['role'] = $result['role'];
+
+            //otomatis membentuk identitas jika baru pertama kali login
+            $dataIsExist = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM identitas WHERE id_user = '$id_user'");
+            $isExist = mysqli_num_rows($dataIsExist);
+            if ($isExist == 0){
+                mysqli_query(ConnectionUtil::connect(), "INSERT INTO identitas (id, id_user, namalengkap) VALUES (DEFAULT, '$id_user', '$username')");
+            }
             header("location:LoginForm.php?pesan=loginberhasil&role={$result['role']}");
         } else {
             header ("location:LoginForm.php?pesan=gagal");
