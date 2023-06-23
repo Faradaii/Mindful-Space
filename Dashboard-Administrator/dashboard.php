@@ -15,30 +15,13 @@
     <link rel="stylesheet" href="styling/modal-style.css">
     <link rel="stylesheet" href="styling/manajemen-style.css">
 
-    <script>
-        document.addEventListener('DOMContentLoaded' function() {
-            // Check if there's a stored value for the radio inputs
-            if (localStorage.getItem('checkedInput')) {
-                // Get the stored value
-                var checkedInput = localStorage.getItem('checkedInput');
-                
-                // Set the checked property based on the stored value
-                document.getElementById(checkedInput).checked = true;
-            }
-            
-            // Add an event listener to the radio inputs
-            var radioInputs = document.querySelectorAll('input[type="radio"]');
-            for (var i = 0; i < radioInputs.length; i++) {
-                radioInputs[i].addEventListener('change', function() {
-                    // Store the checked input's id in localStorage
-                    localStorage.setItem('checkedInput', this.id);
-                });
-            }
-        });
-    </script>
-
 </head> 
 <body>
+<?php 
+$show = isset($_GET['show'])? $_GET['show']:'user';
+$autoshow = !isset($_GET['show'])? header('location:dashboard.php?show='.$show) : '';
+$cari = isset($_GET['search'])? ('&search='.$_GET['search']):'';
+?>
    
 <!-- MODAL -->
 
@@ -47,6 +30,7 @@
     <div class="box__tambah__dokter">
         
         <form action="addDokter.php" method="post">
+            <input type="text" name="currentshow" value="<?php echo $show?>" hidden>
     
             <h1>Tambah Dokter</h1>
     
@@ -78,6 +62,7 @@
     <div class="box__tambah__artikel">
 
     <form action="addNews.php" method="post" enctype="multipart/form-data">
+        <input type="text" name="currentshow" value="<?php echo $show?>" hidden>
     
         <h1>Tambah Artikel</h1>
 
@@ -218,9 +203,10 @@
             </div>
             
             <div class="right__col">
-                
+            
+            
                 <form action="dashboard.php" method="get">
-                    
+                    <input type="text" hidden name="show" value="<?php echo isset($_GET['show'])? $_GET['show']:'user'?>">
                     <input type="text" name="search" placeholder="Cari Username">
                     <input type="submit" value="" hidden>
                     
@@ -229,8 +215,8 @@
                 <div class="table">
     
                     <!-- TABEL DOKTER -->
-    
-                    <input type="radio" name="total" id="total__user">
+                    <input type="radio" name="total" id="total__user" 
+                    <?php echo isset($_GET['show'])? ($_GET['show'] == 'user'? 'checked' : '') : 'checked'?>>
                     <table class="table__dokter">
     
                         <thead>
@@ -247,29 +233,32 @@
                             
                         <?php 
 
-                        $no = 1;
-                        $batas = 7; // <-- Magic number
-                        $halaman= @$_GET['halaman'];
-                        if (empty($halaman)){
-                            $posisi= 0;
-                            $halaman= 1;
-                        } else {
-                            $posisi = ($halaman-1)* $batas;
-                            $no = $posisi + 1;
-                        }
-
-                        $data = mysqli_query(ConnectionUtil::connect(), "SELECT*FROM users WHERE role = 'dokter'");
-                        $jmldata= mysqli_num_rows($data);
-                        $jmlhal = ceil($jmldata/$batas);
+                        if ($show == 'dokter'){
+                            $no = 1;
+                            $batas = 7; // <-- Magic number
+                            $halaman= @$_GET['halaman'];
+                            if (empty($halaman)){
+                                $posisi= 0;
+                                $halaman= 1;
+                            } else {
+                                $posisi = ($halaman-1)* $batas;
+                                $no = $posisi + 1;
+                            }
 
                             // search query
                             
                             if (isset($_GET['search'])) {
                                 $search = $_GET['search'];
-                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'dokter' AND username LIKE '%$search%' LIMIT $posisi,$batas");
+                                $query = "SELECT * FROM users WHERE role = 'dokter' AND username LIKE '%$search%'";
+                                $data = mysqli_query(ConnectionUtil::connect(), $query);
                             } else {
-                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'dokter' LIMIT $posisi,$batas");
+                                $query = "SELECT * FROM users WHERE role = 'dokter'";
+                                $data = mysqli_query(ConnectionUtil::connect(), $query);
                             }
+                            $jmldata= mysqli_num_rows($data);
+                            $jmlhal = ceil($jmldata/$batas);
+                            $data = mysqli_query(ConnectionUtil::connect(), ($query." LIMIT ".$posisi.",".$batas));
+
 
                         while ($result = mysqli_fetch_array($data)){
 
@@ -284,7 +273,7 @@
                                 <td class="action">
                                 
                                     <a href="editUser.php?id=<?php echo $result['id']?>">Update</a>
-                                    <a href="delUserAction.php?id=<?php echo $result['id']?>">Delete</a>
+                                    <a href="delUserAction.php?show=<?php echo $show.'&id='; echo $result['id']?>">Delete</a>
     
                                 </td>
                             </tr>
@@ -292,6 +281,7 @@
                        <?php 
 
                        }
+                    }
 
                        ?>
     
@@ -300,7 +290,7 @@
                     </table>
     
                     <!-- TABEL USER -->
-                    <input type="radio" name="total" id="total__dokter" checked>
+                    <input type="radio" name="total" id="total__dokter" <?php echo isset($_GET['show'])? ($_GET['show'] == 'dokter'? 'checked' : '') : ''?>>
                     <table class="table__user">
                         
                         <tr>
@@ -312,29 +302,35 @@
 
                         <?php
                         // DISINI PHP 
-                        $no = 1;
-                        $batas = 7; // <-- Magic number
-                        $halaman= @$_GET['halaman'];
-                        if (empty($halaman)){
-                            $posisi= 0;
-                            $halaman= 1;
-                        } else {
-                            $posisi = ($halaman-1)* $batas;
-                            $no = $posisi + 1;
-                        }
+                        if ($show == 'user'){
+                            $no = 1;
+                            $batas = 7; // <-- Magic number
+                            $halaman= @$_GET['halaman'];
+                            if (empty($halaman)){
+                                $posisi= 0;
+                                $halaman= 1;
+                            } else {
+                                $posisi = ($halaman-1)* $batas;
+                                $no = $posisi + 1;
+                            }
 
-                        $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'user'");
-                        $jmldata= mysqli_num_rows($data);
-                        $jmlhal = ceil($jmldata/$batas);
+                            
+                        
 
                             // search query
                             
                             if (isset($_GET['search'])) {
                                 $search = $_GET['search'];
-                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'user' AND username LIKE '%$search%' LIMIT $posisi,$batas");
+                                $query = "SELECT * FROM users WHERE role = 'user' AND username LIKE '%$search%' ";
+                                $data = mysqli_query(ConnectionUtil::connect(), $query);
                             } else {
-                                $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM users WHERE role = 'user' LIMIT $posisi,$batas");
+                                $query = "SELECT * FROM users WHERE role = 'user'";
+                                $data = mysqli_query(ConnectionUtil::connect(), $query);
                             }
+                            $jmldata= mysqli_num_rows($data);
+                            $jmlhal = ceil($jmldata/$batas);
+                            $data = mysqli_query(ConnectionUtil::connect(), ($query." LIMIT ".$posisi.",".$batas));
+
                             while ($result = mysqli_fetch_array($data)){
                         ?>
     
@@ -357,6 +353,7 @@
 
                         // DISINI PHP
                                 }
+                            }
                             
 
                        ?>
@@ -367,13 +364,13 @@
                         <?php
                         if ($halaman > 1) {
                         ?>
-                            <a href="dashboard.php?halaman=<?php echo $halaman - 1; ?>"><- previous page</a>
+                            <a href="dashboard.php?show=<?php echo $show; echo $cari?>&halaman=<?php echo $halaman - 1; ?>"><- previous page</a>
                         <?php
                         } 
 
                         if ($halaman < $jmlhal) {
                         ?>
-                            <a href="dashboard.php?halaman=<?php echo $halaman + 1; ?>">next page -></a>
+                            <a href="dashboard.php?show=<?php echo $show; echo $cari?>&halaman=<?php echo $halaman + 1; ?>">next page -></a>
                         <?php
                         }
                         ?>

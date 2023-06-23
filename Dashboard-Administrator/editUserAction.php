@@ -19,7 +19,7 @@
 
     
     mysqli_query(ConnectionUtil::connect(), "UPDATE users SET username='$username', password='$password', role='$role' WHERE id='$id'");
-    header("location:dashboard.php")
+    header("location:dashboard.php?show=".$role)
     ?>
 </body>
 </html>

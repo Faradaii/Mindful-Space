@@ -40,8 +40,8 @@ $renamedFile = $target_dir ."article-image-".$idResult.".".$imageFileType;
     } else {
       echo "Sorry, there was an error uploading your file.";
     }
-  
-    header("location:dashboard.php");
+    $currentshow = $_POST['currentshow'];
+    header("location:dashboard.php?show=".$currentshow);
     ?>
 </body>
 </html>
