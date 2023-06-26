@@ -61,7 +61,14 @@ h1 span {
 
 .beranda {
     font-family: 'ABeeZee', sans-serif;
+    color: var(--black-not-hover);
+}
+a:hover .beranda {
     color: black;
+}
+
+.fasilitas__check {
+    color: black !important;
 }
 
 .login li {
@@ -92,17 +99,17 @@ div.underline {
     background-color: var(--main-blue);
     height: 5px;
     width: 1.3rem;
-    right: 37.2rem;
+    right: 31.2%;
     top: 75%;
     border-radius: 1.3rem;
     transition: .3s;
     z-index: 2;
 }
 
-.fasilitas__hover:hover ~ div.underline {
-    right: 31.1%;
+a:hover ~ div.underline {
+    right: 39%;
 }
 
 .layanan__hover:hover ~ div.underline {
-    right: 22.7%;
+    right: 22.9%;
 }
