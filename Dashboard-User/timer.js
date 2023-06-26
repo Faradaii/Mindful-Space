@@ -1,16 +1,20 @@
 const formbuttonback = document.querySelector("#backbutton");
-const time = document.querySelector("#time");
+const timer = document.querySelector("#time");
+function updateTimer() {
+    var xhttp = new XMLHttpRequest();
+    
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            timer.innerText = this.responseText;
+            if(timer.innerText == 'selesai'){
+                window.location = 'clearSessionChat.php';
+            }
+        }
+    };
 
-let count = 3600;
+    xhttp.open("GET", "scriptTimer.php", true);
+    xhttp.send();
 
-setInterval(() => {
-    date = new Date(0);
-    date.setSeconds(count); 
-    count = count - 1;
-    const hhmmssFormat = date.toISOString().substring(11,19);
-    time.innerText = hhmmssFormat;
-}, 1000);
+}
 
-setTimeout(() => {
-    formbuttonback.submit();
-}, 3601000);
+setInterval(updateTimer, 1000);

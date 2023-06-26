@@ -17,13 +17,32 @@
 <?php
     session_start();
     if(isset($_GET['message'])){
+        $alertgagal = <<<JAVASCRIPT
+        <script>
+            alert('gagal mendapatkan dokter available atau waktu yang anda masukan tidak tersedia');
+            window.location = 'konseling.php';
+        </script>
+        JAVASCRIPT;
+        $alertsukses = <<<JAVASCRIPT
+        <script>
+            alert('Telah berhasil mendaftar ke dokter $_SESSION[id_from] di jam $_SESSION[waktukonsul]');
+            window.location = 'dashboard.php';
+        </script>
+        JAVASCRIPT;
         if($_GET['message'] == 'gagal'){
-            echo '<script> alert("gagal mendapatkan dokter available atau waktu yang anda masukan tidak tersedia")</script>';
+            echo $alertgagal;
+        } else if($_GET['message'] == 'sukses'){
+            echo $alertsukses;
         }
     }
 
-    if(isset($_SESSION['waktukonsul'])){
-        header('location:dashboard.php?messagekonsul=sudahbooking&jam='.$_SESSION['waktukonsul']);
+    if (isset($_SESSION['waktukonsul'])){
+        $autodirect = <<<JAVASCRIPT
+        <script>
+            window.location = 'dashboard.php?messagekonsul=sudahbooking&jam=$_SESSION[waktukonsul]';
+        </script>
+        JAVASCRIPT;
+        echo $autodirect;
     }
 
     $queueTimeQuery = <<<SQL
@@ -102,7 +121,7 @@
         <label for="waktu">Waktu</label>
         <select name="waktu" id="waktu">
             <?php 
-            for ($i = 8; $i <= 19; $i++) {
+            for ($i = 8; $i <= 22; $i++) {
                 $d = strtotime("$i:00");
                 $time = date("H", $d);
                 echo <<<HTML

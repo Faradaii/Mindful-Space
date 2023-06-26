@@ -24,10 +24,6 @@ session_start();
 include '../Helper/ConnectionUtil.php';
     use Helper\ConnectionUtil;
 
-include 'realtime.php';
-if($statusnow == 'selesai' || $realtime != $_SESSION['waktukonsul']){
-    header('location: dashboard.php');
-}
 
 $myid = $_SESSION['id'];
 
@@ -121,7 +117,7 @@ else {
             <div class="keluhan">
                 <h2>KELUHAN</h2>
                 <?php 
-                $getKeluhan = mysqli_query(ConnectionUtil::connect(), "SELECT antrian.keluhan FROM antrian WHERE id_pasien = '$otherid'");
+                $getKeluhan = mysqli_query(ConnectionUtil::connect(), "SELECT antrian.keluhan FROM antrian WHERE id_pasien = '$myid' AND status != 'selesai'");
                 $datakeluhan = mysqli_fetch_array($getKeluhan);
                 ?>
                 <h4><?php echo $datakeluhan['keluhan'] ?></h4>
@@ -152,8 +148,11 @@ else {
             </div>
             
         </div>
+
+        <form action="clearSessionChat.php" method="post" id="clearSessionChat"></form>
     
     </main>
+    <input type="text" id="statuskonsultasihidden" hidden>
 
     <script src="styling/script.js"></script>
     <script src="timer.js"></script>

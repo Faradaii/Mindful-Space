@@ -10,12 +10,15 @@ if ($_SESSION['role'] != 'user') {
 $namalengkap = $_POST['nama'];
 $jk = $_POST['gender'];
 $umur = $_POST['usia'];
+$renamedFile = $_POST['url_image'];
 
-$target_dir = __DIR__ . "../uploads/user/";
+if (is_uploaded_file($_FILES['image_user']['tmp_name'])) {
+$target_dir = "../uploads/user/";
 $target_file = $target_dir . basename($_FILES["image_user"]["name"]);
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
 $renamedFile = $target_dir ."profile-user-".$myId.".".$imageFileType;
+move_uploaded_file($_FILES["image_user"]["tmp_name"], $renamedFile);
+}
 
 $sql = <<<SQL
         UPDATE identitas SET 
@@ -28,5 +31,4 @@ $sql = <<<SQL
 
 mysqli_query(ConnectionUtil::connect(), $sql);
 
-move_uploaded_file($_FILES["image_user"]["tmp_name"], $renamedFile);
 header('location: dashboard.php');
