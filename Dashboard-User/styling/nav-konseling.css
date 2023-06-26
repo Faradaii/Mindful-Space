@@ -35,6 +35,7 @@ ul a {
     color: var(--black-not-hover);
     letter-spacing: .08rem;
     transition: .2s ease; 
+    font-size:16px;
 }
 
 .navigation a:hover {
@@ -60,8 +61,15 @@ h1 span {
 }
 
 .beranda {
-    font-size: 20px;
-    font-weight: 500;
+    font-family: 'ABeeZee', sans-serif;
+    color: var(--black-not-hover);
+}
+a:hover .beranda {
+    color: black;
+}
+
+label[for=layanan] {
+    color: black !important;
 }
 
 .logout li {
@@ -88,32 +96,21 @@ h1 span {
 /* UNDERLINE ANIMATION */
 
 div.underline {
-    display: none;
     position: absolute;
     background-color: var(--main-blue);
     height: 5px;
+    width: 1.3rem;
+    right: 22.6% /*360px*/;
     top: 75%;
+    border-radius: 1.3rem;
     transition: .3s;
     z-index: 2;
 }
-/* 
+
+a.beranda:hover ~ div.underline {
+    right: 38.7%;
+}
+
 .fasilitas__hover:hover ~ div.underline {
-    display: block;
-    right: 32.1%;
-    width: 1.3rem;
-    border-radius: 1.3rem;
+    right: 30.8%;
 }
-
-.layanan__hover:hover ~ div.underline {
-    display: block;
-    right: 22.4%;
-    width: 1.3rem;
-    border-radius: 1.3rem;
-}
-
-.beranda:hover ~ div.underline {
-    display: block;
-    right: 38.5rem;
-    width: 1.3rem;
-    border-radius: 1.3rem;
-} */

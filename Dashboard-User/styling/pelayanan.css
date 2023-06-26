@@ -1,0 +1,92 @@
+h1,p,h3{
+    font-family: 'montserrat';
+}
+
+h3 {
+    font-size: 24px;
+}
+
+.gambar_kanan,
+.gambar_kiri {
+    display: flex;
+    column-gap: 1rem;
+    width: 100%;
+    height: 25%;
+    border-radius: .55rem;
+    overflow: hidden;
+}
+
+.text {
+    text-align: justify;
+}
+.gambar_kanan .text {
+    padding: 1rem 0 1rem 3rem;
+    direction: rtl;
+}
+.gambar_kiri .text {
+    padding: 1rem 3rem 1rem 0;
+}
+
+.gambar_kanan {
+    text-align: right;
+    background-color: var(--secondary-blue)
+}
+
+.gambar_kiri {
+    text-align: left;
+    background-color: var(--main-grey)
+}
+
+/* FOOTER START */
+
+footer {
+    position: absolute;
+    right: 0;
+    left: 0;
+    padding: 0 5%;
+    padding-top: 0.5rem;
+    background-color: var(--main-blue);
+}
+
+div.footer {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: .7rem;
+    height: 4rem;
+    padding: 0 1rem;
+}
+
+div.top {
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer div.kontak a i {
+    color: var(--black-not-hover);
+    font-size: 4rem;
+    transition: .3s;
+}
+footer div.kontak a i:hover {
+    color: black;
+}
+
+div.kontak h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    color: var(--black-not-hover);
+}
+
+div.kontak div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.copyright p {
+    text-align: center;
+}
+
+/* FOOTER END */

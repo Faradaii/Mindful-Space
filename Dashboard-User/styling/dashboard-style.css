@@ -83,6 +83,10 @@ label.save-button {
     justify-content: center;
 }
 
+#change__profile{
+    display:none;
+}
+
 #editbutton {
     margin-top: 2rem;
     font-family: 'Inter';
@@ -131,7 +135,7 @@ label.save-button {
     text-decoration: none;
     font-size: 18px;
     color: var(--black-not-hover);
-    transition: .2s ease; 
+    transition: .2s ease;
 }
 
 .right__col .kanan .card:hover,

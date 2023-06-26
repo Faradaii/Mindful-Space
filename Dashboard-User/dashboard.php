@@ -14,6 +14,46 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+<?php
+session_start();
+require_once "../Helper/ConnectionUtil.php";
+use Helper\ConnectionUtil;
+
+include 'realtime.php';
+// if hours real == session waktukonsul then redirect to chat.php
+
+
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
+    header("location: ../Login-Register/LoginForm.php");
+}
+
+if(isset($_GET['messagekonsul'])){
+    if($_GET['messagekonsul'] == 'sudahbooking'){
+        echo '<script>alert("anda sudah booking konsultasi sebelumnya di jam '.$_SESSION['waktukonsul'].'dengan id dokter'.$_SESSION['id_from'].', silahkan menunggu")</script>';
+        // header('location:dashboard.php');
+    }
+}
+
+$sql = <<<SQL
+        SELECT * FROM identitas WHERE id_user = '$_SESSION[id]'
+    SQL;
+$data = mysqli_query(ConnectionUtil::connect(), $sql);
+$result = mysqli_fetch_array($data);
+
+function resultGender(): bool {
+    global $result;
+    if ($result['jeniskelamin'] == 'Laki - Laki') {
+        return true;
+    }
+
+    return false;
+}
+
+$urlname =explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+// $urlname = explode("/", __DIR__);
+$lengthurl = sizeof($urlname)-1;
+
+?>
     
 <nav>
         
@@ -31,17 +71,7 @@
         
             <li class="fasilitas__hover">
 
-                <input type="radio" name="nav" id="fasilitas">
-                <label for="fasilitas" class="fasilitas__check">Fasilitas <i class="fa fa-chevron-down"></i></label>
-
-                <ul class="fasilitas__dropdown dropdown">
-                    <a href="">
-                        <li>Ruang Konseling</li>
-                    </a>
-                    <a href="">
-                        <li>Farmasi</li>
-                    </a>
-                </ul>                        
+                <a href="Fasilitas.php" class="fasilitas__check">Fasilitas</a>                   
 
             </li>
             
@@ -67,12 +97,12 @@
 
             <li><hr></li>
 
-            <a href="../Login-Register/LoginForm.php" class="logout">
+            <a href="../Login-Register/Logout.php" class="logout">
                 <li>LOG OUT</li>
             </a>
 
             <!-- Garis biru dibawah navigasi -->
-            <div class="underline"></div>
+            <!-- <div class="underline"></div> -->
 
         </ul>
 
@@ -83,36 +113,37 @@
 <br><br><br><br>
 <br><br><br><br>
 
-<h1 style="font-family: 'Montserrat'; font-weight: 700;">Halo, <?php echo "BudhiPro" ?>!</h1>
+<h1 style= "font-family: 'Montserrat'; 
+            font-weight: 700;
+            letter-spacing: 0.03rem;">Halo, <?php echo $urlname[$lengthurl]?>!</h1>
 
 <br><br>
-
 <main>
 
     <section class="left__col">
 
         <div class="image">
 
-            <img src="../image/BudhiSwag-removebg-preview.png" alt="">
+            <img src="<?php echo $result['url_image']?>" alt="">
     
         </div>
-
-        <label for="change__profile">
-            <img src="../image/CameraIcon.svg" alt="">
-        </label>
         
-        <form action="">
+        <form action="../Dashboard-User/updateAction.php" method="post" enctype="multipart/form-data">
+            <label for="change__profile">
+                <img src="../image/CameraIcon.svg" alt="">
+            </label>
+            <input type="file" name="image_user" id="change__profile" disabled>
             
             <label for="nama__lengkap"><img src="../image/NamaLengkapIcon.svg" alt=""> Nama Lengkap</label>
-            <input type="text" name="nama" id="nama__lengkap" value="" autocomplete="off">
+            <input id="inputbutton" disabled type="text" name="nama" id="nama__lengkap" value="<?php echo $result['namalengkap']; ?>" autocomplete="off">
         
             <label for="usia"><img src="../image/UsiaIcon.svg" alt=""> Usia (Tahun)</label>
-            <input type="number" name="usia" id="usia" value="">
+            <input id="inputbutton" disabled type="number" name="usia" id="usia" value="<?php echo $result['umur']; ?>">
 
             <label for="gender"><img src="../image/GenderIcon.svg" alt=""> Jenis Kelamin</label>
             <select name="gender" id="gender">
-                <option value="laki">Laki-Laki</option>
-                <option value="perempuan">Perempuan</option>
+                <option value="Laki - Laki" <?php echo resultGender() ? "selected" : ""?> >Laki-Laki</option>
+                <option value="Perempuan" <?php echo resultGender() ? "" : "selected"?> >Perempuan</option>
             </select>
 
             <label class="save-button">
@@ -164,6 +195,8 @@
 <br><br><br>
 
 <script src="styling/script.js"></script>
+<script src="refreshTime.js"></script>
+
 
 </body>
 </html>
