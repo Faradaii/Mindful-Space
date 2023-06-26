@@ -3,7 +3,7 @@ footer {
     right: 0;
     left: 0;
     padding: 0 5%;
-    padding-top: 2rem;
+    padding-top: 0.5rem;
     background-color: var(--main-blue);
 }
 

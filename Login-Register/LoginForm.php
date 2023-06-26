@@ -43,10 +43,6 @@
                 <?php
             }
         }
-
-        if (isset($_SESSION['role'])) {
-            
-        }
     ?>
 
 
@@ -62,7 +58,7 @@
 
                 <ul>
 
-                    <a href="">
+                    <a href="../Homepage/HomePage-Visitor.php">
                         <li class="beranda">Beranda</li>
                     </a>
                 

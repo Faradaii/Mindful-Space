@@ -31,7 +31,6 @@ while ($result = mysqli_fetch_array($data)){
 
 //renaming file dengan id didapat dari id database newspaper 
 $renamedFile = $target_dir ."article-image-".$idResult.".".$imageFileType;
-echo $renamedFile;
 // ini juga nanti distore ke database mindful-space table newspaper field url
 //todo buat query sql insert into database table field url
 
@@ -41,8 +40,8 @@ echo $renamedFile;
     } else {
       echo "Sorry, there was an error uploading your file.";
     }
-  
-    header("location:dashboard.php");
+    $currentshow = $_POST['currentshow'];
+    header("location:dashboard.php?show=".$currentshow);
     ?>
 </body>
 </html>

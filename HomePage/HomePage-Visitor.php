@@ -28,23 +28,13 @@
 
             <ul>
 
-                <a href="">
+                <a href="../Homepage/HomePage-Visitor.php">
                     <li class="beranda">Beranda</li>
                 </a>
             
                 <li class="fasilitas__hover">
 
-                    <input type="radio" name="nav" id="fasilitas">
-                    <label for="fasilitas" class="fasilitas__check">Fasilitas <i class="fa fa-chevron-down"></i></label>
-
-                    <ul class="fasilitas__dropdown dropdown">
-                        <a href="">
-                            <li>Ruang Konseling</li>
-                        </a>
-                        <a href="">
-                            <li>Farmasi</li>
-                        </a>
-                    </ul>                        
+                    <a href="Fasilitas.php" class="fasilitas__check">Fasilitas</a>                   
 
                 </li>
                 
@@ -56,10 +46,6 @@
                     <ul class="layanan__dropdown dropdown">
                         <a href="">
                             <li>Konseling</li>
-                        </a>
-                        <a href="">
-                            <li>Rehabilitasi</li>
-                        </a>
                         </a>
                         <a href="">
                             <li>Tes Kesehatan Mental</li>
@@ -84,7 +70,7 @@
     </nav>
 
     <br><br><br><br><br><br><br>
-
+ 
     <main>
 
         <section class="welcome">

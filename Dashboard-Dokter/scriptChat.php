@@ -121,8 +121,11 @@
                 
             <?php 
             }
-
-            if (isset($_SESSION['fromWho'])) {
+        
+            $query = "SELECT * FROM chats WHERE referensi = '$ref'";
+            $count = mysqli_fetch_row(mysqli_query(Connect::connect(), $query));
+            
+            if ($count > 0) {
             
                 $query = "SELECT * FROM chats WHERE referensi = '$ref'";
 
@@ -170,6 +173,7 @@
 
                     <?php
                     }
+
                 }
             } else {?>
 

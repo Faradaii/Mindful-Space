@@ -92,7 +92,7 @@ div.underline {
     background-color: var(--main-blue);
     height: 5px;
     width: 1.3rem;
-    right: 38.5rem;
+    right: 37.2rem;
     top: 75%;
     border-radius: 1.3rem;
     transition: .3s;
@@ -100,9 +100,9 @@ div.underline {
 }
 
 .fasilitas__hover:hover ~ div.underline {
-    right: 32.1%;
+    right: 31.1%;
 }
 
 .layanan__hover:hover ~ div.underline {
-    right: 22.4%;
+    right: 22.7%;
 }

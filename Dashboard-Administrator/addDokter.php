@@ -17,7 +17,10 @@
     
     
     mysqli_query(ConnectionUtil::connect(), "INSERT INTO users VALUES(DEFAULT, '$nama','$password', '$role')");
-    header("location:dashboard.php")
+
+    $currentshow = $_POST["currentshow"];
+    header("location:dashboard.php?show=".$currentshow);
+
     ?>
 </body>
 </html>

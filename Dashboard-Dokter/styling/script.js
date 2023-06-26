@@ -65,3 +65,29 @@ available.addEventListener('change', function() {
     }
 
 });
+
+const editbutton = document.querySelector("#editbutton");
+const disabled = document.querySelectorAll("#inputbutton");
+const labelButton = document.querySelector(".save-button")
+const filebutton = document.querySelector("#inputbuttonfile");
+editbutton.addEventListener("click", () => {
+    filebutton.disabled = false;
+    disabled.forEach(element => {
+        element.disabled = false;
+    });
+    labelButton.innerHTML = "Save";
+    console.log(labelButton)
+    labelButton.style.backgroundColor = '#32cd32';
+    setTimeout(() => {
+        editbutton.setAttribute("type", "submit");
+    }, 1000);
+    labelButton.append(editbutton);
+    });
+    console.log(disabled);
+
+const label_image = document.querySelector("#name_image");
+
+console.log(filebutton);
+filebutton.addEventListener("change", () => {
+    label_image.innerHTML = filebutton.files[0].name
+});
