@@ -13,9 +13,11 @@
     date_default_timezone_set("Asia/Makassar"); 
 
     $id = $_POST['id_user'];
+    $id_dokter = $_POST['id_dokter'];
+    $waktukonsul = $_POST['waktukonsul'];
     
     $querySelectTable = <<<SQL
-        SELECT * FROM antrian WHERE id_pasien= '$id' AND status != 'selesai'
+        SELECT * FROM `antrian` WHERE `id_pasien`= '$id' AND `status` = 'konsultasi' AND `id_dokter` = '$id_dokter' AND `waktu` = '$waktukonsul'
     SQL;
     $dataSelect = mysqli_query(ConnectionUtil::connect(), $querySelectTable); //fetch data agar bisa mendapat data keluhan dan
 
@@ -33,6 +35,9 @@
     mysqli_query(ConnectionUtil::connect(), $queryInsertHistory);
     
 
+    unset($_SESSION['waktukonsul']);
+    unset($_SESSION['id_from']);
+    unset($_SESSION['fromWho']);
     header("location:dashboard.php");
     ?>
 </body>
