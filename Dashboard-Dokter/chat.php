@@ -40,6 +40,11 @@ else {
 
 
 <?php
+//ini untuk auto unavailable jika suatu konseling sedang berlangsung
+mysqli_query(ConnectionUtil::connect(), "UPDATE dokters SET status = '0' WHERE id_dokter = '$myid'");
+//untuk mengubah status di database antrian
+mysqli_query(ConnectionUtil::connect(), "UPDATE antrian SET status = 'konsultasi' WHERE id_dokter = '$myid' AND id_pasien = '$otherid'");
+
 $data = mysqli_query(ConnectionUtil::connect(), "SELECT * 
 FROM dokters WHERE id_dokter = $myid ");
 $result = mysqli_fetch_array($data);
