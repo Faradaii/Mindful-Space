@@ -42,3 +42,6 @@ Sebuah platform yang menyediakan pelayanan problem solving untuk berbagai masala
 
 ### 14 Juni - 20 Juni 
 - Pembuatan Dashboard Dokter
+
+### 21 Juni - 27 Juni
+- pembuatan Dashboard User dan Testing part I
