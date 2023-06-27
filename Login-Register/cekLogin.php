@@ -30,10 +30,10 @@
             $dataIsExist = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM identitas WHERE id_user = '$id_user'");
             $isExist = mysqli_num_rows($dataIsExist);
             if ($isExist == 0){
+                mysqli_query(ConnectionUtil::connect(), "INSERT INTO identitas (id, id_user, namalengkap) VALUES (DEFAULT, '$id_user', '$username')");
                 if ($result['role'] == 'dokter') {
                     mysqli_query(ConnectionUtil::connect(), "INSERT INTO dokters (id_dokter, status) VALUES ('$id_user', '0')");
                 }
-                mysqli_query(ConnectionUtil::connect(), "INSERT INTO identitas (id, id_user, namalengkap) VALUES (DEFAULT, '$id_user', '$username')");
             }
             header("location:LoginForm.php?pesan=loginberhasil&role={$result['role']}");
         } else {

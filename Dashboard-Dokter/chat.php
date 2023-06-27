@@ -27,6 +27,8 @@ include '../Helper/ConnectionUtil.php';
 $myid = $_SESSION['id'];
 
 if (isset($_POST['id_from'])) {
+    $_SESSION['waktukonsul'] = $_POST['waktukonsul'];
+    $waktukonsul = $_SESSION['waktukonsul'];
     $_SESSION['id_from'] = $_POST['id_from'];
     $_SESSION['fromWho'] = $_POST['id_from'];
 }
@@ -43,7 +45,7 @@ else {
 //ini untuk auto unavailable jika suatu konseling sedang berlangsung
 mysqli_query(ConnectionUtil::connect(), "UPDATE dokters SET status = '0' WHERE id_dokter = '$myid'");
 //untuk mengubah status di database antrian
-mysqli_query(ConnectionUtil::connect(), "UPDATE antrian SET status = 'konsultasi' WHERE id_dokter = '$myid' AND id_pasien = '$otherid'");
+mysqli_query(ConnectionUtil::connect(), "UPDATE antrian SET status = 'konsultasi' WHERE id_dokter = '$myid' AND id_pasien = '$otherid' AND `waktu` = '$waktukonsul' AND `status` = 'menunggu'");
 
 $data = mysqli_query(ConnectionUtil::connect(), "SELECT * 
 FROM dokters WHERE id_dokter = $myid ");
@@ -182,17 +184,18 @@ $status = $result['status'];
                 </div>
 
                 <?php
-                            echo '<p class="data">' . $userAbout['username'] . '</p>';
-                            echo '<p class="nama__asli">' . $userAbout['namalengkap'] . '</p>';
+                            echo '<p class="data">' . $userAbout['namalengkap'] . '</p>';
+                            echo '<p class="nama__asli">' . $userAbout['username'] . '</p>';
                             echo '<p class="sub__data">' . $userAbout['jeniskelamin'].' | ';
                             echo '<span>' . $userAbout['umur'].'</span></p>';   
-        
                 ?>
 
             </div>
 
             <form action="clearQueue.php" method="post" id="backbutton">
                 <input type="text" name="id_user" value="<?php echo $otherid?>" hidden>
+                <input type="text" name="id_dokter" value="<?php echo $myid?>" hidden>
+                <input type="text" name="waktukonsul" value="<?php echo $_SESSION['waktukonsul']?>" hidden>
                 <button class="back" type="submit">
                     Back
                 </button>

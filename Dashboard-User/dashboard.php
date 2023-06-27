@@ -19,8 +19,22 @@ session_start();
 require_once "../Helper/ConnectionUtil.php";
 use Helper\ConnectionUtil;
 
-include 'realtime.php';
+// include 'realtime.php';
 // if hours real == session waktukonsul then redirect to chat.php
+$timeByJs = <<<JAVASCRIPT
+    <script>
+    let waktu = $_SESSION[waktukonsul];
+    
+    setInterval(() => {
+        const date = new Date();
+        let realtimeHour = date.getHours();
+        if (realtimeHour == waktu) {
+            window.location = 'chat.php';
+        }
+    }, 1000)
+    </script>
+JAVASCRIPT;
+echo $timeByJs;
 
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
@@ -29,8 +43,15 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
 
 if(isset($_GET['messagekonsul'])){
     if($_GET['messagekonsul'] == 'sudahbooking'){
-        echo '<script>alert("anda sudah booking konsultasi sebelumnya di jam '.$_SESSION['waktukonsul'].'dengan id dokter'.$_SESSION['id_from'].', silahkan menunggu")</script>';
-        // header('location:dashboard.php');
+        $confirm = <<<JAVASCRIPT
+        <script>
+            alert('anda sudah booking konsultasi sebelumnya di jam $_SESSION[waktukonsul].00 dengan id dokter $_SESSION[id_from] silahkan menunggu !');
+
+            window.location = 'dashboard.php';
+            
+        </script>
+        JAVASCRIPT;
+        echo $confirm;
     }
 }
 
@@ -49,12 +70,10 @@ function resultGender(): bool {
     return false;
 }
 
-$urlname =explode("/", parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-// $urlname = explode("/", __DIR__);
-$lengthurl = sizeof($urlname)-1;
-
 ?>
-    
+
+
+
 <nav>
         
     <div class="logo">
@@ -115,9 +134,11 @@ $lengthurl = sizeof($urlname)-1;
 
 <h1 style= "font-family: 'Montserrat'; 
             font-weight: 700;
-            letter-spacing: 0.03rem;">Halo, <?php echo $urlname[$lengthurl]?>!</h1>
+            letter-spacing: 0.03rem;">Halo, <?php echo $_SESSION['username']?>!</h1>
 
 <br><br>
+
+<input type="text" id="statuskonsultasihidden" hidden>
 <main>
 
     <section class="left__col">
@@ -132,6 +153,7 @@ $lengthurl = sizeof($urlname)-1;
             <label for="change__profile">
                 <img src="../image/CameraIcon.svg" alt="">
             </label>
+            <input type="text" hidden name="url_image" value="<?php echo $result['url_image']?>">
             <input type="file" name="image_user" id="change__profile" disabled>
             
             <label for="nama__lengkap"><img src="../image/NamaLengkapIcon.svg" alt=""> Nama Lengkap</label>
@@ -141,7 +163,7 @@ $lengthurl = sizeof($urlname)-1;
             <input id="inputbutton" disabled type="number" name="usia" id="usia" value="<?php echo $result['umur']; ?>">
 
             <label for="gender"><img src="../image/GenderIcon.svg" alt=""> Jenis Kelamin</label>
-            <select name="gender" id="gender">
+            <select name="gender" id="gender" disabled>
                 <option value="Laki - Laki" <?php echo resultGender() ? "selected" : ""?> >Laki-Laki</option>
                 <option value="Perempuan" <?php echo resultGender() ? "" : "selected"?> >Perempuan</option>
             </select>
@@ -194,6 +216,7 @@ $lengthurl = sizeof($urlname)-1;
 
 <br><br><br>
 
+<script src="statuschecker.js"></script>
 <script src="styling/script.js"></script>
 <script src="refreshTime.js"></script>
 

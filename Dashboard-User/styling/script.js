@@ -21,11 +21,13 @@ document.body.addEventListener('click', function(event) {
 
 
 const editbutton = document.querySelector("#editbutton");
+const editgender = document.querySelector("#gender"); 
 const disabled = document.querySelectorAll("#inputbutton");
 const labelButton = document.querySelector(".save-button")
 const filebutton = document.querySelector("#change__profile");
 editbutton.addEventListener("click", () => {
     filebutton.disabled =false;
+    editgender.disabled = false;
     disabled.forEach(element => {
         element.disabled = false;
     });
