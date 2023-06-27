@@ -30,7 +30,7 @@ form {
     width: 100%;
 }
 form input[type=text],
-#waktu {
+#waktu , #dokter{
     height: 2rem;
     border: none;
     border-bottom: 2px solid var(--black-not-hover);
