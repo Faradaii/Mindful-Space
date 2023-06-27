@@ -27,7 +27,7 @@
         JAVASCRIPT;
         $alertsukses = <<<JAVASCRIPT
         <script>
-            alert('Telah berhasil mendaftar ke dokter $_SESSION[id_from] di jam $_SESSION[waktukonsul]');
+            alert('Telah berhasil mendaftar ke dokter $_SESSION[namadokter] di jam $_SESSION[waktukonsul]');
             window.location = 'dashboard.php';
         </script>
         JAVASCRIPT;
@@ -125,7 +125,7 @@
             <option selected value="">Silahkan Pilih Dokter Anda</option>
             <?php 
             $queryShowAvailableDokters = <<<SQL
-                SELECT identitas.namalengkap, dokters.* FROM `dokters` JOIN identitas ON dokters.id_dokter = identitas.id_user
+                SELECT identitas.namalengkap, dokters.* FROM `dokters` JOIN identitas ON dokters.id_dokter = identitas.id_user AND `status` = '1'
             SQL;
             $queryShowDokterName = <<<SQL
                 SELECT namalengkap, id_user FROM `identitas`

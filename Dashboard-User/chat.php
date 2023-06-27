@@ -138,8 +138,8 @@ else {
                 </div>
 
                 <?php
-                            echo '<p class="data">' . $userAbout['username'] . '</p>';
-                            echo '<p class="nama__asli">' . $userAbout['namalengkap'] . '</p>';
+                            echo '<p class="data">' . $userAbout['namalengkap'] . '</p>';
+                            echo '<p class="nama__asli">' . $userAbout['username'] . '</p>';
                             echo '<p class="sub__data">' . $userAbout['jeniskelamin'].' | ';
                             echo '<span>' . $userAbout['umur'].'</span></p>';   
         
