@@ -204,6 +204,7 @@
                             <td class="center"><?php echo $no++?></td>
                             <td><a href="../Dashboard-Dokter/dashboard.php?id=<?php echo $row['id_pasien']?>&waktu=<?php echo $row['waktu']?>"><?php echo $row['username']?></a></td>
 
+
                             <td class="center"><?php echo $row['waktu']?>.00 - <?php echo $row['waktu']+1?>.00</td>
                             <td class="center"><?php echo $row['status']?></td>
                         </tr>
@@ -291,6 +292,7 @@
     
                     <form action="chat.php" method="post">
                         <input type="text" value="<?php echo isset($_GET['waktu'])? $_GET['waktu']:'' ?>" name="waktukonsul" hidden>
+
                         <input type="text" value="<?php echo isset($_GET['id'])? $_GET['id']:'' ?>" name="id_from" hidden>
                         <button class="message" type="submit">
                             Message

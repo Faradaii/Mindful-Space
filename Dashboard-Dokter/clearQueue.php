@@ -38,6 +38,7 @@
     unset($_SESSION['waktukonsul']);
     unset($_SESSION['id_from']);
     unset($_SESSION['fromWho']);
+
     header("location:dashboard.php");
     ?>
 </body>

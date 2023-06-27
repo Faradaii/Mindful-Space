@@ -47,6 +47,7 @@ mysqli_query(ConnectionUtil::connect(), "UPDATE dokters SET status = '0' WHERE i
 //untuk mengubah status di database antrian
 mysqli_query(ConnectionUtil::connect(), "UPDATE antrian SET status = 'konsultasi' WHERE id_dokter = '$myid' AND id_pasien = '$otherid' AND `waktu` = '$waktukonsul' AND `status` = 'menunggu'");
 
+
 $data = mysqli_query(ConnectionUtil::connect(), "SELECT * 
 FROM dokters WHERE id_dokter = $myid ");
 $result = mysqli_fetch_array($data);

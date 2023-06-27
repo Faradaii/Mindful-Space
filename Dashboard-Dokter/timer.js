@@ -1,5 +1,4 @@
 const formbuttonback = document.querySelector("#backbutton");
-
 const timer = document.querySelector("#time");
 function updateTimer() {
     var xhttp = new XMLHttpRequest();
