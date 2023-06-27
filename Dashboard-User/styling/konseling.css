@@ -1,0 +1,79 @@
+
+main {
+    font-family: 'montserrat';
+    width: 60%;
+    margin: 0 auto;
+    height: 100%;
+    border-radius: 40px;
+    background-color: var(--main-grey);
+    padding: 0 6rem;
+}
+
+main h1 {
+    text-align: center;
+}
+
+main label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: var(--black-not-hover);
+    margin-top: 2rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+form input[type=text],
+
+#waktu , #dokter{
+    height: 2rem;
+    border: none;
+    border-bottom: 2px solid var(--black-not-hover);
+    background-color: transparent;
+    margin-top: .5rem;
+    font-family: 'Poppins';
+    font-size: 1.2rem;
+}
+*:focus {
+    outline: none;
+}
+
+main div {
+    display: flex;
+    justify-content: space-between;
+}
+
+main a, input[type=submit] {
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    height: 3rem;
+    width: 10rem;
+    cursor: pointer;
+    text-align: center;
+    transition: .3s;
+}
+
+main a {
+    display: grid;
+    place-items: center;
+    background-color: var(--main-red);
+    box-shadow: 0 0 5px 1px var(--main-red-transparent);
+}
+main a:hover {
+    box-shadow: 0 0 15px 2px var(--main-red-transparent);
+}
+
+input[type=submit] {
+    border: transparent;
+    background-color: var(--main-blue);
+    box-shadow: 0 0 5px 1px var(--main-blue-transparent);
+}
+input[type=submit]:hover {
+    box-shadow: 0 0 15px 2px var(--main-blue-transparent);
+}

@@ -4,7 +4,9 @@ include '../Helper/ConnectionUtil.php';
     use Helper\ConnectionUtil;
 
 $time = time();
+
 $current_time = date('h:i',$time +3600*6);
+
 
 $isiChat = $_POST['isiChat'];
 $id_from = $_POST['idFrom'];

@@ -7,7 +7,7 @@ function updateTimer() {
         if (this.readyState == 4 && this.status == 200) {
             timer.innerText = this.responseText;
             if(timer.innerText == 'selesai'){
-                formbuttonback.submit();
+                window.location = 'clearSessionChat.php';
             }
         }
     };
@@ -18,4 +18,3 @@ function updateTimer() {
 }
 
 setInterval(updateTimer, 1000);
-

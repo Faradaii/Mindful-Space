@@ -26,12 +26,10 @@ include '../Helper/ConnectionUtil.php';
 
 $myid = $_SESSION['id'];
 
-if (isset($_POST['id_from'])) {
-    $_SESSION['waktukonsul'] = $_POST['waktukonsul'];
-    $waktukonsul = $_SESSION['waktukonsul'];
-    $_SESSION['id_from'] = $_POST['id_from'];
-    $_SESSION['fromWho'] = $_POST['id_from'];
+if (isset($_SESSION['id_from'])) {
+    $_SESSION['fromWho'] = $_SESSION['id_from'];
 }
+
 $otherid = $_SESSION['id_from'];
 if ($myid < $otherid) {
     $ref = $myid.$otherid;
@@ -41,51 +39,8 @@ else {
 } ?>
 
 
-<?php
-//ini untuk auto unavailable jika suatu konseling sedang berlangsung
-mysqli_query(ConnectionUtil::connect(), "UPDATE dokters SET status = '0' WHERE id_dokter = '$myid'");
-//untuk mengubah status di database antrian
-mysqli_query(ConnectionUtil::connect(), "UPDATE antrian SET status = 'konsultasi' WHERE id_dokter = '$myid' AND id_pasien = '$otherid' AND `waktu` = '$waktukonsul' AND `status` = 'menunggu'");
-
-
-$data = mysqli_query(ConnectionUtil::connect(), "SELECT * 
-FROM dokters WHERE id_dokter = $myid ");
-$result = mysqli_fetch_array($data);
-$status = $result['status'];
-?>
     <input type="checkbox" name="dropdown__setting" id="dropdown__setting">
-    <div class="setting">
-
-        <p>Availability Status</p>
-
-        <br><br>
-
-        <div id="availability__box">
-
-            <p class="available__status"><!-- Javascript --></p>
-            
-            <form action="setStatus.php" method="POST" id="setStatus">
-            <label for="available__status">
-                <!-- PHP selected dibawah -->
-                <input type="checkbox" name="available__status" onchange="document.getElementById('setStatus').submit()" id="available__status" <?php echo $status == 1 ? 'checked' : ''  ?>>
-                <input type="text" name="status" value="<?php echo $status == 1? 0 : 1 ?>" hidden>
-                <div class="toggle"></div>
-            </label>
-            
-            </form>
-                
-            
-
-        </div>
-        <a href="" class="profile__set">
-            <li>Profile</li>
-        </a>
-
-        <a href="../Login-Register/Logout.php" class="logout">
-            <li>Log Out</li>
-        </a>
-    </div>
-        
+   
     <nav>
     <?php 
 
@@ -119,11 +74,8 @@ $status = $result['status'];
     <hr>
     
     <br><br><br><br><br>
-    <br><br>
-    <br><br>
+    <br><br><br><br>
     
-
-
     <main>
 
         <div class="left__col">
@@ -164,7 +116,7 @@ $status = $result['status'];
             <div class="keluhan">
                 <h2>KELUHAN</h2>
                 <?php 
-                $getKeluhan = mysqli_query(ConnectionUtil::connect(), "SELECT antrian.keluhan FROM antrian WHERE id_pasien = '$otherid'");
+                $getKeluhan = mysqli_query(ConnectionUtil::connect(), "SELECT antrian.keluhan FROM antrian WHERE id_pasien = '$myid' AND status != 'selesai'");
                 $datakeluhan = mysqli_fetch_array($getKeluhan);
                 ?>
                 <h4><?php echo $datakeluhan['keluhan'] ?></h4>
@@ -187,29 +139,25 @@ $status = $result['status'];
                 <?php
                             echo '<p class="data">' . $userAbout['namalengkap'] . '</p>';
                             echo '<p class="nama__asli">' . $userAbout['username'] . '</p>';
+
                             echo '<p class="sub__data">' . $userAbout['jeniskelamin'].' | ';
                             echo '<span>' . $userAbout['umur'].'</span></p>';   
+        
                 ?>
 
             </div>
-
-            <form action="clearQueue.php" method="post" id="backbutton">
-                <input type="text" name="id_user" value="<?php echo $otherid?>" hidden>
-                <input type="text" name="id_dokter" value="<?php echo $myid?>" hidden>
-                <input type="text" name="waktukonsul" value="<?php echo $_SESSION['waktukonsul']?>" hidden>
-                <button class="back" type="submit">
-                    Back
-                </button>
-                <i class="fa-solid fa-arrow-left"></i>
-
-            </form>
             
         </div>
+
+
+        <form action="clearSessionChat.php" method="post" id="clearSessionChat"></form>
     
     </main>
+    <input type="text" id="statuskonsultasihidden" hidden>
 
     <script src="styling/script.js"></script>
     <script src="timer.js"></script>
+    <script src="refreshTime.js"></script>
 
 
 </body>

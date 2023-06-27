@@ -117,6 +117,7 @@ $result = mysqli_fetch_array($datax);
 <main class="container">
     <div class="left">
         <img id="image" src="<?php echo $result['url_image']?>">
+        <input type="text" hidden name="url_image" value="<?php echo $result['url_image']?>">
         <label class="label-upload">
             <input type="file" id="inputbuttonfile" disabled name="image_user" accept=".png, .jpg">Upload File
         </label>

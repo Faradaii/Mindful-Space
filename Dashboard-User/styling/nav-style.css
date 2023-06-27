@@ -60,49 +60,60 @@ h1 span {
 }
 
 .beranda {
-    font-family: 'ABeeZee', sans-serif;
-    color: black;
+    font-size: 20px;
+    font-weight: 500;
 }
 
-.login li {
+.logout li {
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 1rem;
     height: 2.8rem;
-    background-color: var(--main-blue);
+    background-color: var(--main-red);
     color: white;
     font-weight: 700;
     width: 8rem;  
     font-size: 1.15rem;
     font-family: 'Inter', sans-serif;
     letter-spacing: .01rem;
-    box-shadow: 0 0 5px 1px var(--main-blue-transparent);
+    box-shadow: 0 0 5px 1px var(--main-red-transparent);
     transition: .3s;
 }
 
-.login li:hover {
-    box-shadow: 0 0 15px 2px var(--main-blue-transparent);
+.logout li:hover {
+    box-shadow: 0 0 15px 2px var(--main-red-transparent);
 }
 
 /* UNDERLINE ANIMATION */
 
 div.underline {
+    display: none;
     position: absolute;
     background-color: var(--main-blue);
     height: 5px;
-    width: 1.3rem;
-    right: 37.2rem;
     top: 75%;
-    border-radius: 1.3rem;
     transition: .3s;
     z-index: 2;
 }
-
+/* 
 .fasilitas__hover:hover ~ div.underline {
-    right: 31.1%;
+    display: block;
+    right: 32.1%;
+    width: 1.3rem;
+    border-radius: 1.3rem;
 }
 
 .layanan__hover:hover ~ div.underline {
-    right: 22.7%;
+    display: block;
+    right: 22.4%;
+    width: 1.3rem;
+    border-radius: 1.3rem;
 }
+
+.beranda:hover ~ div.underline {
+    display: block;
+    right: 38.5rem;
+    width: 1.3rem;
+    border-radius: 1.3rem;
+} */

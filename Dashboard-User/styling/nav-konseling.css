@@ -35,6 +35,7 @@ ul a {
     color: var(--black-not-hover);
     letter-spacing: .08rem;
     transition: .2s ease; 
+    font-size:16px;
 }
 
 .navigation a:hover {
@@ -61,28 +62,35 @@ h1 span {
 
 .beranda {
     font-family: 'ABeeZee', sans-serif;
+    color: var(--black-not-hover);
+}
+a:hover .beranda {
     color: black;
 }
 
-.login li {
+label[for=layanan] {
+    color: black !important;
+}
+
+.logout li {
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 1rem;
     height: 2.8rem;
-    background-color: var(--main-blue);
+    background-color: var(--main-red);
     color: white;
     font-weight: 700;
     width: 8rem;  
     font-size: 1.15rem;
     font-family: 'Inter', sans-serif;
     letter-spacing: .01rem;
-    box-shadow: 0 0 5px 1px var(--main-blue-transparent);
+    box-shadow: 0 0 5px 1px var(--main-red-transparent);
     transition: .3s;
 }
 
-.login li:hover {
-    box-shadow: 0 0 15px 2px var(--main-blue-transparent);
+.logout li:hover {
+    box-shadow: 0 0 15px 2px var(--main-red-transparent);
 }
 
 /* UNDERLINE ANIMATION */
@@ -92,17 +100,17 @@ div.underline {
     background-color: var(--main-blue);
     height: 5px;
     width: 1.3rem;
-    right: 37.2rem;
+    right: 22.6% /*360px*/;
     top: 75%;
     border-radius: 1.3rem;
     transition: .3s;
     z-index: 2;
 }
 
-.fasilitas__hover:hover ~ div.underline {
-    right: 31.1%;
+a.beranda:hover ~ div.underline {
+    right: 38.7%;
 }
 
-.layanan__hover:hover ~ div.underline {
-    right: 22.7%;
+.fasilitas__hover:hover ~ div.underline {
+    right: 30.8%;
 }
