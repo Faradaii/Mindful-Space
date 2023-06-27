@@ -188,7 +188,6 @@ $status = $result['status'];
                             echo '<p class="nama__asli">' . $userAbout['username'] . '</p>';
                             echo '<p class="sub__data">' . $userAbout['jeniskelamin'].' | ';
                             echo '<span>' . $userAbout['umur'].'</span></p>';   
-        
                 ?>
 
             </div>

@@ -20,6 +20,7 @@ $renamedFile = $target_dir ."profile-user-".$myId.".".$imageFileType;
 move_uploaded_file($_FILES["image_user"]["tmp_name"], $renamedFile);
 }
 
+
 $sql = <<<SQL
         UPDATE identitas SET 
             namalengkap = '$namalengkap',

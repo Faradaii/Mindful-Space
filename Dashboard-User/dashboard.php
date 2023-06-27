@@ -55,7 +55,6 @@ if(isset($_GET['messagekonsul'])){
     }
 }
 
-
 $sql = <<<SQL
         SELECT * FROM identitas WHERE id_user = '$_SESSION[id]'
     SQL;
@@ -70,6 +69,7 @@ function resultGender(): bool {
 
     return false;
 }
+
 ?>
 
 
@@ -144,6 +144,7 @@ function resultGender(): bool {
     <section class="left__col">
 
         <div class="image">
+
             <img src="<?php echo $result['url_image']?>" alt="">
     
         </div>

@@ -24,7 +24,6 @@ session_start();
 include '../Helper/ConnectionUtil.php';
     use Helper\ConnectionUtil;
 
-
 $myid = $_SESSION['id'];
 
 if (isset($_SESSION['id_from'])) {
@@ -140,6 +139,7 @@ else {
                 <?php
                             echo '<p class="data">' . $userAbout['namalengkap'] . '</p>';
                             echo '<p class="nama__asli">' . $userAbout['username'] . '</p>';
+
                             echo '<p class="sub__data">' . $userAbout['jeniskelamin'].' | ';
                             echo '<span>' . $userAbout['umur'].'</span></p>';   
         
@@ -148,6 +148,7 @@ else {
             </div>
             
         </div>
+
 
         <form action="clearSessionChat.php" method="post" id="clearSessionChat"></form>
     

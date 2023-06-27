@@ -10,6 +10,7 @@ if ($_SESSION['role'] != 'dokter') {
 $namalengkap = $_POST['namalengkap'];
 $jk = $_POST['jeniskelamin'];
 $umur = $_POST['umur'];
+
 $renamedFile = $_POST['url_image'];
 
 if (is_uploaded_file($_FILES['image_user']['tmp_name'])) {
@@ -20,12 +21,14 @@ if (is_uploaded_file($_FILES['image_user']['tmp_name'])) {
     move_uploaded_file($_FILES["image_user"]["tmp_name"], $renamedFile);
 }
 
+
 mysqli_query(ConnectionUtil::connect(), "UPDATE identitas SET 
     namalengkap = '$namalengkap',
     jeniskelamin = '$jk',
     umur = '$umur',
     url_image = '$renamedFile'
  WHERE id_user = $myId");
+
 
  header('location: updateProfile.php');
 

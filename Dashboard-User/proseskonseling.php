@@ -28,7 +28,3 @@ if(mysqli_num_rows($data) > 0){
 } else {
     header('location:konseling.php?message=gagal');
 }
-
-
-
-

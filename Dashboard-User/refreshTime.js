@@ -1,4 +1,3 @@
-//nama file perlu diganti karna ambigu
 
 var statuskonsultasihidden = document.querySelector("#statuskonsultasihidden");
 
