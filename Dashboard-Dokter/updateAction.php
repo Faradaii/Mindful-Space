@@ -2,6 +2,10 @@
 include '../Helper/ConnectionUtil.php';
 use Helper\ConnectionUtil;
 session_start();
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'dokter') {
+    header("location: ../Login-Register/LoginForm.php");
+}
+
 $myId = $_SESSION['id'];
 if ($_SESSION['role'] != 'dokter') {
     header('location:../Login-Register/LoginForm.php');

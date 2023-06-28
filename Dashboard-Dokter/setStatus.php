@@ -8,9 +8,12 @@
 </head>
 <body>
 <?php 
-include '../Helper/ConnectionUtil.php';
-    use Helper\ConnectionUtil;
 session_start();
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'dokter') {
+    header("location: ../Login-Register/LoginForm.php");
+}
+include '../Helper/ConnectionUtil.php';
+use Helper\ConnectionUtil;
 $status = $_POST['status'];
 $id = $_SESSION['id'];
 

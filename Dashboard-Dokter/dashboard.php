@@ -22,13 +22,13 @@
 <?php
 
     session_start();
+    if (!isset($_SESSION['role']) || $_SESSION['role'] != 'dokter') {
+        header("location: ../Login-Register/LoginForm.php");
+    }
     include '../Helper/ConnectionUtil.php';
     use Helper\ConnectionUtil;
-    if ($_SESSION['role'] != 'dokter') {
-        header('location:../Login-Register/LoginForm.php');
-    }
 
-
+    date_default_timezone_set("Asia/Makassar");
     unset($_SESSION['fromWho']);
     unset($_SESSION['id_from']);
     $myId = $_SESSION['id'];
@@ -37,6 +37,12 @@
     FROM dokters WHERE id_dokter = $myId ");
     $resulty = mysqli_fetch_array($datay);
     $status = $resulty['status'];
+
+    date_default_timezone_set("Asia/Makassar"); 
+    $currentDate = date("d-m-Y");
+    if (isset($_GET['tanggal'])) {
+        $currentDate = $_GET['tanggal'];
+    }
 
 ?>
 
@@ -130,15 +136,27 @@
         ?>
             <!-- <h2>DASHBOARD</h2> -->
 
-            <form action="dashboard.php?tes=1">
+            <form action="dashboard.php" method="get" id="formtgl">
 
                 <!-- <label for="tanggal"><i class="fa-solid fa-calendar-days"></i></label> -->
                 <input type="date" name="tanggal" id="tanggal">
-                <h4> Senin, 30 Februari 2023</h4>
+                <h4><?php $date = date_format(date_create_from_format('d-m-Y', $currentDate),'l, j F o'); echo ($date);  ?></h4>
 
                 <input type="submit" value="" hidden>
 
             </form>
+            <script>
+                let formtgl = document.querySelector('#formtgl');
+                let inputtgl = document.querySelector("#tanggal");
+                inputtgl.addEventListener("change", function(){
+                    console.log('s')
+                    var date = new Date(inputtgl.value);
+                    var options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+                    var tanggalString = date.toLocaleDateString('en-GB', options);
+                    tanggalString = tanggalString.replace(/\//g, '-');
+                    window.location = "dashboard.php?tanggal="+tanggalString;
+                });
+            </script>
 
         </div>
 
@@ -150,10 +168,13 @@
     
     <?php 
         // <!-- fetch data dari table antrian where id_dokter = $_SESSION['id'] -->
-        $data = mysqli_query(ConnectionUtil::connect(), "SELECT users.username, antrian.* 
-                                                    FROM antrian JOIN users 
-                                ON antrian.id_pasien = users.id
-                                WHERE id_dokter = $myId ");
+        $sql = <<<SQL
+        SELECT users.username, antrian.* 
+            FROM antrian JOIN users 
+            ON antrian.id_pasien = users.id
+            WHERE id_dokter = $myId AND tanggal = '$currentDate'
+        SQL;
+        $data = mysqli_query(ConnectionUtil::connect(), $sql);
 ?>
                 <div>
 
@@ -169,7 +190,7 @@
         $data = mysqli_query(ConnectionUtil::connect(), "SELECT users.username, antrian.* 
         FROM antrian JOIN users 
         ON antrian.id_pasien = users.id
-        WHERE id_dokter = $myId AND status != 'selesai' ");
+        WHERE id_dokter = $myId AND status != 'selesai' AND tanggal = '$currentDate'");
         ?>
                         <h4>Antrian saat ini</h4>
                         <h3><?php echo sizeof(mysqli_fetch_all($data))?></h3>
@@ -196,7 +217,7 @@
                     $data = mysqli_query(ConnectionUtil::connect(), "SELECT users.username, antrian.* 
                     FROM antrian JOIN users 
         ON antrian.id_pasien = users.id
-        WHERE id_dokter = $myId and status != 'selesai' ORDER BY waktu ASC");
+        WHERE id_dokter = $myId AND status != 'selesai' AND tanggal = '$currentDate' ORDER BY waktu ASC");
         $no = 1;
                         while ($row = mysqli_fetch_array($data)){
                     ?>
@@ -215,12 +236,6 @@
     
                 </table>
 
-                <!-- <div class="pagination">
-
-                        <a href=""><- previous page</a>
-                        <a href="">next page -></a>
-
-                </div> -->
     
             </div>
 
@@ -232,7 +247,7 @@
                     SELECT users.username, antrian.* 
                     FROM antrian JOIN users 
                     ON antrian.id_pasien = users.id
-                    WHERE id_dokter = $myId AND status = 'selesai';
+                    WHERE id_dokter = $myId AND status = 'selesai' AND tanggal = '$currentDate';
                 SQL;
                 
         $data = mysqli_query(ConnectionUtil::connect(), $statusQueueQuery);
@@ -245,62 +260,83 @@
                 <!-- PHP UNTUK PROFIL USER DISINI -->
                 <div class="user__manage">
     
-                    <!-- SEARCH BAR -->
-                    <form action="dashboard.php" method="get">
-                        
-                        <input type="text" name="search" placeholder=" Cari Username">
-                        <input type="submit" value="" hidden>
-                        
-                    </form>
-    
                     <!-- PROFIL YANG KELUAR DISAAT DOKTER KLIK
                     DATA USER YANG TERTERA PADA TABEL. -->
-                    <div class="profile__user">
-                    <?php 
-                        $checkCurrentProfileQuery = <<<SQL
-                            SELECT users.username, identitas.* 
-                            FROM identitas JOIN users 
-                            ON identitas.id_user = users.id;
-                        SQL;
-
-                        if (isset($_GET['id'])) {
-                            $data = mysqli_query(ConnectionUtil::connect(), $checkCurrentProfileQuery);
-                            $otherId = $_GET['id'];
-
-                            $checkOtherProfileQuery = <<<SQL
+                    <?php
+                    if(isset($_GET['id'])){?>
+                        <div class="profile__user">
+                        <?php 
+                            $checkCurrentProfileQuery = <<<SQL
                                 SELECT users.username, identitas.* 
                                 FROM identitas JOIN users 
-                                ON identitas.id_user = users.id WHERE id_user = $otherId
+                                ON identitas.id_user = users.id;
                             SQL;
-                            
-                            $data = mysqli_query(ConnectionUtil::connect(), $checkOtherProfileQuery);
-                        }
-                        while($row = mysqli_fetch_array($data)){
-                        ?>
-                        <div class="profile__picture">
-                            <img src="<?php echo $row['url_image']?$row['url_image']: '' ?>" alt="">
-                        </div>
     
-                        <div class="identity">
-                            <h1><?php echo $row['username']? $row['username']:''  ?></h1>
-                            <p><?php echo $row['namalengkap']?$row['namalengkap']:'' ?></p>
-                            <p><?php echo $row['jeniskelamin']?$row['jeniskelamin']:'' ?> | <?php echo $row['umur'] ?> Tahun</p>
-                        </div>
+                            if (isset($_GET['id'])) {
+                                $data = mysqli_query(ConnectionUtil::connect(), $checkCurrentProfileQuery);
+                                $otherId = $_GET['id'];
     
+                                $checkOtherProfileQuery = <<<SQL
+                                    SELECT users.username, identitas.* 
+                                    FROM identitas JOIN users 
+                                    ON identitas.id_user = users.id WHERE id_user = $otherId
+                                SQL;
+                                
+                                $data = mysqli_query(ConnectionUtil::connect(), $checkOtherProfileQuery);
+                            }
+                            while($row = mysqli_fetch_array($data)){
+                            ?>
+                            <div class="profile__picture">
+                                <img src="<?php echo $row['url_image']?$row['url_image']: '' ?>" alt="">
+                            </div>
+        
+                            <div class="identity">
+                                <h1><?php echo $row['username']? $row['username']:''  ?></h1>
+                                <p><?php echo $row['namalengkap']?$row['namalengkap']:'' ?></p>
+                                <p><?php echo $row['jeniskelamin']?$row['jeniskelamin']:'' ?> | <?php echo $row['umur'] ?> Tahun</p>
+                            </div>
+        
+                        </div>
+                        <?php }?>
+        
+                        <form action="chat.php" method="post">
+                            <input type="text" value="<?php echo isset($_GET['waktu'])? $_GET['waktu']:'' ?>" name="waktukonsul" hidden>
+    
+                            <input type="text" value="<?php echo isset($_GET['id'])? $_GET['id']:'' ?>" name="id_from" hidden>
+                            <button class="message" type="submit">
+                                Message
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </form>
+        
                     </div>
-                    <?php }?>
-    
-                    <form action="chat.php" method="post">
-                        <input type="text" value="<?php echo isset($_GET['waktu'])? $_GET['waktu']:'' ?>" name="waktukonsul" hidden>
-
-                        <input type="text" value="<?php echo isset($_GET['id'])? $_GET['id']:'' ?>" name="id_from" hidden>
-                        <button class="message" type="submit">
-                            Message
-                            <i class="fa-solid fa-paper-plane"></i>
-                        </button>
-                    </form>
-    
-                </div>
+                    <?php 
+                    } else {?>
+                        <div class="profile__user">
+                            <div class="identity">
+                                <p style="font-weight:900; padding-inline:3rem;">Saat ini, Anda belum memilih pengguna untuk memulai sesi chat dengan Anda. Silahkan pilih pengguna pada tabel disamping untuk memulainya! Silakan tetap siap dan tersedia untuk membantu pengguna yang membutuhkan</p>
+                            </div>
+                        </div>
+        
+                        <?php 
+                        if ($status == 0) {
+                        echo <<<HTML
+                            <div class="profile__user" style="align-items:center; height:1rem;">
+                                <div class="identity" >
+                                    <p style="font-weight:900; padding-inline:3rem;">Jangan lupa untuk membuat status anda available agar pengguna bisa memulai sesi chat dengan anda!</p>
+                                </div>
+                            </div>
+                        HTML;
+                       }
+                       ?>
+                            
+        
+                    </div>
+                    
+                    <?php 
+                    }
+                    
+                    ?>
     
             </div>
 

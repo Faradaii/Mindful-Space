@@ -8,6 +8,10 @@
 </head>
 <body>
 <?php 
+    session_start();
+    if (!isset($_SESSION['role']) || $_SESSION['role'] != 'dokter') {
+        header("location: ../Login-Register/LoginForm.php");
+    }
     require_once '../Helper/ConnectionUtil.php';
     use Helper\ConnectionUtil;
     date_default_timezone_set("Asia/Makassar"); 
@@ -28,6 +32,7 @@
     
     $result = mysqli_fetch_array($dataSelect);
     print_r($result);
+    date_default_timezone_set("Asia/Makassar"); 
     $currentDate = date("d-m-Y");
     $queryInsertHistory = <<<SQL
         INSERT INTO historychat (id_from,id_to,tanggal,keluhan) VALUES ('$result[id_dokter]', '$result[id_pasien]', '$currentDate', '$result[keluhan]')

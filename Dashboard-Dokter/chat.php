@@ -21,6 +21,9 @@
 
 <?php 
 session_start();
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'dokter') {
+    header("location: ../Login-Register/LoginForm.php");
+}
 include '../Helper/ConnectionUtil.php';
     use Helper\ConnectionUtil;
 
@@ -77,7 +80,7 @@ $status = $result['status'];
             
 
         </div>
-        <a href="" class="profile__set">
+        <a href="updateProfile.php" class="profile__set">
             <li>Profile</li>
         </a>
 
@@ -188,7 +191,7 @@ $status = $result['status'];
                             echo '<p class="data">' . $userAbout['namalengkap'] . '</p>';
                             echo '<p class="nama__asli">' . $userAbout['username'] . '</p>';
                             echo '<p class="sub__data">' . $userAbout['jeniskelamin'].' | ';
-                            echo '<span>' . $userAbout['umur'].'</span></p>';   
+                            echo '<span>' . $userAbout['umur'].' Tahun</span></p>';   
                 ?>
 
             </div>

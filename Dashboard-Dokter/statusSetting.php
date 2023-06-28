@@ -8,11 +8,14 @@
 </head>
 <body>
 <?php
+session_start();
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'dokter') {
+    header("location: ../Login-Register/LoginForm.php");
+}
 
 include '../Helper/ConnectionUtil.php';
-    use Helper\ConnectionUtil;
+use Helper\ConnectionUtil;
 
-session_start();
 $myid = $_SESSION['id'];
 
 $data = mysqli_query(ConnectionUtil::connect(), "SELECT * FROM dokters WHERE id_dokter = '$myid'");

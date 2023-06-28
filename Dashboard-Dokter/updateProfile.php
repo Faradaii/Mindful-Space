@@ -17,13 +17,12 @@
 </head>
 <body>
 <?php
-
 session_start();
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'dokter') {
+    header("location: ../Login-Register/LoginForm.php");
+}
 include '../Helper/ConnectionUtil.php';
 use Helper\ConnectionUtil;
-if ($_SESSION['role'] != 'dokter') {
-    header('location:../Login-Register/LoginForm.php');
-}
 
 
 unset($_SESSION['fromWho']);
@@ -63,7 +62,7 @@ $status = $result['status'];
             
 
         </div>
-        <a href="" class="profile__set">
+        <a href="updateProfile.php" class="profile__set">
             <li>Profile</li>
         </a>
 

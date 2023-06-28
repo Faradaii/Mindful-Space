@@ -121,13 +121,14 @@
                 
             <?php 
             }
-        
-            $query = "SELECT * FROM chats WHERE referensi = '$ref'";
+            date_default_timezone_set("Asia/Makassar"); 
+            $currentDate = date("d-m-Y");
+            $query = "SELECT * FROM chats WHERE referensi = '$ref' AND tanggal = '$currentDate'";
             $count = mysqli_fetch_row(mysqli_query(Connect::connect(), $query));
             
             if ($count > 0) {
             
-                $query = "SELECT * FROM chats WHERE referensi = '$ref'";
+                $query = "SELECT * FROM chats WHERE referensi = '$ref' AND tanggal = '$currentDate'";
 
                 $ChatData = mysqli_query(Connect::connect(), $query); 
 
