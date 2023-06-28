@@ -43,7 +43,8 @@ Sebuah platform yang menyediakan pelayanan problem solving untuk berbagai masala
 ### 14 Juni - 20 Juni 
 - Pembuatan Dashboard Dokter
 
-### 21 Juni - 27 Juni
+### 21 Juni - 28 Juni
 - pembuatan Dashboard User dan Testing part I
 
+### Infrastruktur Database
 ![Cuplikan layar 2023-06-28 133716](https://github.com/Faradaii/Mindful-Space/assets/114233356/e097febe-02e6-462a-b053-52eff4e7a564)
