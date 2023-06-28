@@ -45,3 +45,5 @@ Sebuah platform yang menyediakan pelayanan problem solving untuk berbagai masala
 
 ### 21 Juni - 27 Juni
 - pembuatan Dashboard User dan Testing part I
+
+![Cuplikan layar 2023-06-28 133716](https://github.com/Faradaii/Mindful-Space/assets/114233356/e097febe-02e6-462a-b053-52eff4e7a564)
