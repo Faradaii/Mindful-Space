@@ -13,6 +13,23 @@
 
 </head>
 <body>
+<?php 
+    session_start();
+    if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
+        header("location: ../Login-Register/LoginForm.php");
+    }
+?>
+
+<?php 
+
+$navButton = "LOG IN";
+
+session_start();
+if (isset($_SESSION['role'])) {
+    $navButton = "DASHBOARD";
+}
+
+?>
     
 <nav>
         
@@ -41,11 +58,11 @@
                 <label for="layanan" class="layanan__check">Layanan <i class="fa fa-chevron-down"></i></label>
 
                 <ul class="layanan__dropdown dropdown">
-                    <a href="">
+                    <a href="konseling.php">
                         <li>Konseling</li>
                     </a>
                     </a>
-                    <a href="">
+                    <a href="tesmental.php">
                         <li>Tes Kesehatan Mental</li>
                     </a>
                 </ul>       
@@ -55,7 +72,7 @@
             <li><hr></li>
 
             <a href="../Login-Register/LoginForm.php" class="login">
-                <li>LOG IN</li>
+                <li><?php echo $navButton ?></li>
             </a>
 
             <!-- Garis biru dibawah navigasi -->

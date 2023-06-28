@@ -17,7 +17,7 @@ main {
 }
 
 div.image {
-    background-color: var(--main-blue);
+    background-color: var(--main-grey);
     width: 9rem;
     height: 9rem;
     border-radius: 9rem;
@@ -47,7 +47,7 @@ label[for=change__profile] {
     transform: translateY(0px);
 }
 
-label {
+form label {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     font-size: 20px;

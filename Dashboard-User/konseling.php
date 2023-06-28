@@ -16,6 +16,9 @@
     
 <?php
     session_start();
+    if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
+        header("location: ../Login-Register/LoginForm.php");
+    }
     require_once "../Helper/ConnectionUtil.php";
     use Helper\ConnectionUtil;
     if(isset($_GET['message'])){

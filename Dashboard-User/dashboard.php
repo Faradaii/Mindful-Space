@@ -16,12 +16,16 @@
 <body>
 <?php
 session_start();
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
+    header("location: ../Login-Register/LoginForm.php");
+}
 require_once "../Helper/ConnectionUtil.php";
 use Helper\ConnectionUtil;
 
 // include 'realtime.php';
 // if hours real == session waktukonsul then redirect to chat.php
-$timeByJs = <<<JAVASCRIPT
+if(isset($_SESSION['waktukonsul'])){
+    $timeByJs = <<<JAVASCRIPT
     <script>
     let waktu = $_SESSION[waktukonsul];
     
@@ -33,19 +37,16 @@ $timeByJs = <<<JAVASCRIPT
         }
     }, 1000)
     </script>
-JAVASCRIPT;
-echo $timeByJs;
-
-
-if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
-    header("location: ../Login-Register/LoginForm.php");
+    JAVASCRIPT;
+    echo $timeByJs;
 }
+
 
 if(isset($_GET['messagekonsul'])){
     if($_GET['messagekonsul'] == 'sudahbooking'){
         $confirm = <<<JAVASCRIPT
         <script>
-            alert('anda sudah booking konsultasi sebelumnya di jam $_SESSION[waktukonsul].00 dengan id dokter $_SESSION[id_from] silahkan menunggu !');
+            alert('anda sudah booking konsultasi sebelumnya di jam $_SESSION[waktukonsul].00 dengan dokter $_SESSION[namadokter] silahkan menunggu !');
 
             window.location = 'dashboard.php';
             
@@ -90,7 +91,7 @@ function resultGender(): bool {
         
             <li class="fasilitas__hover">
 
-                <a href="Fasilitas.php" class="fasilitas__check">Fasilitas</a>                   
+                <a href="../HomePage/Fasilitas.php" class="fasilitas__check">Fasilitas</a>                   
 
             </li>
             
@@ -102,10 +103,6 @@ function resultGender(): bool {
                 <ul class="layanan__dropdown dropdown">
                     <a href="konseling.php">
                         <li>Konseling</li>
-                    </a>
-                    <a href="">
-                        <li>Rehabilitasi</li>
-                    </a>
                     </a>
                     <a href="tesmental.php">
                         <li>Tes Kesehatan Mental</li>
@@ -180,7 +177,7 @@ function resultGender(): bool {
 
         <div class="kanan">
 
-            <a href="fasilitas.php" class="card">
+            <a href="../HomePage/Fasilitas.php" class="card">
                 <img src="../image/FasilitasIcon.svg" alt="" class="gambar">
                 <br>
                 <p>Fasilitas</p>

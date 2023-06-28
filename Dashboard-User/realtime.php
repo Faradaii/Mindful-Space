@@ -10,7 +10,9 @@ if(isset($_SESSION['id_from'])){
         $id_from = $_SESSION['id_from'];
         $id_to = $_SESSION['id'];
         $waktu = $_SESSION['waktukonsul'];
-        $query = "SELECT * FROM antrian WHERE id_dokter = $id_from AND id_pasien = $id_to AND waktu = $waktu AND status != 'selesai'";
+        date_default_timezone_set("Asia/Makassar"); 
+        $currentDate = date("d-m-Y");
+        $query = "SELECT * FROM antrian WHERE id_dokter = $id_from AND id_pasien = $id_to AND waktu = $waktu AND status != 'selesai' AND tanggal = '$currentDate'";
         $data = mysqli_query(Connect::connect(), $query);
         $result = mysqli_fetch_array($data);
         return $result['status']?? 'selesai';

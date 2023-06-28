@@ -2,10 +2,10 @@
 include '../Helper/ConnectionUtil.php';
 use Helper\ConnectionUtil;
 session_start();
-$myId = $_SESSION['id'];
-if ($_SESSION['role'] != 'user') {
-    header('location:../Login-Register/LoginForm.php');
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
+    header("location: ../Login-Register/LoginForm.php");
 }
+$myId = $_SESSION['id'];
 
 $namalengkap = $_POST['nama'];
 $jk = $_POST['gender'];

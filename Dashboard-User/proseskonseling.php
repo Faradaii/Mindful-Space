@@ -3,6 +3,9 @@
 require_once "../Helper/ConnectionUtil.php";
 use Helper\ConnectionUtil;
 session_start();
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
+    header("location: ../Login-Register/LoginForm.php");
+}
 $myid = $_SESSION['id'];
 
 $keluhan=$_POST['keluhan'];
@@ -20,8 +23,11 @@ if(mysqli_num_rows($data) > 0){
     $_SESSION['waktukonsul'] = $waktu;
     $_SESSION['id_from'] = $id_dokter;
     
+    date_default_timezone_set("Asia/Makassar"); 
+    $currentDate = date("d-m-Y");
+    
     $queryInsertAntrian = <<<SQL
-        INSERT INTO antrian VALUES (DEFAULT, '$myid', '$id_dokter', 'menunggu', '$keluhan', '$waktu')
+        INSERT INTO antrian VALUES (DEFAULT, '$myid', '$id_dokter', 'menunggu', '$keluhan', '$waktu', '$currentDate')
     SQL;
     mysqli_query(ConnectionUtil::connect(), $queryInsertAntrian);
     header('location:konseling.php?message=sukses');

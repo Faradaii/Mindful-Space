@@ -16,6 +16,12 @@
 
 </head>
 <body>
+<?php 
+session_start();
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
+    header("location: ../Login-Register/LoginForm.php");
+}
+?>
 
 <nav>
 
@@ -33,7 +39,7 @@
         
             <li class="fasilitas__hover">
 
-                <a href="Fasilitas.php" class="fasilitas__check">Fasilitas</a>                   
+                <a href="../HomePage/Fasilitas.php" class="fasilitas__check">Fasilitas</a>                   
 
             </li>
             
@@ -119,16 +125,16 @@ $jmlhal = ceil($jmldata/$batas);
         <input type="number" name="points" value="<?php echo $points ?>" hidden>
         <br>
 
-        <input type="radio" name="point" id="sangat-setuju" value="4" hidden>
+        <input type="radio" name="point" id="sangat-setuju" value="1" hidden required>
         <label for="sangat-setuju">Sangat Setuju</label>
 
-        <input type="radio" name="point" id="setuju" value="3" hidden>
+        <input type="radio" name="point" id="setuju" value="2" hidden required>
         <label for="setuju">Setuju</label>
 
-        <input type="radio" name="point" id="tidak-setuju" value="2" hidden>
+        <input type="radio" name="point" id="tidak-setuju" value="3" hidden required>
         <label for="tidak-setuju">Tidak Setuju</label>
 
-        <input type="radio" name="point" id="sangat-tidak-setuju" value="1" hidden>
+        <input type="radio" name="point" id="sangat-tidak-setuju" value="4" hidden required>
         <label for="sangat-tidak-setuju">Sangat Tidak Setuju</label>
         
         <input type="submit" value="Next"> 
@@ -137,9 +143,9 @@ $jmlhal = ceil($jmldata/$batas);
     
 </div>
 
-<div class="hasil" <?php echo ($_GET['halaman'] == 0)? '': 'hidden'?>>
+<div class="hasil" style="<?php echo ($_GET['halaman'] == 0)? '': 'display:none;'?>">
     <!-- hasil result  -->
-    <!-- <p>skor anda: <?php $points = $_GET['points']; echo $points?></p> -->
+    <!-- <p>skor anda: <?php $points = $_GET['points'];?></p> -->
      
     <p class="hasil-tes">
 
