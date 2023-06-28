@@ -1,3 +1,3 @@
 <?php
-    header('location:Login-Register/LoginForm.php');
+    header('location:HomePage/HomePage-Visitor.php');
 ?>
