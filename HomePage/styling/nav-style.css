@@ -64,26 +64,6 @@ h1 span {
     color: black;
 }
 
-.login li {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 1rem;
-    height: 2.8rem;
-    background-color: var(--main-blue);
-    color: white;
-    font-weight: 700;
-    width: 8rem;  
-    font-size: 1.15rem;
-    font-family: 'Inter', sans-serif;
-    letter-spacing: .01rem;
-    box-shadow: 0 0 5px 1px var(--main-blue-transparent);
-    transition: .3s;
-}
-
-.login li:hover {
-    box-shadow: 0 0 15px 2px var(--main-blue-transparent);
-}
 
 /* UNDERLINE ANIMATION */
 

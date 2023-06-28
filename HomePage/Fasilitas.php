@@ -18,6 +18,17 @@
 </head>
 <body>
 
+<?php 
+
+    $navButton = "LOG IN";
+
+    session_start();
+    if (isset($_SESSION['role'])) {
+        $navButton = "DASHBOARD";
+    }
+
+?>
+
 <nav>
         
     <div class="logo">
@@ -44,10 +55,10 @@
                 <label for="layanan" class="layanan__check">Layanan <i class="fa fa-chevron-down"></i></label>
 
                 <ul class="layanan__dropdown dropdown">
-                    <a href="">
+                    <a href="../Dashboard-User/konseling.php">
                         <li>Konseling</li>
                     </a>
-                    <a href="">
+                    <a href="../Dashboard-User/tesmental.php">
                         <li>Tes Kesehatan Mental</li>
                     </a>
                 </ul>       
@@ -57,7 +68,7 @@
             <li><hr></li>
 
             <a href="../Login-Register/LoginForm.php" class="login">
-                <li>LOG IN</li>
+                <li><?php echo $navButton ?></li>
             </a>
 
             <!-- Garis biru dibawah navigasi -->
