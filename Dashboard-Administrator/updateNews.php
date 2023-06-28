@@ -14,6 +14,10 @@
 </head>
 <body>
 <?php
+session_start();
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+    header("location: ../Login-Register/LoginForm.php");
+}
 require_once "../Helper/ConnectionUtil.php";
 use Helper\ConnectionUtil;
 

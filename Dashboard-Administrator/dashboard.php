@@ -18,6 +18,10 @@
 </head> 
 <body>
 <?php 
+session_start();
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+    header("location: ../Login-Register/LoginForm.php");
+}
 $show = isset($_GET['show'])? $_GET['show']:'user';
 $autoshow = !isset($_GET['show'])? header('location:dashboard.php?show='.$show) : '';
 $cari = isset($_GET['search'])? ('&search='.$_GET['search']):'';
