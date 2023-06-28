@@ -52,36 +52,22 @@
                     <li class="beranda">Beranda</li>
                 </a>
 
-                <li>
+                <li class="fasilitas__hover">
 
-                    <input type="checkbox" id="fasilitas">
-                    <label for="fasilitas" class="fasilitas__check">Fasilitas <i class="fa fa-chevron-down"></i></label>
-
-                    <ul class="fasilitas__dropdown">
-                        <a href="">
-                            <li>Ruang Konseling</li>
-                        </a>
-                        <a href="">
-                            <li>Farmasi</li>
-                        </a>
-                    </ul>                        
+                    <a href="../HomePage/Fasilitas.php" class="fasilitas__check">Fasilitas</a>
 
                 </li>
                 
                 <li>
 
-                    <input type="checkbox" id="layanan">
+                    <input type="radio" id="layanan">
                     <label for="layanan" class="layanan__check">Layanan <i class="fa fa-chevron-down"></i></label>
 
                     <ul class="layanan__dropdown">
-                        <a href="">
+                        <a href="../Dashboard-User/konseling.php">
                             <li>Konseling</li>
                         </a>
-                        <a href="">
-                            <li>Rehabilitasi</li>
-                        </a>
-                        </a>
-                        <a href="">
+                        <a href="../Dashboard-User/tesmental.php">
                             <li>Tes Kesehatan Mental</li>
                         </a>
                     </ul>       
@@ -134,5 +120,7 @@
 
     </div>
     
+    <script src="../Dashboard-User/styling/script.js"></script>
+
 </body>
 </html>
