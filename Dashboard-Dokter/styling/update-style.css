@@ -92,8 +92,9 @@
 
 
 input[type="file"] {
-     display: none;
+    display: none;
 }
+
 input[type=number] {
     font-family: 'Poppins', sans-serif;
     font-size: 1.15rem;

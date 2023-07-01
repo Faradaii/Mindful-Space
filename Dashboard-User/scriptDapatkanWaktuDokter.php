@@ -16,8 +16,16 @@ if (isset($_GET['dapatkanWaktuDokter'])) {
     while($row = mysqli_fetch_array($datawaktu)){
         $arrayWaktuTidakTersedia[] = $row['waktu'];
     }
+
+    //time 
+    $getWaktuNow = date('H');
     // print_r($arrayWaktuTidakTersedia);
-    for ($i=0; $i <= 23; $i++) { 
+    if($getWaktuNow >= 8){
+        $i = $getWaktuNow;
+    } else {
+        $i = 8;
+    }
+    for ($i; $i <= 23; $i++) { 
         if(!in_array($i, $arrayWaktuTidakTersedia)){
             echo <<<HTML
                 <option value="$i">

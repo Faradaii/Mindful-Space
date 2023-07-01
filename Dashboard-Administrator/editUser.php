@@ -46,8 +46,8 @@
             <div>
             <form action="Dashboard.php">
 
-            <button class="back">
-                <i class="fa-solid fa-arrow-left" style="margin-inline: 5%;"></i>
+            <button class="back" style="color: white;">
+                <i class="fa-solid fa-arrow-left" style="margin-inline: 5%; color: white;"></i>
                 Back
             </button>
 
@@ -78,7 +78,7 @@
             </select>
             </div>
             <div class="editdiv">
-            <button type = "submit" class="editbutton">Edit User</button>
+                <button type = "submit" class="editbutton" style="color: white;">Edit User</button>
             </div>
         </div>
 </div>

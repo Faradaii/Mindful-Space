@@ -130,9 +130,11 @@ $status = $result['status'];
     <main>
 
         <div class="left__col">
-    
-            <div id="chatAutoRefresh">
-                <!-- ISI CHAT -->
+            
+            <div class="scroll">
+                <div id="chatAutoRefresh">
+                    <!-- ISI CHAT -->
+                </div>
             </div>  
             
             <br><br><br>
@@ -167,7 +169,7 @@ $status = $result['status'];
             <div class="keluhan">
                 <h2>KELUHAN</h2>
                 <?php 
-                $getKeluhan = mysqli_query(ConnectionUtil::connect(), "SELECT antrian.keluhan FROM antrian WHERE id_pasien = '$otherid'");
+                $getKeluhan = mysqli_query(ConnectionUtil::connect(), "SELECT antrian.keluhan FROM antrian WHERE id_pasien = '$otherid' AND status != 'selesai'");
                 $datakeluhan = mysqli_fetch_array($getKeluhan);
                 ?>
                 <h4><?php echo $datakeluhan['keluhan'] ?></h4>

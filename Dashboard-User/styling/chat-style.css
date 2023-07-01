@@ -16,10 +16,10 @@ main {
     max-height: 75vh;
 }
 
-#chatAutoRefresh {
+.scroll {
+    overflow-y: scroll;
     height: 100%;
     max-height: calc(100% - 4.5rem);
-    overflow-y: auto;
 }
 
 /* RIGHT COLUMN START */
@@ -93,7 +93,6 @@ main {
 }
 
 div.image {
-    background-color: var(--main-blue);
     width: 9rem;
     height: 9rem;
     border-radius: 9rem;

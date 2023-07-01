@@ -158,7 +158,6 @@ input[type=text] {
 }
 
 .profile__user > div.profile__picture {
-    background-color: var(--main-blue);
     height: 12rem;
     width: 12rem;
     border-radius: 12rem;
@@ -205,14 +204,21 @@ input[type=text] {
     color: var(--black-not-hover);
     width: 100%;
     border: none;
+    cursor: pointer;
 }
 
 .message i {
-    transition: .3s;
+    transition: .04s;
     font-size: 2rem;
+    background-color: transparent;
 }
-.message:hover, .message:hover > i {
+
+.message:hover {
     background-color: var(--main-green);
+    color: black;
+}
+
+.message:hover > i {
     color: black;
 }
 

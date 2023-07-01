@@ -55,7 +55,7 @@ else {
             <h1>MINDFUL <span>SPACE</span></h1>
         </div>
 
-        <div class="profile">
+        <!-- <div class="profile">
             <div class="image">
                 <img src="<?php echo $result['url_image']?>" alt="">
             </div>
@@ -70,21 +70,24 @@ else {
                     <i class="fa fa-chevron-down dropdown__setting"></i>
                 </label>
             </div>
-        </div>
+        </div> -->
+        <h1 style="font-family: 'Montserrat';">SESI KONSELING</h1>
 
     </nav>
 
     <hr>
     
-    <br><br><br><br><br>
-    <br><br><br><br>
+    <br><br><br>
+    <br><br><br>
     
     <main>
 
         <div class="left__col">
     
-            <div id="chatAutoRefresh">
-                <!-- ISI CHAT -->
+            <div class="scroll" id="scrollContainer">
+                <div id="chatAutoRefresh">
+                    <!-- ISI CHAT -->
+                </div>
             </div>  
             
             <br><br><br>
@@ -105,8 +108,6 @@ else {
             </form>
     
         </div>
-    
-        <hr>
     
         <div class="right__col">
 
@@ -140,12 +141,11 @@ else {
                 </div>
 
                 <?php
-                            echo '<p class="data">' . $userAbout['namalengkap'] . '</p>';
-                            echo '<p class="nama__asli">' . $userAbout['username'] . '</p>';
+                    echo '<p class="data">' . $userAbout['namalengkap'] . '</p>';
+                    echo '<p class="nama__asli">' . $userAbout['username'] . '</p>';
 
-                            echo '<p class="sub__data">' . $userAbout['jeniskelamin'].' | ';
-                            echo '<span>' . $userAbout['umur'].' Tahun</span></p>';   
-        
+                    echo '<p class="sub__data">' . $userAbout['jeniskelamin'].' | ';
+                    echo '<span>' . $userAbout['umur'].' Tahun</span></p>';   
                 ?>
 
             </div>

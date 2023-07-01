@@ -9,12 +9,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <!-- Styling -->
-
         <link rel="stylesheet" href="styling/style.css">
         <link rel="stylesheet" href="styling/nav-style.css">
         <link rel="stylesheet" href="styling/main-style.css">
         <link rel="stylesheet" href="styling/dropdown-style.css">
-
 
 </head>
 <body>
@@ -58,17 +56,17 @@
             <p class="available__status"><!-- Javascript --></p>
             
             <form action="setStatus.php" method="POST" id="setStatus">
-            <label for="available__status">
-                <!-- PHP selected dibawah -->
-                <input type="checkbox" name="available__status" onchange="document.getElementById('setStatus').submit()" id="available__status" <?php echo $status == 1 ? 'checked' : ''  ?>>
-                <input type="text" name="status" value="<?php echo $status == 1? 0 : 1 ?>" hidden>
-                <div class="toggle"></div>
-            </label>
+
+                <label for="available__status">
+                    <!-- PHP selected dibawah -->
+                    <input type="checkbox" name="available__status" onchange="document.getElementById('setStatus').submit()" id="available__status" <?php echo $status == 1 ? 'checked' : ''  ?>>
+                    <div class="toggle"></div>
+                    <input type="text" name="status" value="<?php echo $status == 1? 0 : 1 ?>" hidden>
+                </label>
             
             </form>
                 
             </form>
-            
 
         </div>
         <a href="updateProfile.php" class="profile__set">

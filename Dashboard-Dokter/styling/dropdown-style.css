@@ -127,7 +127,7 @@ input[name=dropdown__setting]:checked + div {
 }
 input[name=dropdown__setting]:not(:checked) + div {
     transition: .3s;
-    top: -20%;
+    top: -22%;
 }
 
 @keyframes dropdown {

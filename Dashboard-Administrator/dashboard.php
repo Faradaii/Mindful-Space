@@ -41,12 +41,12 @@ $cari = isset($_GET['search'])? ('&search='.$_GET['search']):'';
             <br><br>
 
             <label for="username">Username</label>
-            <input type="text" name="username" id="">
+            <input type="text" name="username" id="" required>
     
             <br><br><br>
     
             <label for="password">Password</label>
-            <input type="password" name="password" id="">
+            <input type="password" name="password" id="" required>
     
             <br><br><br><br>
     

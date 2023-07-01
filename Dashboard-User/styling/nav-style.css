@@ -43,8 +43,6 @@ ul a {
 
 hr {
     border: 1.5px solid var(--black-not-hover);
-    opacity: .6;
-    height: 35px;
 }
 
 .logo h1 {

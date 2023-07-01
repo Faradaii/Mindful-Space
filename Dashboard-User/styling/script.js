@@ -4,6 +4,11 @@ const fasilitas = document.querySelector('.fasilitas__check');
 const layanan = document.querySelector('.layanan__check');
 const underline = document.querySelector('.underline');
 
+window.onload = function() {
+    console.log("scroll");
+    var scrollContainer = document.querySelector("#scrollContainer");
+    scrollContainer.scrollTop = scrollContainer.scrollHeight;
+};
 
 document.body.addEventListener('click', function(event) {
   
@@ -18,7 +23,6 @@ document.body.addEventListener('click', function(event) {
     }
 
 });
-
 
 const editbutton = document.querySelector("#editbutton");
 const editgender = document.querySelector("#gender"); 
