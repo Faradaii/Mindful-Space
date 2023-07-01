@@ -61,6 +61,7 @@
             <div>
             <input type ="text" name = "password" value="<?php echo $result['password']; ?>">
             </div>
+            <input type="text" name="roleBefore" value="<?php echo $result['role']; ?>" hidden>
             <div>
             <select type ="text" name = "role" value="<?php echo $result['role']; ?>" id="inputbutton">
                 <?php 
