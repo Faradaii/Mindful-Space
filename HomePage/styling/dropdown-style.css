@@ -15,13 +15,13 @@ label[for=layanan], label[for=fasilitas] {
 }
 
 ul.fasilitas__dropdown, ul.layanan__dropdown {
-    background-color: rgba(255, 255, 255, .4);
+    background-color: rgba(255, 255, 255, .9);
+    border: 1px solid var(--main-grey);
     border-radius: .5rem;
     backdrop-filter: blur(.5rem);
     margin-top: 1rem;
     padding: 1rem 0;
-    top: -20%;
-    z-index: -1;
+    /* top: -20%; */
     width: 8rem;
     height: 6rem;
     display: flex;
@@ -38,12 +38,14 @@ ul.layanan__dropdown {
     padding-bottom: 1.3rem;
 }
 
-ul.fasilitas__dropdown {
-    right: 27.5rem;
+.layanan__hover {
+    position: relative;
 }
 
-ul.layanan__dropdown {
-    right: 17.5rem;
+.absolute {
+    position: absolute;
+    top: -20rem;
+    right: 8rem;
 }
 
 ul.fasilitas__dropdown li, 
@@ -64,8 +66,8 @@ ul.layanan__dropdown li {
     top: 3.8rem;
     animation: dropdown .3s ease-in-out forwards;
 }
-#layanan:checked ~ ul.layanan__dropdown {
-    top: 5.8rem;
+#layanan:checked ~ .absolute {
+    top: 4.6rem;
     animation: dropdown .3s ease-in-out forwards;
 }
 

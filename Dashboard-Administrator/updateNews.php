@@ -49,8 +49,8 @@ $result = mysqli_fetch_array($data);
             <div>
                 <form action="Dashboard.php">
 
-                <button class="back">
-                    <i class="fa-solid fa-arrow-left" style="margin-inline: 5%;"></i>
+                <button class="back" style="color: white;">
+                    <i class="fa-solid fa-arrow-left" style="margin-inline: 5%; color: white;"></i>
                     Back
                 </button>
 
@@ -74,7 +74,7 @@ $result = mysqli_fetch_array($data);
                 <input type ="text" name = "link" value="<?php echo $result['link']; ?>">
             </div>
             <div class="editdiv">
-                <button type="submit" class="editbutton">Edit News</button>
+                <button type="submit" class="editbutton" style="color: white;">Edit News</button>
             </div>
         </div>
        

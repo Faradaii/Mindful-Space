@@ -53,8 +53,8 @@ $status = $result['status'];
             <label for="available__status">
                 <!-- PHP selected dibawah -->
                 <input type="checkbox" name="available__status" onchange="document.getElementById('setStatus').submit()" id="available__status" <?php echo $status == 1 ? 'checked' : ''  ?>>
-                <input type="text" name="status" value="<?php echo $status == 1? 0 : 1 ?>" hidden>
                 <div class="toggle"></div>
+                <input type="text" name="status" value="<?php echo $status == 1? 0 : 1 ?>" hidden>
             </label>
             
             </form>
@@ -140,7 +140,7 @@ $result = mysqli_fetch_array($datax);
                 <?php }?>
             </select>
             <input type="number" name="umur" id="inputbutton" disabled value="<?php echo $result['umur']?>">
-            <label class="save-button">
+            <label class="save-button" style="color: white;">
                 <input type="button" class="thebutton" id="editbutton">Edit
             </label>
         </div>
@@ -149,8 +149,8 @@ $result = mysqli_fetch_array($datax);
 </main>
 <form action="Dashboard.php">
 
-    <button class="back">
-        <i class="fa-solid fa-arrow-left" style="margin-inline: 5%;"></i>
+    <button class="back" style="color: white;">
+        <i class="fa-solid fa-arrow-left" style="margin-inline: 5%; color: white;"></i>
         Back
     </button>
 

@@ -66,7 +66,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
             </a>
 
             <!-- Garis biru dibawah navigasi -->
-            <div class="underline"></div>
+            <!-- <div class="underline"></div> -->
 
         </ul>
 
