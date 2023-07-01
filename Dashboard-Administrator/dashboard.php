@@ -131,7 +131,7 @@ $cari = isset($_GET['search'])? ('&search='.$_GET['search']):'';
                 </li>
 
                 <a href="../Login-Register/Logout.php" class="logout">
-                    <li>Log Out</li>
+                    <li>LOG OUT</li>
                 </a>
                 
             </ul>

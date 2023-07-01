@@ -54,14 +54,18 @@
                     <input type="radio" name="nav" id="layanan">
                     <label for="layanan" class="layanan__check">Layanan <i class="fa fa-chevron-down"></i></label>
 
-                    <ul class="layanan__dropdown dropdown">
-                        <a href="../Dashboard-User/konseling.php">
-                            <li>Konseling</li>
-                        </a>
-                        <a href="../Dashboard-User/tesmental.php">
-                            <li>Tes Kesehatan Mental</li>
-                        </a>
-                    </ul>       
+                    <div class="absolute">
+
+                        <ul class="layanan__dropdown dropdown">
+                            <a href="../Dashboard-User/konseling.php">
+                                <li>Konseling</li>
+                            </a>
+                            <a href="../Dashboard-User/tesmental.php">
+                                <li>Tes Kesehatan Mental</li>
+                            </a>
+                        </ul>       
+
+                    </div>
 
                 </li>
 
@@ -72,7 +76,7 @@
                 </a>
 
                 <!-- Garis biru dibawah navigasi -->
-                <div class="underline"></div>
+                <!-- <div class="underline"></div> -->
 
             </ul>
 

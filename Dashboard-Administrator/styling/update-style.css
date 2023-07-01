@@ -10,8 +10,6 @@
     font-family: 'Montserrat';
 }
 
-
-
 .left{
     width: 70%;
     display: flex;
@@ -94,6 +92,9 @@ input[type="file"] {
 
 
 .back {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
     font-family: 'Montserrat';
     font-weight: 700;
     font-size: 2rem;
@@ -105,18 +106,17 @@ input[type="file"] {
     background-color: var(--main-red);
     color: black;
     font-weight: 700;
-    width: 130% !important;  
+    width: 8rem !important;  
     font-size: 1.15rem;
     font-family: 'Inter', sans-serif;
     letter-spacing: .01rem;
     box-shadow: 0 0 5px 1px var(--main-blue-transparent);
     transition: .3s;
-    padding-left: 0.5rem;
-    margin-top: 0.5rem;
-
+    padding-right: .5rem;
+    margin-top: .3rem;
 }
 .editbutton{
-    font-family: 'Montserrat';
+    cursor: pointer;
     font-weight: 700;
     font-size: 2rem;
     border: none;
@@ -136,7 +136,6 @@ input[type="file"] {
     transition: .3s;
     margin-inline: auto;
     margin-top: 1rem;
-
 }
 
 #name_image{
