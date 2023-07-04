@@ -142,7 +142,7 @@
     <div class="gambar_kiri">
 
         <div>
-            <img src="https://img.freepik.com/free-vector/hand-drawn-collage-background_23-2149590537.jpg?t=st=1687683797~exp=1687684397~hmac=6b19ee673bc1328de79f4abc853a804b5464323721c2dddbe1dd95e4c5fd6e60" alt="">
+            <img src="https://img.freepik.com/free-vector/emergency-service-team_23-2147933444.jpg?size=626&ext=jpg&ga=GA1.2.629320682.1661959596&semt=sph" alt="">
         </div>
 
         <div class="text">

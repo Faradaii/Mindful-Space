@@ -10,7 +10,7 @@
 <?php 
     session_start();
     if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
-        header("location: ../Login-Register/LoginForm.php");
+        header("location: ../Login-R+egister/LoginForm.php");
     }
     require_once '../Helper/ConnectionUtil.php';
     use Helper\ConnectionUtil;
@@ -29,6 +29,7 @@
     
 
     mysqli_query(ConnectionUtil::connect(), $query);
+    mysqli_query(ConnectionUtil::connect(), "DELETE FROM historychat WHERE id_from = $id");
     mysqli_query(ConnectionUtil::connect(), "DELETE FROM identitas WHERE id_user = $id");
     mysqli_query(ConnectionUtil::connect(), "DELETE FROM users WHERE id = $id");
     header("location:dashboard.php?show=".$show)
